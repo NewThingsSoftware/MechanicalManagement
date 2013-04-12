@@ -8,6 +8,7 @@ import entidades.Veiculo;
 public class MechanicalManagement {
 
     public static void main(String[] args) {
+        //RODAR A PRIMEIRA VEZ PARA POLUIR O BANCO!
 //        Cliente cliente = new Cliente("Bruno", 010, 014, 3537, "Rua", true, null);
 //        Cliente cliente2 = new Cliente("Marih", 020, 05, 3521, "Rua", true, null);
 //        Veiculo veiculo = new Veiculo(cliente, "IHW-0593", "GM", "Vectra", true);
