@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/04/2013 13:39:37 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="entidades.Veiculo" table="veiculo" catalog="mecanica">
+        <id name="idVeiculo" type="java.lang.Integer">
+            <column name="id_veiculo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="entidades.Cliente" fetch="select">
+            <column name="id_cliente" not-null="true" />
+        </many-to-one>
+        <property name="placa" type="string">
+            <column name="placa" length="8" not-null="true" unique="true" />
+        </property>
+        <property name="ano" type="java.lang.Integer">
+            <column name="ano" />
+        </property>
+        <property name="marca" type="string">
+            <column name="marca" length="150" not-null="true" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="modelo" length="150" not-null="true" />
+        </property>
+        <property name="km" type="java.lang.Integer">
+            <column name="km" />
+        </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="ordemServicos" inverse="true">
+            <key>
+                <column name="id_veiculo" not-null="true" />
+            </key>
+            <one-to-many class="entidades.OrdemServico" />
+        </set>
+    </class>
+</hibernate-mapping>
