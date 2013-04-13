@@ -5,8 +5,10 @@
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="mecanica?zeroDateTimeBehavior=convertToNullPU"/>
-        <Property name="flushModeType" type="java.lang.Object" value="FlushModeType.AUTO"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CadastroDeVeiculos_entityManager"/>
+      </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="clienteQuery">
       <Properties>
@@ -87,9 +89,7 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="clienteQuery" sourcePath="${resultList}" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false">
-              <Property name="name" type="java.lang.String" value=""/>
-            </BindingProperty>
+            <BindingProperty name="elements" source="clienteQuery" sourcePath="${resultList}" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false"/>
           </BindingProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
