@@ -7,7 +7,7 @@ import entidades.Cliente;
 public class MechanicalManagement {
 
     public static void main(String[] args) {
-        Cliente c = new Cliente("Teste", 444, 0004, true);
-        ClienteDAO.gravar(c);
+       Cliente c = VeiculoDAO.obterPorModelo("Vectra").get(0).getCliente();
+        System.out.println(c.getNome());
     }
 }
