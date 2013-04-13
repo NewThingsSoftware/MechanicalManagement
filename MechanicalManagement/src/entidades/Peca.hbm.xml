@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="entidades.Peca" table="peca" catalog="mecanica">
+        <id name="idPeca" type="java.lang.Integer">
+            <column name="id_peca" />
+            <generator class="identity" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" length="150" not-null="true" />
+        </property>
+        <property name="marca" type="string">
+            <column name="marca" length="150" />
+        </property>
+        <property name="precoCompra" type="big_decimal">
+            <column name="preco_compra" precision="10" />
+        </property>
+        <property name="precoVenda" type="big_decimal">
+            <column name="preco_venda" precision="10" />
+        </property>
+        <property name="quantidade" type="java.lang.Double">
+            <column name="quantidade" precision="22" scale="0" />
+        </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="pecaUsadas" inverse="true">
+            <key>
+                <column name="id_peca" not-null="true" />
+            </key>
+            <one-to-many class="entidades.PecaUsada" />
+        </set>
+        <set name="pecaUsadas_1" inverse="true">
+            <key>
+                <column name="id_peca" not-null="true" />
+            </key>
+            <one-to-many class="entidades.PecaUsada" />
+        </set>
+        <set name="pecaUsadas_2" inverse="true">
+            <key>
+                <column name="id_peca" not-null="true" />
+            </key>
+            <one-to-many class="entidades.PecaUsada" />
+        </set>
+    </class>
+</hibernate-mapping>
