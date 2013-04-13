@@ -1,5 +1,6 @@
 package dao;
 
+import entidades.Cliente;
 import entidades.Veiculo;
 import java.util.List;
 import org.hibernate.Query;
@@ -40,6 +41,15 @@ public class VeiculoDAO {
         return veiculos;
     }
 
+    public static List<Veiculo> obterPorCliente(Cliente cliente){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE idCliente = :idCliente");
+        qry.setParameter("idCliente", cliente.getIdCliente());
+        List<Veiculo> veiculos = qry.list();
+        return veiculos;
+    }
+    
     public static List<Veiculo> obterPorPlaca(String placa) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.placa LIKE :placa");
