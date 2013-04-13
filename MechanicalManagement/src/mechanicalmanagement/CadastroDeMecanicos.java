@@ -51,8 +51,6 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -170,9 +168,11 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         jButton8.setText("Cancelar");
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 100, -1));
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        pack();
+        setSize(new java.awt.Dimension(629, 457));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
