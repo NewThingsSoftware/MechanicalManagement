@@ -1,6 +1,5 @@
 package mechanicalmanagement;
 
-import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
 
