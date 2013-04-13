@@ -2,19 +2,16 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="entityManager">
+    <Component class="javax.persistence.EntityManager" name="entityManager0">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="mecanica?zeroDateTimeBehavior=convertToNullPU"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CadastroDeVeiculos_entityManager"/>
-      </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="clienteQuery">
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT c.nome FROM Cliente c"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="entityManager"/>
+          <ComponentRef name="entityManager0"/>
         </Property>
       </Properties>
     </Component>
@@ -88,18 +85,10 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="jCBcliente">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Cliente 1"/>
-                <StringItem index="1" value="Cliente 2"/>
-                <StringItem index="2" value="Cliente 3"/>
-                <StringItem index="3" value="Cliente 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="clienteQuery" sourcePath="${resultList}" target="jCBcliente" targetPath="elements" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="elements" source="clienteQuery" sourcePath="${resultList}" target="jCBcliente" targetPath="elements" updateStrategy="0" immediately="false">
+              <Property name="name" type="java.lang.String" value=""/>
+            </BindingProperty>
           </BindingProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
