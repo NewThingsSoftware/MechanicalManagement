@@ -337,7 +337,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Cadastro de Pe&#xe7;as"/>
+    <Property name="title" type="java.lang.String" value="Cadastro de Mec&#xe2;nicos"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

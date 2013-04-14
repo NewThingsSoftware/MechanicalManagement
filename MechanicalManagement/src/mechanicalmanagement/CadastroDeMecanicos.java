@@ -194,7 +194,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 100, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Peças");
+        setTitle("Cadastro de Mecânicos");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
