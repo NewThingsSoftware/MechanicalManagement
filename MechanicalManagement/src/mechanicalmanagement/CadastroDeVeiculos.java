@@ -9,6 +9,7 @@ import dao.VeiculoDAO;
 import entidades.Cliente;
 import entidades.Veiculo;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 /**
  *
  * @author Marihelly
@@ -95,7 +96,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 100, 20));
 
         jChBstatus.setBackground(new java.awt.Color(255, 255, 255));
-        jChBstatus.setText("Inativo / ativo");
+        jChBstatus.setText("Ativo");
         jChBstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jChBstatusActionPerformed(evt);
@@ -227,22 +228,25 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jChBstatusActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Cliente cliente = ClienteDAO.obertPorNome((String)jCBcliente.getSelectedItem()).get(0);
-        String placa = jTFplaca.getText();
-        int ano = Integer.parseInt(jTFano.getText());
-        String marca = jTFmarca.getText();
-        String modelo = jTFmodelo.getText();
-        int km = Integer.parseInt(jTFkm.getText());
-        boolean status = jChBstatus.isSelected();
-        VeiculoDAO.gravar(new Veiculo(cliente, placa, ano, marca, modelo, km, status));
+        VeiculoDAO.gravar(obterCampos());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        Veiculo veiculo = VeiculoDAO.obterPorPlaca(obterCampos().getPlaca()).get(0);
+        veiculo.setCliente(ClienteDAO.obertPorNome(obterCampos().getCliente().getNome()).get(0));
+        veiculo.setMarca(obterCampos().getMarca());
+        veiculo.setModelo(obterCampos().getModelo());
+        veiculo.setAno(obterCampos().getAno());
+        veiculo.setKm(obterCampos().getKm());
+        veiculo.setStatus(obterCampos().getStatus());
+        VeiculoDAO.alterar(veiculo);
+        jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        jTFplaca.setEnabled(false);
+        jButton7.setEnabled(false);
+        new ConsultaVeiculo(this).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -250,13 +254,37 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         dispose(); /* Marihelly: Volta para a Tela Central. */
+        dispose(); /* Marihelly: Volta para a Tela Central. */
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTFanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFanoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFanoActionPerformed
-
+    
+    private Veiculo obterCampos(){
+        Cliente cliente = ClienteDAO.obertPorNome((String) jCBcliente.getSelectedItem()).get(0);
+        String placa = jTFplaca.getText();
+        int ano = Integer.parseInt(jTFano.getText());
+        String marca = jTFmarca.getText();
+        String modelo = jTFmodelo.getText();
+        int km = Integer.parseInt(jTFkm.getText());
+        boolean status = jChBstatus.isSelected();
+        return new Veiculo(cliente, placa, ano, marca, modelo, km, status);
+    }
+    
+    private void preencherCampos(Veiculo veiculo){
+        jCBcliente.setSelectedItem(veiculo.getCliente().getNome());
+        jTFplaca.setText(veiculo.getPlaca());
+        jTFano.setText(veiculo.getAno().toString());
+        jTFmarca.setText(veiculo.getMarca());
+        jTFmodelo.setText(veiculo.getModelo());
+        jTFkm.setText(veiculo.getKm().toString());
+        jChBstatus.setSelected(veiculo.getStatus());
+    }
+    
+    public void consultaVeiculo(Veiculo veiculo){
+        preencherCampos(veiculo);
+    }
     /**
      * @param args the command line arguments
      */
@@ -286,11 +314,12 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CadastroDeVeiculos().setVisible(true);
             }
         });
-    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<mechanicalmanagement.Cliente> clienteList;
     private javax.persistence.Query clienteQuery;

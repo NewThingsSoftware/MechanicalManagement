@@ -52,8 +52,9 @@ public class VeiculoDAO {
     
     public static List<Veiculo> obterPorPlaca(String placa) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
-        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.placa LIKE :placa");
-        qry.setParameter("placa", "%" + placa + "%");
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.placa = :placa");
+        qry.setParameter("placa", placa);
         List<Veiculo> veiculos = qry.list();
         return veiculos;
     }

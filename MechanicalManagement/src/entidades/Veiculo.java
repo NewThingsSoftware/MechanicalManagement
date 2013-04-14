@@ -114,6 +114,11 @@ public class Veiculo  implements java.io.Serializable {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    
+    public boolean getStatus(){
+        return this.status;
+    }
+    
     public Set getOrdemServicos() {
         return this.ordemServicos;
     }
