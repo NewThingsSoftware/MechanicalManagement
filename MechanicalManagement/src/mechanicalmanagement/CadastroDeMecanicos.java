@@ -3,6 +3,7 @@ package mechanicalmanagement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -50,6 +51,30 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jBcancelar = new javax.swing.JButton();
+        jBsalvar = new javax.swing.JButton();
+        jBalterar = new javax.swing.JButton();
+        jBconsultar = new javax.swing.JButton();
+        jTFcodigo = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTFnome = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jCBstatus = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        jTFespecialidade = new javax.swing.JTextField();
+        jBvoltar = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jFTFtelefone = new javax.swing.JFormattedTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jFTFrg = new javax.swing.JFormattedTextField();
+        jFTFcpf = new javax.swing.JFormattedTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,9 +194,146 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 100, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Peças");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        setSize(new java.awt.Dimension(629, 457));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("Cadastro de Mecânicos");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 200, -1));
+
+        jBcancelar.setBackground(new java.awt.Color(255, 255, 255));
+        jBcancelar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBcancelar.setForeground(new java.awt.Color(102, 102, 102));
+        jBcancelar.setMnemonic('a');
+        jBcancelar.setText("Cancelar");
+        jPanel3.add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 100, -1));
+
+        jBsalvar.setBackground(new java.awt.Color(255, 255, 255));
+        jBsalvar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBsalvar.setForeground(new java.awt.Color(102, 102, 102));
+        jBsalvar.setMnemonic('a');
+        jBsalvar.setText("Salvar");
+        jBsalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsalvarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBsalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 110, -1));
+
+        jBalterar.setBackground(new java.awt.Color(255, 255, 255));
+        jBalterar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBalterar.setForeground(new java.awt.Color(102, 102, 102));
+        jBalterar.setMnemonic('g');
+        jBalterar.setText("Alterar");
+        jBalterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBalterarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBalterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 110, -1));
+
+        jBconsultar.setBackground(new java.awt.Color(255, 255, 255));
+        jBconsultar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBconsultar.setForeground(new java.awt.Color(102, 102, 102));
+        jBconsultar.setMnemonic('a');
+        jBconsultar.setText("Consultar");
+        jBconsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconsultarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 100, -1));
+
+        jTFcodigo.setEnabled(false);
+        jPanel3.add(jTFcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 100, -1));
+
+        jLabel11.setText("Código:");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, -1));
+        jPanel3.add(jTFnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 430, -1));
+
+        jLabel13.setText("Especialidade:");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 90, -1));
+
+        jCBstatus.setBackground(new java.awt.Color(255, 255, 255));
+        jCBstatus.setText("Inativo");
+        jCBstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBstatusActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jCBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 110, 20));
+
+        jLabel15.setText("RG");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 260, 20));
+
+        jLabel16.setText("Nome");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+        jPanel3.add(jTFespecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 340, -1));
+
+        jBvoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jBvoltar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBvoltar.setForeground(new java.awt.Color(102, 102, 102));
+        jBvoltar.setMnemonic('a');
+        jBvoltar.setText("Voltar");
+        jBvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBvoltarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 100, -1));
+
+        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel20.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 600, 60));
+
+        try {
+            jFTFtelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel3.add(jFTFtelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 170, -1));
+
+        jLabel14.setText("Telefone:");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 70, -1));
+
+        try {
+            jFTFrg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel3.add(jFTFrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 140, -1));
+
+        try {
+            jFTFcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFTFcpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTFcpfActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jFTFcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 170, -1));
+
+        jLabel21.setText("Status");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, 10));
+
+        jLabel22.setText("CPF");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Mecânico", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 600, 190));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 400));
+
+        setSize(new java.awt.Dimension(636, 430));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -190,6 +352,30 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBsalvarActionPerformed
+
+    private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBalterarActionPerformed
+
+    private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBconsultarActionPerformed
+
+    private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBstatusActionPerformed
+
+    private void jFTFcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFcpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTFcpfActionPerformed
+
+    private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        dispose(); /* Marihelly: Volta para a Tela Central. */
+    }//GEN-LAST:event_jBvoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,17 +412,36 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBalterar;
+    private javax.swing.JButton jBcancelar;
+    private javax.swing.JButton jBconsultar;
+    private javax.swing.JButton jBsalvar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jBvoltar;
+    private javax.swing.JCheckBox jCBstatus;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JFormattedTextField jFTFcpf;
+    private javax.swing.JFormattedTextField jFTFrg;
+    private javax.swing.JFormattedTextField jFTFtelefone;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -245,7 +450,12 @@ public class CadastroDeMecanicos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTFcodigo;
+    private javax.swing.JTextField jTFespecialidade;
+    private javax.swing.JTextField jTFnome;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

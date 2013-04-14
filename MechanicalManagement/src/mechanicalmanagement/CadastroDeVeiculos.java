@@ -8,6 +8,7 @@ import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
 import entidades.Veiculo;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 /**
  *
  * @author Marihelly
@@ -38,7 +39,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jCBcliente = new javax.swing.JComboBox();
         jTFmarca = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTFplaca = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTFmodelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -48,17 +48,20 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jChBstatus = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLborda = new javax.swing.JLabel();
-        jTFano = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jTFplaca = new javax.swing.JFormattedTextField();
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jTFano = new javax.swing.JFormattedTextField();
         jButton6 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLborda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Veículos");
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -69,16 +72,13 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteQuery, eLProperty, jCBcliente, "");
         bindingGroup.addBinding(jComboBoxBinding);
 
-        jPanel2.add(jCBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 380, -1));
-
-        jTFmarca.setText("marca");
-        jPanel2.add(jTFmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
+        jPanel2.add(jCBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 380, 20));
+        jPanel2.add(jTFmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 330, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Cadastro de Veículos");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
-        jPanel2.add(jTFplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 100, -1));
 
         jLabel3.setText("Placa:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, -1));
@@ -89,9 +89,9 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
         jLabel6.setText("Ano:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 50, -1));
-        jPanel2.add(jTFkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 20));
+        jPanel2.add(jTFkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 140, -1));
 
-        jLabel2.setText("Kilometragem atual:");
+        jLabel2.setText("Marca");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 100, 20));
 
         jChBstatus.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,26 +101,33 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
                 jChBstatusActionPerformed(evt);
             }
         });
-        jPanel2.add(jChBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 110, 20));
+        jPanel2.add(jChBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 110, 20));
 
         jLabel8.setText("Status:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 290, 20));
-
-        jLborda.setForeground(new java.awt.Color(102, 102, 102));
-        jLborda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Veículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
-        jPanel2.add(jLborda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 600, 210));
-        jPanel2.add(jTFano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 100, -1));
 
         jLabel7.setText("Cliente");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+
+        try {
+            jTFplaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel2.add(jTFplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 100, -1));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(102, 102, 102));
         jButton5.setMnemonic('a');
         jButton5.setText("Voltar");
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 100, -1));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 100, -1));
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -132,7 +139,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 110, -1));
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 110, -1));
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -144,7 +151,20 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 110, -1));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 110, -1));
+
+        try {
+            jTFano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTFano.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTFano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFanoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTFano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 110, -1));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -156,18 +176,30 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 100, -1));
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 100, -1));
 
-        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 600, 60));
+        jLabel5.setText("Kilometragem atual:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 120, 20));
 
         jButton8.setBackground(new java.awt.Color(255, 255, 255));
         jButton8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jButton8.setForeground(new java.awt.Color(102, 102, 102));
         jButton8.setMnemonic('a');
         jButton8.setText("Cancelar");
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 100, -1));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 100, -1));
+
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 600, 60));
+
+        jLborda.setForeground(new java.awt.Color(102, 102, 102));
+        jLborda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Veículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
+        jPanel2.add(jLborda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 600, 220));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,7 +207,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,6 +244,18 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         dispose(); /* Marihelly: Volta para a Tela Central. */
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTFanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFanoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFanoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,17 +307,18 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLborda;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTFano;
+    private javax.swing.JFormattedTextField jTFano;
     private javax.swing.JTextField jTFkm;
     private javax.swing.JTextField jTFmarca;
     private javax.swing.JTextField jTFmodelo;
-    private javax.swing.JTextField jTFplaca;
+    private javax.swing.JFormattedTextField jTFplaca;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
