@@ -154,7 +154,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 110, -1));
 
         try {
-            jTFano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
+            jTFano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -218,8 +218,8 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(642, 457));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-642)/2, (screenSize.height-457)/2, 642, 457);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jChBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBstatusActionPerformed
