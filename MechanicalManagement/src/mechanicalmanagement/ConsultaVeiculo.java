@@ -41,7 +41,7 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTFplaca = new javax.swing.JTextField();
+        jTFbusca = new javax.swing.JTextField();
         jBprocurar = new javax.swing.JButton();
         jRBplaca = new javax.swing.JRadioButton();
         jRBmarca = new javax.swing.JRadioButton();
@@ -96,7 +96,7 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTFplaca, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBprocurar)
                         .addGap(20, 20, 20))))
@@ -116,7 +116,7 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBprocurar)
-                    .addComponent(jTFplaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRBplaca)
@@ -147,15 +147,15 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
 
     private void jBprocurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBprocurarActionPerformed
         if (jRBmarca.isSelected()) {
-            List<Veiculo> veiculos = VeiculoDAO.obterPorMarca(jTFplaca.getText());
+            List<Veiculo> veiculos = VeiculoDAO.obterPorMarca(jTFbusca.getText());
             jTable1.setModel(new VeiculoTableModel(veiculos));
         }
         if (jRBmodelo.isSelected()) {
-            List<Veiculo> veiculos = VeiculoDAO.obterPorModelo(jTFplaca.getText());
+            List<Veiculo> veiculos = VeiculoDAO.obterPorModelo(jTFbusca.getText());
             jTable1.setModel(new VeiculoTableModel(veiculos));
         }
         if (jRBplaca.isSelected()) {
-            List<Veiculo> veiculos = VeiculoDAO.obterPorPlaca(jTFplaca.getText());
+            List<Veiculo> veiculos = VeiculoDAO.obterPorPlaca(jTFbusca.getText());
             jTable1.setModel(new VeiculoTableModel(veiculos));
         }
         if (jRBtodos.isSelected()) {
@@ -208,7 +208,7 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRBplaca;
     private javax.swing.JRadioButton jRBtodos;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFplaca;
+    private javax.swing.JTextField jTFbusca;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
