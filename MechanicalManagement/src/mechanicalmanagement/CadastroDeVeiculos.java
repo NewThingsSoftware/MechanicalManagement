@@ -8,11 +8,11 @@ import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
 import entidades.Veiculo;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Marihelly
+ * @author Bruno
  */
 public class CadastroDeVeiculos extends javax.swing.JFrame {
 
@@ -21,6 +21,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
      */
     public CadastroDeVeiculos() {
         initComponents();
+        jBalterar.setEnabled(false);
     }
 
     /**
@@ -44,21 +45,21 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jTFmodelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTFkm = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jChBstatus = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jTFplaca = new javax.swing.JFormattedTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBvoltar = new javax.swing.JButton();
+        jBsalvar = new javax.swing.JButton();
+        jBalterar = new javax.swing.JButton();
         jTFano = new javax.swing.JFormattedTextField();
-        jButton6 = new javax.swing.JButton();
+        jBconsultar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        jBcancelar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        jTFkm = new javax.swing.JFormattedTextField();
         jLborda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,7 +91,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
         jLabel6.setText("Ano:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 50, -1));
-        jPanel2.add(jTFkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 140, -1));
 
         jLabel2.setText("Marca");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 100, 20));
@@ -118,41 +118,41 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         }
         jPanel2.add(jTFplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 100, -1));
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(102, 102, 102));
-        jButton5.setMnemonic('a');
-        jButton5.setText("Voltar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBvoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jBvoltar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBvoltar.setForeground(new java.awt.Color(102, 102, 102));
+        jBvoltar.setMnemonic('a');
+        jBvoltar.setText("Voltar");
+        jBvoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBvoltarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 100, -1));
+        jPanel2.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 100, -1));
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(102, 102, 102));
-        jButton7.setMnemonic('a');
-        jButton7.setText("Salvar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jBsalvar.setBackground(new java.awt.Color(255, 255, 255));
+        jBsalvar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBsalvar.setForeground(new java.awt.Color(102, 102, 102));
+        jBsalvar.setMnemonic('a');
+        jBsalvar.setText("Salvar");
+        jBsalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jBsalvarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 110, -1));
+        jPanel2.add(jBsalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 110, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(102, 102, 102));
-        jButton4.setMnemonic('g');
-        jButton4.setText("Alterar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBalterar.setBackground(new java.awt.Color(255, 255, 255));
+        jBalterar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBalterar.setForeground(new java.awt.Color(102, 102, 102));
+        jBalterar.setMnemonic('g');
+        jBalterar.setText("Alterar");
+        jBalterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBalterarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 110, -1));
+        jPanel2.add(jBalterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 110, -1));
 
         try {
             jTFano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -167,36 +167,40 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         });
         jPanel2.add(jTFano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 110, -1));
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(102, 102, 102));
-        jButton6.setMnemonic('a');
-        jButton6.setText("Consultar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBconsultar.setBackground(new java.awt.Color(255, 255, 255));
+        jBconsultar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBconsultar.setForeground(new java.awt.Color(102, 102, 102));
+        jBconsultar.setMnemonic('a');
+        jBconsultar.setText("Consultar");
+        jBconsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBconsultarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 100, -1));
+        jPanel2.add(jBconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 100, -1));
 
         jLabel5.setText("Kilometragem atual:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 120, 20));
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(102, 102, 102));
-        jButton8.setMnemonic('a');
-        jButton8.setText("Cancelar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jBcancelar.setBackground(new java.awt.Color(255, 255, 255));
+        jBcancelar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jBcancelar.setForeground(new java.awt.Color(102, 102, 102));
+        jBcancelar.setMnemonic('a');
+        jBcancelar.setText("Cancelar");
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jBcancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 100, -1));
+        jPanel2.add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 100, -1));
 
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 600, 60));
+
+        jTFkm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jTFkm.setToolTipText("");
+        jPanel2.add(jTFkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 140, -1));
 
         jLborda.setForeground(new java.awt.Color(102, 102, 102));
         jLborda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Veículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
@@ -227,41 +231,91 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jChBstatusActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        VeiculoDAO.gravar(obterCampos());
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
+        /*BrunoDePerto*/
+        if (camposPreenchidos()) {
+            VeiculoDAO.gravar(obterCampos());
+            limpaTela();
+        }
+        jTFplaca.setEnabled(true);
+    }//GEN-LAST:event_jBsalvarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Veiculo veiculo = VeiculoDAO.obterPorPlaca(obterCampos().getPlaca()).get(0);
-        veiculo.setCliente(ClienteDAO.obertPorNome(obterCampos().getCliente().getNome()).get(0));
-        veiculo.setMarca(obterCampos().getMarca());
-        veiculo.setModelo(obterCampos().getModelo());
-        veiculo.setAno(obterCampos().getAno());
-        veiculo.setKm(obterCampos().getKm());
-        veiculo.setStatus(obterCampos().getStatus());
-        VeiculoDAO.alterar(veiculo);
-        jButton7.setEnabled(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
+        /*BrunoDePerto*/
+        if (camposPreenchidos()) {
+            Veiculo veiculo = VeiculoDAO.obterPorPlaca(obterCampos().getPlaca()).get(0);
+            veiculo.setCliente(ClienteDAO.obertPorNome(obterCampos().getCliente().getNome()).get(0));
+            veiculo.setMarca(obterCampos().getMarca());
+            veiculo.setModelo(obterCampos().getModelo());
+            veiculo.setAno(obterCampos().getAno());
+            veiculo.setKm(obterCampos().getKm());
+            veiculo.setStatus(obterCampos().getStatus());
+            VeiculoDAO.alterar(veiculo);
+            jBsalvar.setEnabled(true);
+            jBalterar.setEnabled(false);
+            limpaTela();
+        }
+    }//GEN-LAST:event_jBalterarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+        /*BrunoDePerto*/
         jTFplaca.setEnabled(false);
-        jButton7.setEnabled(false);
+        jBsalvar.setEnabled(false);
+        jBalterar.setEnabled(true);
         new ConsultaVeiculo(this).setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jBconsultarActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        /*BrunoDePerto*/
+        limpaTela();
+        jTFplaca.setEnabled(true);
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
+    }//GEN-LAST:event_jBcancelarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        /*BrunoDePerto*/
+        limpaTela();
+        jTFplaca.setEnabled(true);
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
         dispose(); /* Marihelly: Volta para a Tela Central. */
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBvoltarActionPerformed
 
     private void jTFanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFanoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFanoActionPerformed
-    
-    private Veiculo obterCampos(){
+
+    /*Metodo para verificar se todos os campos da tela de cadastro de veiculo
+     * estão preenchidos*/
+    private boolean camposPreenchidos() {
+        if (jTFplaca.getText().isEmpty()
+                || jTFano.getText().isEmpty()
+                || jTFmarca.getText().isEmpty()
+                || jTFmodelo.getText().isEmpty()
+                || jTFkm.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
+            return false;
+        }
+        return true;
+    }
+
+    /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
+    private void limpaTela() {
+        /*BrunoDePerto*/
+        jCBcliente.setSelectedIndex(0);
+        jTFplaca.setText("");
+        jTFano.setText("");
+        jTFmarca.setText("");
+        jTFmodelo.setText("");
+        jTFkm.setText("");
+        jChBstatus.setSelected(false);
+    }
+    /*Metodp que pega todos os valores dos campos da tela de cadastro de veiculos
+     * e cria um objeto do tipo veiculo que é retornado com os valores*/
+
+    private Veiculo obterCampos() {
+        /*BrunoDePerto*/
         Cliente cliente = ClienteDAO.obertPorNome((String) jCBcliente.getSelectedItem()).get(0);
         String placa = jTFplaca.getText();
         int ano = Integer.parseInt(jTFano.getText());
@@ -271,8 +325,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         boolean status = jChBstatus.isSelected();
         return new Veiculo(cliente, placa, ano, marca, modelo, km, status);
     }
-    
-    private void preencherCampos(Veiculo veiculo){
+
+    /*Metodo que preenche todos os campos da tela de cadastro de veiculo, 
+     * recebendo por parametro um objeto do tipo veiculo*/
+    private void preencherCampos(Veiculo veiculo) {
+        /*BrunoDePerto*/
         jCBcliente.setSelectedItem(veiculo.getCliente().getNome());
         jTFplaca.setText(veiculo.getPlaca());
         jTFano.setText(veiculo.getAno().toString());
@@ -281,10 +338,14 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         jTFkm.setText(veiculo.getKm().toString());
         jChBstatus.setSelected(veiculo.getStatus());
     }
-    
-    public void consultaVeiculo(Veiculo veiculo){
+
+    /* Metodo de retorno da janela de consulta de veiculo, setando os valores
+     * lidos para os campos da janela*/
+    public void consultaVeiculo(Veiculo veiculo) {
+        /*BrunoDePerto*/
         preencherCampos(veiculo);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -319,16 +380,16 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
                 new CadastroDeVeiculos().setVisible(true);
             }
         });
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<mechanicalmanagement.Cliente> clienteList;
     private javax.persistence.Query clienteQuery;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jBalterar;
+    private javax.swing.JButton jBcancelar;
+    private javax.swing.JButton jBconsultar;
+    private javax.swing.JButton jBsalvar;
+    private javax.swing.JButton jBvoltar;
     private javax.swing.JComboBox jCBcliente;
     private javax.swing.JCheckBox jChBstatus;
     private javax.swing.JLabel jLabel1;
@@ -344,7 +405,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JFormattedTextField jTFano;
-    private javax.swing.JTextField jTFkm;
+    private javax.swing.JFormattedTextField jTFkm;
     private javax.swing.JTextField jTFmarca;
     private javax.swing.JTextField jTFmodelo;
     private javax.swing.JFormattedTextField jTFplaca;

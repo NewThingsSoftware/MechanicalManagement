@@ -37,8 +37,7 @@ public class VeiculoDAO {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT v FROM Veiculo v");
-        List<Veiculo> veiculos = qry.list();
-        return veiculos;
+        return qry.list();
     }
 
     public static List<Veiculo> obterPorCliente(Cliente cliente){
@@ -46,15 +45,14 @@ public class VeiculoDAO {
         s.beginTransaction();
         Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE idCliente = :idCliente");
         qry.setParameter("idCliente", cliente.getIdCliente());
-        List<Veiculo> veiculos = qry.list();
-        return veiculos;
+        return qry.list();
     }
     
     public static List<Veiculo> obterPorPlaca(String placa) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.placa = :placa");
-        qry.setParameter("placa", placa);
+        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.placa LIKE :placa");
+        qry.setParameter("placa", "%" + placa + "%");
         List<Veiculo> veiculos = qry.list();
         return veiculos;
     }

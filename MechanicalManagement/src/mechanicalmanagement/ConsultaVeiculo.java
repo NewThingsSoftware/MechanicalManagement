@@ -6,6 +6,11 @@ package mechanicalmanagement;
 
 import dao.VeiculoDAO;
 import entidades.Veiculo;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class ConsultaVeiculo extends javax.swing.JFrame {
 
@@ -16,14 +21,33 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
 
     public ConsultaVeiculo() {
         initComponents();
+        veiculoList.removeAll(veiculoList);
+        veiculoList.addAll(veiculoQuery.getResultList());
     }
-    
-    public ConsultaVeiculo(CadastroDeVeiculos cadastroDeVeiculos){
+
+    public ConsultaVeiculo(CadastroDeVeiculos cadastroDeVeiculos) {
         this.cadastroDeVeiculos = cadastroDeVeiculos;
         initComponents();
-        System.out.println("Oi");
+        veiculoList.removeAll(veiculoList);
+        veiculoList.addAll(veiculoQuery.getResultList());
     }
-    
+
+    /*Metodo para preencher a tabela com a consulta feita*/
+    private TableModel preencheTabela(List<Veiculo> veiculos) {
+        TableModel tableModel = jTable1.getModel();
+        
+        System.out.println(
+        tableModel.getRowCount());
+        for (int i = 0; i < veiculos.size(); i++) {
+            System.out.println(i);
+            tableModel.setValueAt(veiculos.get(i).getPlaca(), i, 0);
+            tableModel.setValueAt(veiculos.get(i).getModelo(), i, 1);
+            tableModel.setValueAt(veiculos.get(i).getMarca(), i, 2);
+            tableModel.setValueAt(veiculos.get(i).getAno(), i, 3);
+            tableModel.setValueAt(veiculos.get(i).getKm(), i, 4);
+        }
+        return tableModel;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,18 +61,21 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mecanica?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         veiculoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Veiculo v");
-        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : veiculoQuery.getResultList();
-        jButton1 = new javax.swing.JButton();
+        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(veiculoQuery.getResultList());
+        veiculoQueryPlaca = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Veiculo v");
+        jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTFplaca = new javax.swing.JTextField();
+        jBconsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBselecionar.setText("jButton1");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBselecionarActionPerformed(evt);
             }
         });
 
@@ -77,26 +104,44 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
+        jBconsultar.setText("jButton2");
+        jBconsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(302, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jBselecionar)
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTFplaca, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBconsultar)
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBconsultar)
+                    .addComponent(jTFplaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBselecionar)
                 .addContainerGap())
         );
 
@@ -106,12 +151,25 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         setBounds((screenSize.width-416)/2, (screenSize.height-339)/2, 416, 339);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String placa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-        Veiculo veiculo = VeiculoDAO.obterPorPlaca(placa).get(0);
-        cadastroDeVeiculos.consultaVeiculo(veiculo);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
+        if (jTable1.getSelectedRow() > 0) {
+            String placa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            Veiculo veiculo = VeiculoDAO.obterPorPlaca(placa).get(0);
+            cadastroDeVeiculos.consultaVeiculo(veiculo);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");
+        }
+    }//GEN-LAST:event_jBselecionarActionPerformed
+
+    private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+        veiculoList.removeAll(veiculoList);
+        jTable1.setModel(preencheTabela(VeiculoDAO.obterPorPlaca(jTFplaca.getText())));
+//        veiculoList.removeAll(veiculoList);
+//        veiculoQueryPlaca = entityManager.createQuery("SELECT v FROM Veiculo v "
+//                + "WHERE v.placa LIKE '%" + jTFplaca.getText() + "%'");
+//        veiculoList.addAll(veiculoQueryPlaca.getResultList());
+    }//GEN-LAST:event_jBconsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,11 +208,14 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBconsultar;
+    private javax.swing.JButton jBselecionar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTFplaca;
     private javax.swing.JTable jTable1;
     private java.util.List<mechanicalmanagement.Veiculo> veiculoList;
     private javax.persistence.Query veiculoQuery;
+    private javax.persistence.Query veiculoQueryPlaca;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
