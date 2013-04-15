@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12/04/2013 13:39:36 by Hibernate Tools 3.2.1.GA
+// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -20,6 +20,8 @@ public class Peca  implements java.io.Serializable {
      private Double quantidade;
      private boolean status;
      private Set pecaUsadas = new HashSet(0);
+     private Set pecaUsadas_1 = new HashSet(0);
+     private Set pecaUsadas_2 = new HashSet(0);
 
     public Peca() {
     }
@@ -29,7 +31,7 @@ public class Peca  implements java.io.Serializable {
         this.descricao = descricao;
         this.status = status;
     }
-    public Peca(String descricao, String marca, BigDecimal precoCompra, BigDecimal precoVenda, Double quantidade, boolean status, Set pecaUsadas) {
+    public Peca(String descricao, String marca, BigDecimal precoCompra, BigDecimal precoVenda, Double quantidade, boolean status, Set pecaUsadas, Set pecaUsadas_1, Set pecaUsadas_2) {
        this.descricao = descricao;
        this.marca = marca;
        this.precoCompra = precoCompra;
@@ -37,6 +39,8 @@ public class Peca  implements java.io.Serializable {
        this.quantidade = quantidade;
        this.status = status;
        this.pecaUsadas = pecaUsadas;
+       this.pecaUsadas_1 = pecaUsadas_1;
+       this.pecaUsadas_2 = pecaUsadas_2;
     }
    
     public Integer getIdPeca() {
@@ -94,6 +98,20 @@ public class Peca  implements java.io.Serializable {
     
     public void setPecaUsadas(Set pecaUsadas) {
         this.pecaUsadas = pecaUsadas;
+    }
+    public Set getPecaUsadas_1() {
+        return this.pecaUsadas_1;
+    }
+    
+    public void setPecaUsadas_1(Set pecaUsadas_1) {
+        this.pecaUsadas_1 = pecaUsadas_1;
+    }
+    public Set getPecaUsadas_2() {
+        return this.pecaUsadas_2;
+    }
+    
+    public void setPecaUsadas_2(Set pecaUsadas_2) {
+        this.pecaUsadas_2 = pecaUsadas_2;
     }
 
 

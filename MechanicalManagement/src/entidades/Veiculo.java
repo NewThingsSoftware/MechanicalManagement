@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12/04/2013 13:39:36 by Hibernate Tools 3.2.1.GA
+// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -20,6 +20,8 @@ public class Veiculo  implements java.io.Serializable {
      private Integer km;
      private boolean status;
      private Set ordemServicos = new HashSet(0);
+     private Set ordemServicos_1 = new HashSet(0);
+     private Set ordemServicos_2 = new HashSet(0);
 
     public Veiculo() {
     }
@@ -32,7 +34,18 @@ public class Veiculo  implements java.io.Serializable {
         this.modelo = modelo;
         this.status = status;
     }
-    public Veiculo(Cliente cliente, String placa, Integer ano, String marca, String modelo, Integer km, boolean status, Set ordemServicos) {
+
+    public Veiculo(Cliente cliente, String placa, Integer ano, String marca, String modelo, Integer km, boolean status) {
+        this.cliente = cliente;
+        this.placa = placa;
+        this.ano = ano;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.km = km;
+        this.status = status;
+    }
+    
+    public Veiculo(Cliente cliente, String placa, Integer ano, String marca, String modelo, Integer km, boolean status, Set ordemServicos, Set ordemServicos_1, Set ordemServicos_2) {
        this.cliente = cliente;
        this.placa = placa;
        this.ano = ano;
@@ -41,6 +54,8 @@ public class Veiculo  implements java.io.Serializable {
        this.km = km;
        this.status = status;
        this.ordemServicos = ordemServicos;
+       this.ordemServicos_1 = ordemServicos_1;
+       this.ordemServicos_2 = ordemServicos_2;
     }
    
     public Integer getIdVeiculo() {
@@ -99,12 +114,31 @@ public class Veiculo  implements java.io.Serializable {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    
+    public boolean getStatus(){
+        return this.status;
+    }
+    
     public Set getOrdemServicos() {
         return this.ordemServicos;
     }
     
     public void setOrdemServicos(Set ordemServicos) {
         this.ordemServicos = ordemServicos;
+    }
+    public Set getOrdemServicos_1() {
+        return this.ordemServicos_1;
+    }
+    
+    public void setOrdemServicos_1(Set ordemServicos_1) {
+        this.ordemServicos_1 = ordemServicos_1;
+    }
+    public Set getOrdemServicos_2() {
+        return this.ordemServicos_2;
+    }
+    
+    public void setOrdemServicos_2(Set ordemServicos_2) {
+        this.ordemServicos_2 = ordemServicos_2;
     }
 
 

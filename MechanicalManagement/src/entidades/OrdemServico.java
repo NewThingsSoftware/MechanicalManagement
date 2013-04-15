@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12/04/2013 13:39:36 by Hibernate Tools 3.2.1.GA
+// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,6 +20,10 @@ public class OrdemServico  implements java.io.Serializable {
      private char status;
      private Set contasRecebers = new HashSet(0);
      private Set pecaUsadas = new HashSet(0);
+     private Set contasRecebers_1 = new HashSet(0);
+     private Set pecaUsadas_1 = new HashSet(0);
+     private Set contasRecebers_2 = new HashSet(0);
+     private Set pecaUsadas_2 = new HashSet(0);
 
     public OrdemServico() {
     }
@@ -31,7 +35,7 @@ public class OrdemServico  implements java.io.Serializable {
         this.data = data;
         this.status = status;
     }
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status, Set contasRecebers, Set pecaUsadas) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status, Set contasRecebers, Set pecaUsadas, Set contasRecebers_1, Set pecaUsadas_1, Set contasRecebers_2, Set pecaUsadas_2) {
        this.veiculo = veiculo;
        this.mecanico = mecanico;
        this.data = data;
@@ -39,6 +43,10 @@ public class OrdemServico  implements java.io.Serializable {
        this.status = status;
        this.contasRecebers = contasRecebers;
        this.pecaUsadas = pecaUsadas;
+       this.contasRecebers_1 = contasRecebers_1;
+       this.pecaUsadas_1 = pecaUsadas_1;
+       this.contasRecebers_2 = contasRecebers_2;
+       this.pecaUsadas_2 = pecaUsadas_2;
     }
    
     public Integer getIdOrdemServico() {
@@ -96,6 +104,34 @@ public class OrdemServico  implements java.io.Serializable {
     
     public void setPecaUsadas(Set pecaUsadas) {
         this.pecaUsadas = pecaUsadas;
+    }
+    public Set getContasRecebers_1() {
+        return this.contasRecebers_1;
+    }
+    
+    public void setContasRecebers_1(Set contasRecebers_1) {
+        this.contasRecebers_1 = contasRecebers_1;
+    }
+    public Set getPecaUsadas_1() {
+        return this.pecaUsadas_1;
+    }
+    
+    public void setPecaUsadas_1(Set pecaUsadas_1) {
+        this.pecaUsadas_1 = pecaUsadas_1;
+    }
+    public Set getContasRecebers_2() {
+        return this.contasRecebers_2;
+    }
+    
+    public void setContasRecebers_2(Set contasRecebers_2) {
+        this.contasRecebers_2 = contasRecebers_2;
+    }
+    public Set getPecaUsadas_2() {
+        return this.pecaUsadas_2;
+    }
+    
+    public void setPecaUsadas_2(Set pecaUsadas_2) {
+        this.pecaUsadas_2 = pecaUsadas_2;
     }
 
 

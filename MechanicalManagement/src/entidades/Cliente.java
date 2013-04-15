@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12/04/2013 13:39:36 by Hibernate Tools 3.2.1.GA
+// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -19,6 +19,8 @@ public class Cliente  implements java.io.Serializable {
      private String endereco;
      private boolean status;
      private Set veiculos = new HashSet(0);
+     private Set veiculos_1 = new HashSet(0);
+     private Set veiculos_2 = new HashSet(0);
 
     public Cliente() {
     }
@@ -30,7 +32,7 @@ public class Cliente  implements java.io.Serializable {
         this.rg = rg;
         this.status = status;
     }
-    public Cliente(String nome, int cpf, int rg, Integer telefone, String endereco, boolean status, Set veiculos) {
+    public Cliente(String nome, int cpf, int rg, Integer telefone, String endereco, boolean status, Set veiculos, Set veiculos_1, Set veiculos_2) {
        this.nome = nome;
        this.cpf = cpf;
        this.rg = rg;
@@ -38,6 +40,8 @@ public class Cliente  implements java.io.Serializable {
        this.endereco = endereco;
        this.status = status;
        this.veiculos = veiculos;
+       this.veiculos_1 = veiculos_1;
+       this.veiculos_2 = veiculos_2;
     }
    
     public Integer getIdCliente() {
@@ -95,6 +99,20 @@ public class Cliente  implements java.io.Serializable {
     
     public void setVeiculos(Set veiculos) {
         this.veiculos = veiculos;
+    }
+    public Set getVeiculos_1() {
+        return this.veiculos_1;
+    }
+    
+    public void setVeiculos_1(Set veiculos_1) {
+        this.veiculos_1 = veiculos_1;
+    }
+    public Set getVeiculos_2() {
+        return this.veiculos_2;
+    }
+    
+    public void setVeiculos_2(Set veiculos_2) {
+        this.veiculos_2 = veiculos_2;
     }
 
 

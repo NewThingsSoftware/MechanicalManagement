@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="mecanica"/>
-  <table-filter match-name="veiculo"/>
   <table-filter match-name="cliente"/>
-  <table-filter match-name="mecanico"/>
+  <table-filter match-name="peca"/>
   <table-filter match-name="peca_usada"/>
   <table-filter match-name="contas_receber"/>
   <table-filter match-name="ordem_servico"/>
-  <table-filter match-name="peca"/>
+  <table-filter match-name="veiculo"/>
+  <table-filter match-name="mecanico"/>
 </hibernate-reverse-engineering>

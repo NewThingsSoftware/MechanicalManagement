@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12/04/2013 13:39:36 by Hibernate Tools 3.2.1.GA
+// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -19,6 +19,8 @@ public class Mecanico  implements java.io.Serializable {
      private String especialidade;
      private boolean status;
      private Set ordemServicos = new HashSet(0);
+     private Set ordemServicos_1 = new HashSet(0);
+     private Set ordemServicos_2 = new HashSet(0);
 
     public Mecanico() {
     }
@@ -31,7 +33,7 @@ public class Mecanico  implements java.io.Serializable {
         this.especialidade = especialidade;
         this.status = status;
     }
-    public Mecanico(String nome, int cpf, int rg, String telefone, String especialidade, boolean status, Set ordemServicos) {
+    public Mecanico(String nome, int cpf, int rg, String telefone, String especialidade, boolean status, Set ordemServicos, Set ordemServicos_1, Set ordemServicos_2) {
        this.nome = nome;
        this.cpf = cpf;
        this.rg = rg;
@@ -39,6 +41,8 @@ public class Mecanico  implements java.io.Serializable {
        this.especialidade = especialidade;
        this.status = status;
        this.ordemServicos = ordemServicos;
+       this.ordemServicos_1 = ordemServicos_1;
+       this.ordemServicos_2 = ordemServicos_2;
     }
    
     public Integer getIdMecanico() {
@@ -96,6 +100,20 @@ public class Mecanico  implements java.io.Serializable {
     
     public void setOrdemServicos(Set ordemServicos) {
         this.ordemServicos = ordemServicos;
+    }
+    public Set getOrdemServicos_1() {
+        return this.ordemServicos_1;
+    }
+    
+    public void setOrdemServicos_1(Set ordemServicos_1) {
+        this.ordemServicos_1 = ordemServicos_1;
+    }
+    public Set getOrdemServicos_2() {
+        return this.ordemServicos_2;
+    }
+    
+    public void setOrdemServicos_2(Set ordemServicos_2) {
+        this.ordemServicos_2 = ordemServicos_2;
     }
 
 
