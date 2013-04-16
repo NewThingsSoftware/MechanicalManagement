@@ -15,7 +15,7 @@ public class Cliente  implements java.io.Serializable {
      private String nome;
      private int cpf;
      private int rg;
-     private Integer telefone;
+     private String telefone;
      private String endereco;
      private boolean status;
      private Set veiculos = new HashSet(0);
@@ -32,7 +32,7 @@ public class Cliente  implements java.io.Serializable {
         this.rg = rg;
         this.status = status;
     }
-    public Cliente(String nome, int cpf, int rg, Integer telefone, String endereco, boolean status, Set veiculos, Set veiculos_1, Set veiculos_2) {
+    public Cliente(String nome, int cpf, int rg, String telefone, String endereco, boolean status, Set veiculos, Set veiculos_1, Set veiculos_2) {
        this.nome = nome;
        this.cpf = cpf;
        this.rg = rg;
@@ -72,11 +72,11 @@ public class Cliente  implements java.io.Serializable {
     public void setRg(int rg) {
         this.rg = rg;
     }
-    public Integer getTelefone() {
+    public String getTelefone() {
         return this.telefone;
     }
     
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
     public String getEndereco() {

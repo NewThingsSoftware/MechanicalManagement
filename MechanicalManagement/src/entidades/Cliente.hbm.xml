@@ -17,7 +17,7 @@
         <property name="rg" type="int">
             <column name="rg" not-null="true" unique="true" />
         </property>
-        <property name="telefone" type="java.lang.Integer">
+        <property name="telefone" type="string">
             <column name="telefone" />
         </property>
         <property name="endereco" type="string">
