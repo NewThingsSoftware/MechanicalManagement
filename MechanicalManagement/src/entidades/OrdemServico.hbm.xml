@@ -20,7 +20,7 @@
         <property name="descricao" type="string">
             <column name="descricao" length="150" />
         </property>
-        <property name="status" type="char">
+        <property name="status" type="boolean">
             <column name="status" length="1" not-null="true" />
         </property>
         <set name="contasRecebers" inverse="true">

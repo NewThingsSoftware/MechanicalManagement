@@ -17,7 +17,7 @@ public class OrdemServico  implements java.io.Serializable {
      private Mecanico mecanico;
      private Date data;
      private String descricao;
-     private char status;
+     private boolean status;
      private Set contasRecebers = new HashSet(0);
      private Set pecaUsadas = new HashSet(0);
      private Set contasRecebers_1 = new HashSet(0);
@@ -29,14 +29,14 @@ public class OrdemServico  implements java.io.Serializable {
     }
 
 	
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, char status) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, boolean status) {
         this.veiculo = veiculo;
         this.mecanico = mecanico;
         this.data = data;
         this.status = status;
     }
 
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, boolean status) {
         this.veiculo = veiculo;
         this.mecanico = mecanico;
         this.data = data;
@@ -44,7 +44,7 @@ public class OrdemServico  implements java.io.Serializable {
         this.status = status;
     }
     
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status, Set contasRecebers, Set pecaUsadas, Set contasRecebers_1, Set pecaUsadas_1, Set contasRecebers_2, Set pecaUsadas_2) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, boolean status, Set contasRecebers, Set pecaUsadas, Set contasRecebers_1, Set pecaUsadas_1, Set contasRecebers_2, Set pecaUsadas_2) {
        this.veiculo = veiculo;
        this.mecanico = mecanico;
        this.data = data;
@@ -93,11 +93,11 @@ public class OrdemServico  implements java.io.Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public char getStatus() {
+    public boolean getStatus() {
         return this.status;
     }
     
-    public void setStatus(char status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
     public Set getContasRecebers() {

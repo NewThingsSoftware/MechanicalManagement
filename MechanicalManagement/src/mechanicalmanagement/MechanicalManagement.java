@@ -2,6 +2,7 @@ package mechanicalmanagement;
 
 import dao.ClienteDAO;
 import dao.MecanicoDAO;
+import dao.OrdemServicoDAO;
 import dao.PecaDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
@@ -27,5 +28,6 @@ public class MechanicalManagement {
         Peca peca = new Peca("Parafuso", "Inox", new BigDecimal("10.50"), new BigDecimal("15.45"), 20.0, true);
         PecaDAO.gravar(peca);
         OrdemServico ordemServico = new OrdemServico(veiculo, mecanico, new Date(2013, 4, 16), "Concerto", true);
+        OrdemServicoDAO.gravar(ordemServico);
     }
 }
