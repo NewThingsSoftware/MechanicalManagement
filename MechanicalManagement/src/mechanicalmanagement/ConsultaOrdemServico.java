@@ -1,6 +1,7 @@
 package mechanicalmanagement;
 
 import TableModels.OrdemServicoTableModelo;
+import dao.OrdemServicoDAO;
 
 /**
  *
@@ -13,7 +14,7 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
      */
     public ConsultaOrdemServico() {
         initComponents();
-        jTable1.setModel(new OrdemServicoTableModelo(null));
+        jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterTodos()));
     }
 
     /**
