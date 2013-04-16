@@ -1,6 +1,5 @@
 package dao;
 
-import entidades.Cliente;
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Veiculo;
@@ -65,14 +64,16 @@ public class OrdemServicoDAO {
     public static List<OrdemServico> obterPorVeiculo(Veiculo veiculo){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT o FROM OrdemServico o WHERE o.idVeiculo");
+        Query qry = s.createQuery("SELECT o FROM OrdemServico o WHERE o.idVeiculo = :idVeiculo");
+        qry.setParameter("idVeiculo", veiculo.getIdVeiculo());
         List<OrdemServico> ordemServicos = qry.list();
         return ordemServicos;
     }
-    public static List<OrdemServico> obterPorMecanico(){
+    public static List<OrdemServico> obterPorMecanico(Mecanico mecanico){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT o FROM OrdemServico o");
+        Query qry = s.createQuery("SELECT o FROM OrdemServico o WHERE o.idMecanico = :idMecanico");
+        qry.setParameter("idMecanico", mecanico.getIdMecanico());
         List<OrdemServico> ordemServicos = qry.list();
         return ordemServicos;
     }
