@@ -31,6 +31,16 @@ public class Peca  implements java.io.Serializable {
         this.descricao = descricao;
         this.status = status;
     }
+
+    public Peca(String descricao, String marca, BigDecimal precoCompra, BigDecimal precoVenda, Double quantidade, boolean status) {
+        this.descricao = descricao;
+        this.marca = marca;
+        this.precoCompra = precoCompra;
+        this.precoVenda = precoVenda;
+        this.quantidade = quantidade;
+        this.status = status;
+    }
+    
     public Peca(String descricao, String marca, BigDecimal precoCompra, BigDecimal precoVenda, Double quantidade, boolean status, Set pecaUsadas, Set pecaUsadas_1, Set pecaUsadas_2) {
        this.descricao = descricao;
        this.marca = marca;

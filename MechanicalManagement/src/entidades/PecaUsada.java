@@ -17,6 +17,13 @@ public class PecaUsada  implements java.io.Serializable {
     public PecaUsada() {
     }
 
+    public PecaUsada(OrdemServico ordemServico, Peca peca, double quantidade) {
+        this.ordemServico = ordemServico;
+        this.peca = peca;
+        this.quantidade = quantidade;
+    }
+    
+
     public PecaUsada(PecaUsadaId id, OrdemServico ordemServico, Peca peca, double quantidade) {
        this.id = id;
        this.ordemServico = ordemServico;

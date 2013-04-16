@@ -35,6 +35,15 @@ public class OrdemServico  implements java.io.Serializable {
         this.data = data;
         this.status = status;
     }
+
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status) {
+        this.veiculo = veiculo;
+        this.mecanico = mecanico;
+        this.data = data;
+        this.descricao = descricao;
+        this.status = status;
+    }
+    
     public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status, Set contasRecebers, Set pecaUsadas, Set contasRecebers_1, Set pecaUsadas_1, Set contasRecebers_2, Set pecaUsadas_2) {
        this.veiculo = veiculo;
        this.mecanico = mecanico;

@@ -33,6 +33,16 @@ public class Mecanico  implements java.io.Serializable {
         this.especialidade = especialidade;
         this.status = status;
     }
+
+    public Mecanico(String nome, int cpf, int rg, String telefone, String especialidade, boolean status) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.telefone = telefone;
+        this.especialidade = especialidade;
+        this.status = status;
+    }
+    
     public Mecanico(String nome, int cpf, int rg, String telefone, String especialidade, boolean status, Set ordemServicos, Set ordemServicos_1, Set ordemServicos_2) {
        this.nome = nome;
        this.cpf = cpf;

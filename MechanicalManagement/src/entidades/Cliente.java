@@ -32,6 +32,16 @@ public class Cliente  implements java.io.Serializable {
         this.rg = rg;
         this.status = status;
     }
+
+    public Cliente(String nome, int cpf, int rg, String telefone, String endereco, boolean status) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.status = status;
+    }
+    
     public Cliente(String nome, int cpf, int rg, String telefone, String endereco, boolean status, Set veiculos, Set veiculos_1, Set veiculos_2) {
        this.nome = nome;
        this.cpf = cpf;
