@@ -47,9 +47,12 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jRBmarca = new javax.swing.JRadioButton();
         jRBmodelo = new javax.swing.JRadioButton();
         jRBtodos = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBselecionar.setText("Selecionar");
         jBselecionar.addActionListener(new java.awt.event.ActionListener() {
@@ -57,8 +60,12 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
                 jBselecionarActionPerformed(evt);
             }
         });
+        getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
         jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
+        getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, -1));
 
         jBprocurar.setText("Procurar");
         jBprocurar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,72 +73,54 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
                 jBprocurarActionPerformed(evt);
             }
         });
+        getContentPane().add(jBprocurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 80, -1));
 
+        jRBplaca.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBplaca);
         jRBplaca.setText("Placa");
+        getContentPane().add(jRBplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
+        jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBmarca);
         jRBmarca.setText("Marca");
+        getContentPane().add(jRBmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
+        jRBmodelo.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBmodelo);
         jRBmodelo.setText("Modelo");
+        getContentPane().add(jRBmodelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
 
+        jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
+        getContentPane().add(jRBtodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(294, Short.MAX_VALUE)
-                .addComponent(jBselecionar)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTFbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBprocurar)
-                        .addGap(20, 20, 20))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jRBplaca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRBmarca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRBmodelo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRBtodos)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBprocurar)
-                    .addComponent(jTFbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRBplaca)
-                    .addComponent(jRBmarca)
-                    .addComponent(jRBmodelo)
-                    .addComponent(jRBtodos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBselecionar)
-                .addContainerGap())
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(22, 22, 22))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-416)/2, (screenSize.height-377)/2, 416, 377);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
+
+        setSize(new java.awt.Dimension(408, 389));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
@@ -203,6 +192,8 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
     private javax.swing.ButtonGroup jBGconsulta;
     private javax.swing.JButton jBprocurar;
     private javax.swing.JButton jBselecionar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBmarca;
     private javax.swing.JRadioButton jRBmodelo;
     private javax.swing.JRadioButton jRBplaca;
