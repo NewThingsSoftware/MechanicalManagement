@@ -21,7 +21,7 @@ public class ClienteDAO {
     public static List<Cliente> obertPorNome(String nome){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT c FROM Cliente c WHERE nome = :nome");
+        Query qry = s.createQuery("SELECT c FROM Cliente c WHERE c.nome = :nome");
         qry.setParameter("nome", nome);
         List<Cliente> clientes = qry.list();
         return clientes;

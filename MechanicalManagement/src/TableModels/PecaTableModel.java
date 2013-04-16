@@ -1,26 +1,28 @@
 package TableModels;
 
-import entidades.Veiculo;
-import java.util.List;
 import javax.swing.table.AbstractTableModel;
-
+import entidades.Peca;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.List;
 /**
  *
- * @author Bruno
+ * @author ctb03
  */
-public class VeiculoTableModel extends AbstractTableModel {
-
+public class PecaTableModel extends AbstractTableModel {
+    
     private static final long serialVersionUID = 1L;
     /* Lista de Cliente que representam as linhas. */
-    private List<Veiculo> veiculos;
+    private List<Peca> pecas;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Placa", "Modelo", "Marca", "Ano", "Km"};
+        "Código", "Descrição", "Marca", "Preço Compra", "Preço Venda", 
+    "Quantidade"};
 
     /* Cria um ClienteTableModel carregado com 
      * a lista de Cliente especificada. */
-    public VeiculoTableModel(List<Veiculo> veiculos) {
-        this.veiculos = veiculos;
+    public PecaTableModel(List<Peca> pecas) {
+        this.pecas = pecas;
     }
 
     /* Retorna a quantidade de colunas. */
@@ -34,7 +36,7 @@ public class VeiculoTableModel extends AbstractTableModel {
     @Override
     public int getRowCount() {
         // Retorna o tamanho da lista de Cliente.  
-        return veiculos.size();
+        return pecas.size();
     }
 
     @Override
@@ -52,7 +54,7 @@ public class VeiculoTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Veiculo veiculo = veiculos.get(rowIndex);
+        Peca peca = pecas.get(rowIndex);
         /*Retorna o campo referente a coluna especificada.  
          Aqui é feito um switch para verificar qual é a coluna  
          e retornar o campo adequado. As colunas são as mesmas  
@@ -60,15 +62,17 @@ public class VeiculoTableModel extends AbstractTableModel {
         switch (columnIndex) {
             // "Placa", "Modelo", "Marca", "Ano", "Km";  
             case 0:
-                return veiculo.getPlaca();
+                return peca.getIdPeca();
             case 1:
-                return veiculo.getModelo();
+                return peca.getDescricao();
             case 2:
-                return veiculo.getMarca();
+                return peca.getMarca();
             case 3:
-                return veiculo.getAno();
+                return peca.getPrecoCompra();
             case 4:
-                return veiculo.getKm();
+                return peca.getPrecoVenda();
+            case 5:
+                return peca.getQuantidade();
             default:
                 // Isto não deveria acontecer...  
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -78,24 +82,27 @@ public class VeiculoTableModel extends AbstractTableModel {
     @Override
     //modifica na linha e coluna especificada  
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Veiculo veiculo = veiculos.get(rowIndex);
+        Peca peca = pecas.get(rowIndex);
         // Carrega o item da linha que deve ser modificado  
 
         switch (columnIndex) { // Seta o valor do campo respectivo  
             case 0:
-                veiculo.setPlaca(aValue.toString());
+                peca.setIdPeca(Integer.parseInt(aValue.toString()));
                 break;
             case 1:
-                veiculo.setModelo(aValue.toString());
+                peca.setDescricao(aValue.toString());
                 break;
             case 2:
-                veiculo.setMarca(aValue.toString());
+                peca.setMarca(aValue.toString());
                 break;
             case 3:
-                veiculo.setAno(Integer.parseInt(aValue.toString()));
+                peca.setPrecoCompra(new BigDecimal(aValue.toString()));
                 break;
             case 4:
-                veiculo.setKm(Integer.parseInt(aValue.toString()));
+                peca.setPrecoVenda(new BigDecimal(aValue.toString()));
+                break;
+            case 5:
+                peca.setQuantidade(Double.parseDouble(aValue.toString()));
                 break;
             default:
             // Isto não deveria acontecer... 
@@ -104,20 +111,22 @@ public class VeiculoTableModel extends AbstractTableModel {
     }
 
     //modifica na linha especificada  
-    public void setValueAt(Veiculo aValue, int rowIndex) {
-        Veiculo veiculo = veiculos.get(rowIndex); // Carrega o item da linha que deve ser modificado  
+    public void setValueAt(Peca aValue, int rowIndex) {
+        Peca peca = pecas.get(rowIndex); // Carrega o item da linha que deve ser modificado  
 
-        veiculo.setPlaca(aValue.getPlaca());
-        veiculo.setModelo(aValue.getModelo());
-        veiculo.setMarca(aValue.getMarca());
-        veiculo.setAno(aValue.getAno());
-        veiculo.setKm(aValue.getKm());
+        peca.setIdPeca(aValue.getIdPeca());
+        peca.setDescricao(aValue.getDescricao());
+        peca.setMarca(aValue.getMarca());
+        peca.setPrecoCompra(aValue.getPrecoCompra());
+        peca.setPrecoVenda(aValue.getPrecoVenda());
+        peca.setQuantidade(aValue.getQuantidade());
 
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
         fireTableCellUpdated(rowIndex, 3);
         fireTableCellUpdated(rowIndex, 4);
+        fireTableCellUpdated(rowIndex, 5);
     }
 
     @Override
@@ -125,21 +134,21 @@ public class VeiculoTableModel extends AbstractTableModel {
         return false;
     }
 
-    public Veiculo getVeiculo(int indiceLinha) {
-        return veiculos.get(indiceLinha);
+    public Peca getPeca(int indiceLinha) {
+        return pecas.get(indiceLinha);
     }
 
     /* Adiciona um registro. */
-    public void addVeiculo(Veiculo veiculo) {
+    public void addPeca(Peca veiculo) {
         // Adiciona o registro.  
-        veiculos.add(veiculo);
+        pecas.add(veiculo);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
 
     /* Remove a linha especificada. */
     public void removeVeiculo(int indiceLinha) {
-        veiculos.remove(indiceLinha);
+        pecas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
@@ -156,12 +165,12 @@ public class VeiculoTableModel extends AbstractTableModel {
 
     /* Remove todos os registros. */
     public void limpar() {
-        veiculos.clear();
+        pecas.clear();
         fireTableDataChanged();
     }
 
     /* Verifica se este table model esta vazio. */
     public boolean isEmpty() {
-        return veiculos.isEmpty();
+        return pecas.isEmpty();
     }
 }

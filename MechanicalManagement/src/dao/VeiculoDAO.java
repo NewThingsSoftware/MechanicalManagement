@@ -43,7 +43,7 @@ public class VeiculoDAO {
     public static List<Veiculo> obterPorCliente(Cliente cliente){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE idCliente = :idCliente");
+        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.idCliente = :idCliente");
         qry.setParameter("idCliente", cliente.getIdCliente());
         return qry.list();
     }

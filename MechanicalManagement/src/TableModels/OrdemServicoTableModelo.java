@@ -18,7 +18,8 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
     private List<OrdemServico> ordemServicos;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Placa", "Modelo", "Marca", "Ano", "Km"};
+        "Data", "Nome do Cliente", "Placa do Veiculo", "Marca do Veiculo", 
+        "Modelo do Veiculo", "Nome do Mecânico", "Descrição do serviço"};
 
     /* Cria um ClienteTableModel carregado com 
      * a lista de Cliente especificada. */
