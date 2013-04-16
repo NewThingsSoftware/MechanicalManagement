@@ -147,18 +147,18 @@ public class PecaTableModel extends AbstractTableModel {
     }
 
     /* Remove a linha especificada. */
-    public void removeVeiculo(int indiceLinha) {
+    public void removePeca(int indiceLinha) {
         pecas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
     /* Adiciona uma lista de Cliente ao final dos registros. */
-    public void addListaDeVeiculo(List<Veiculo> veiculos) {
+    public void addListaDePeca(List<Peca> pecas) {
         // Pega o tamanho antigo da tabela.  
         int tamanhoAntigo = getRowCount();
 
         // Adiciona os registros.  
-        veiculos.addAll(veiculos);
+        pecas.addAll(pecas);
 
         fireTableRowsInserted(tamanhoAntigo, getRowCount() - 1);
     }
