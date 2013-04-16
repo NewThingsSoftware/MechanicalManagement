@@ -86,6 +86,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="jCBcliente">
+          <Properties>
+            <Property name="maximumRowCount" type="int" value="3"/>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="elements" source="clienteQuery" sourcePath="${resultList}" target="jCBcliente" targetPath="elements" updateStrategy="0" immediately="false">
               <Property name="name" type="java.lang.String" value=""/>
