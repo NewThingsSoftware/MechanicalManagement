@@ -1,4 +1,7 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mechanicalmanagement;
 
 import java.beans.PropertyChangeListener;
@@ -17,7 +20,7 @@ import javax.persistence.Transient;
 
 /**
  *
- * @author Bruno
+ * @author ctb03
  */
 @Entity
 @Table(name = "cliente", catalog = "mecanica", schema = "")
@@ -49,7 +52,7 @@ public class Cliente implements Serializable {
     @Column(name = "rg")
     private int rg;
     @Column(name = "telefone")
-    private Integer telefone;
+    private String telefone;
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
@@ -111,12 +114,12 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("rg", oldRg, rg);
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Integer telefone) {
-        Integer oldTelefone = this.telefone;
+    public void setTelefone(String telefone) {
+        String oldTelefone = this.telefone;
         this.telefone = telefone;
         changeSupport.firePropertyChange("telefone", oldTelefone, telefone);
     }
