@@ -4,7 +4,7 @@
  */
 package mechanicalmanagement;
 
-import TableModels.VeiculoTableModel;
+import tableModel.VeiculoTableModel;
 import dao.VeiculoDAO;
 import entidades.Veiculo;
 import java.util.List;
@@ -16,18 +16,22 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
      * Creates new form ConsultaVeiculo
      */
     private CadastroDeVeiculos cadastroDeVeiculos;
+    private CadastroDeOrdemServico cadastroDeOrdemServico;
 
     public ConsultaVeiculo() {
         initComponents();
-        jTable1.setModel(new VeiculoTableModel(VeiculoDAO.obterTodos()));
     }
 
     public ConsultaVeiculo(CadastroDeVeiculos cadastroDeVeiculos) {
         this.cadastroDeVeiculos = cadastroDeVeiculos;
         initComponents();
-        jTable1.setModel(new VeiculoTableModel(VeiculoDAO.obterTodos()));
     }
 
+    public ConsultaVeiculo(CadastroDeOrdemServico cadastroDeOrdemServico){
+        this.cadastroDeOrdemServico = cadastroDeOrdemServico;
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +66,7 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         });
         getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
+        jTable1.setModel(new VeiculoTableModel(VeiculoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
@@ -119,15 +124,20 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
 
-        setSize(new java.awt.Dimension(408, 389));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-408)/2, (screenSize.height-389)/2, 408, 389);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
         if (jTable1.getSelectedRow() > -1) {
             String placa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
             Veiculo veiculo = VeiculoDAO.obterPorPlaca(placa).get(0);
-            cadastroDeVeiculos.consultaVeiculo(veiculo);
+            if(cadastroDeVeiculos != null){
+                cadastroDeVeiculos.consultaVeiculo(veiculo);
+            }else{
+                System.out.println("Nula");
+            }
+            
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");

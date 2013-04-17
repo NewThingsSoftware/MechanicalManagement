@@ -219,14 +219,14 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(642, 457));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-642)/2, (screenSize.height-457)/2, 642, 457);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jChBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBstatusActionPerformed

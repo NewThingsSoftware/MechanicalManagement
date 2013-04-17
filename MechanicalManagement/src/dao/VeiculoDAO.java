@@ -7,6 +7,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
+/**
+ *
+ * @author Bruno
+ */
 public class VeiculoDAO {
 
     public VeiculoDAO() {

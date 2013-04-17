@@ -1,6 +1,6 @@
 package mechanicalmanagement;
 
-import TableModels.OrdemServicoTableModelo;
+import tableModel.OrdemServicoTableModelo;
 import dao.OrdemServicoDAO;
 
 /**

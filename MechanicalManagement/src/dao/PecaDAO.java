@@ -6,7 +6,7 @@ import util.HibernateUtil;
 
 /**
  *
- * @author ctb03
+ * @author Bruno
  */
 public class PecaDAO {
 

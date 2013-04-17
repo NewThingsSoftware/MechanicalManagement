@@ -1,24 +1,27 @@
-package TableModels;
+package tableModel;
 
-import entidades.Cliente;
+import entidades.Peca;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author Bruno
  */
-public class ClienteTableModel extends AbstractTableModel{
+public class PecaTableModel extends AbstractTableModel {
+    
     private static final long serialVersionUID = 1L;
     /* Lista de Cliente que representam as linhas. */
-    private List<Cliente> clientes;
+    private List<Peca> pecas;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Nome", "CPF", "RG", "Telefone", "Endereco"};
+        "Código", "Descrição", "Marca", "Preço Compra", "Preço Venda", 
+    "Quantidade"};
 
     /* Cria um ClienteTableModel carregado com 
      * a lista de Cliente especificada. */
-    public ClienteTableModel(List<Cliente> clientes) {
-        this.clientes = clientes;
+    public PecaTableModel(List<Peca> pecas) {
+        this.pecas = pecas;
     }
 
     /* Retorna a quantidade de colunas. */
@@ -32,7 +35,7 @@ public class ClienteTableModel extends AbstractTableModel{
     @Override
     public int getRowCount() {
         // Retorna o tamanho da lista de Cliente.  
-        return clientes.size();
+        return pecas.size();
     }
 
     @Override
@@ -50,7 +53,7 @@ public class ClienteTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Cliente cliente = clientes.get(rowIndex);
+        Peca peca = pecas.get(rowIndex);
         /*Retorna o campo referente a coluna especificada.  
          Aqui é feito um switch para verificar qual é a coluna  
          e retornar o campo adequado. As colunas são as mesmas  
@@ -58,15 +61,17 @@ public class ClienteTableModel extends AbstractTableModel{
         switch (columnIndex) {
             // "Placa", "Modelo", "Marca", "Ano", "Km";  
             case 0:
-                return cliente.getNome();
+                return peca.getIdPeca();
             case 1:
-                return cliente.getCpf();
+                return peca.getDescricao();
             case 2:
-                return cliente.getRg();
+                return peca.getMarca();
             case 3:
-                return cliente.getTelefone();
+                return peca.getPrecoCompra();
             case 4:
-                return cliente.getEndereco();
+                return peca.getPrecoVenda();
+            case 5:
+                return peca.getQuantidade();
             default:
                 // Isto não deveria acontecer...  
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -76,24 +81,27 @@ public class ClienteTableModel extends AbstractTableModel{
     @Override
     //modifica na linha e coluna especificada  
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Cliente cliente = clientes.get(rowIndex);
+        Peca peca = pecas.get(rowIndex);
         // Carrega o item da linha que deve ser modificado  
 
         switch (columnIndex) { // Seta o valor do campo respectivo  
             case 0:
-                cliente.setNome(aValue.toString());
+                peca.setIdPeca(Integer.parseInt(aValue.toString()));
                 break;
             case 1:
-                cliente.setCpf(Integer.parseInt(aValue.toString()));
+                peca.setDescricao(aValue.toString());
                 break;
             case 2:
-                cliente.setRg(Integer.parseInt(aValue.toString()));
+                peca.setMarca(aValue.toString());
                 break;
             case 3:
-                cliente.setTelefone(aValue.toString());
+                peca.setPrecoCompra(new BigDecimal(aValue.toString()));
                 break;
             case 4:
-                cliente.setEndereco(aValue.toString());
+                peca.setPrecoVenda(new BigDecimal(aValue.toString()));
+                break;
+            case 5:
+                peca.setQuantidade(Double.parseDouble(aValue.toString()));
                 break;
             default:
             // Isto não deveria acontecer... 
@@ -102,20 +110,22 @@ public class ClienteTableModel extends AbstractTableModel{
     }
 
     //modifica na linha especificada  
-    public void setValueAt(Cliente aValue, int rowIndex) {
-        Cliente cliente = clientes.get(rowIndex); // Carrega o item da linha que deve ser modificado  
+    public void setValueAt(Peca aValue, int rowIndex) {
+        Peca peca = pecas.get(rowIndex); // Carrega o item da linha que deve ser modificado  
 
-        cliente.setNome(aValue.getNome());
-        cliente.setCpf(aValue.getCpf());
-        cliente.setRg(aValue.getRg());
-        cliente.setTelefone(aValue.getTelefone());
-        cliente.setEndereco(aValue.getEndereco());
+        peca.setIdPeca(aValue.getIdPeca());
+        peca.setDescricao(aValue.getDescricao());
+        peca.setMarca(aValue.getMarca());
+        peca.setPrecoCompra(aValue.getPrecoCompra());
+        peca.setPrecoVenda(aValue.getPrecoVenda());
+        peca.setQuantidade(aValue.getQuantidade());
 
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
         fireTableCellUpdated(rowIndex, 3);
         fireTableCellUpdated(rowIndex, 4);
+        fireTableCellUpdated(rowIndex, 5);
     }
 
     @Override
@@ -123,43 +133,43 @@ public class ClienteTableModel extends AbstractTableModel{
         return false;
     }
 
-    public Cliente getCliente(int indiceLinha) {
-        return clientes.get(indiceLinha);
+    public Peca getPeca(int indiceLinha) {
+        return pecas.get(indiceLinha);
     }
 
     /* Adiciona um registro. */
-    public void addCliente(Cliente cliente) {
+    public void addPeca(Peca peca) {
         // Adiciona o registro.  
-        clientes.add(cliente);
+        pecas.add(peca);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
 
     /* Remove a linha especificada. */
-    public void removeCliente(int indiceLinha) {
-        clientes.remove(indiceLinha);
+    public void removePeca(int indiceLinha) {
+        pecas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
     /* Adiciona uma lista de Cliente ao final dos registros. */
-    public void addListaDeCliente(List<Cliente> clientes) {
+    public void addListaDePeca(List<Peca> pecas) {
         // Pega o tamanho antigo da tabela.  
         int tamanhoAntigo = getRowCount();
 
         // Adiciona os registros.  
-        clientes.addAll(clientes);
+        pecas.addAll(pecas);
 
         fireTableRowsInserted(tamanhoAntigo, getRowCount() - 1);
     }
 
     /* Remove todos os registros. */
     public void limpar() {
-        clientes.clear();
+        pecas.clear();
         fireTableDataChanged();
     }
 
     /* Verifica se este table model esta vazio. */
     public boolean isEmpty() {
-        return clientes.isEmpty();
+        return pecas.isEmpty();
     }
 }
