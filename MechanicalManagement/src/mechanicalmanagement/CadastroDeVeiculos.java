@@ -59,6 +59,8 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jTFkm = new javax.swing.JFormattedTextField();
         jLborda = new javax.swing.JLabel();
 
+        entityManager.setFlushMode(javax.persistence.FlushModeType.COMMIT);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículos");
         setResizable(false);
@@ -67,9 +69,10 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jCBcliente.setMaximumRowCount(3);
+        jCBcliente.setMaximumRowCount(5);
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, jCBcliente, "");
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteQuery, eLProperty, jCBcliente, "");
         bindingGroup.addBinding(jComboBoxBinding);
 
         jPanel2.add(jCBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 380, 20));

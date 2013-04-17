@@ -20,6 +20,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
      */
     public CadastroDeClientes() {
         initComponents();
+        jBalterar.setEnabled(false);
     }
 
     /**
@@ -112,7 +113,8 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 70, -1));
 
         jCBstatus.setBackground(new java.awt.Color(255, 255, 255));
-        jCBstatus.setText("Inativo");
+        jCBstatus.setText("Ativo");
+        jCBstatus.setActionCommand("");
         jCBstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBstatusActionPerformed(evt);
@@ -219,6 +221,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
         if (camposPreenchidos()) {
             ClienteDAO.gravar(obterCampos());
             limparCampos();
+            
         }
     }//GEN-LAST:event_jBsalvarActionPerformed
 
@@ -348,6 +351,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
     @Override
     public void prencherCampos(Object objetc) {
         Cliente cliente = (Cliente) objetc;
+        jTFcodigo.setText(cliente.getIdCliente().toString());
         jTFnome.setText(cliente.getNome());
         jFTFcpf.setText(String.valueOf(cliente.getCpf()));
         jFTFrg.setText(String.valueOf(cliente.getRg()));
