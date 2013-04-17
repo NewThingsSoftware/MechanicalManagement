@@ -5,6 +5,7 @@
     <class>entidades.ClienteJPA</class>
     <class>mechanicalmanagement.Cliente</class>
     <class>mechanicalmanagement.Veiculo</class>
+    <class>mechanicalmanagement.Mecanico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mecanica?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="root"/>

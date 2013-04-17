@@ -4,9 +4,6 @@
  */
 package mechanicalmanagement;
 
-import comboBoxModel.ClienteComboBoxModel;
-import dao.ClienteDAO;
-
 /**
  *
  * @author Bruno
@@ -18,7 +15,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        jComboBox1.setModel(new ClienteComboBoxModel(ClienteDAO.obertPorNome("")));
     }
 
     /**
@@ -29,29 +25,52 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mecanica?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        veiculoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v.placa FROM Veiculo v");
+        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : veiculoQuery.getResultList();
+        mecanicoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT m.nome FROM Mecanico m");
+        mecanicoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : mecanicoQuery.getResultList();
         jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, mecanicoQuery, eLProperty, jComboBox1);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, veiculoQuery, eLProperty, jComboBox2);
+        bindingGroup.addBinding(jComboBoxBinding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(221, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,6 +110,13 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private java.util.List<mechanicalmanagement.Mecanico> mecanicoList;
+    private javax.persistence.Query mecanicoQuery;
+    private java.util.List<mechanicalmanagement.Veiculo> veiculoList;
+    private javax.persistence.Query veiculoQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
