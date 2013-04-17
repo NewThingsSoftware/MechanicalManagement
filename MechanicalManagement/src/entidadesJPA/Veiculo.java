@@ -2,28 +2,36 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mechanicalmanagement;
+package entidadesJPA;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Bruno
+ * @author ctb03
  */
 @Entity
-@Table(name = "veiculo", catalog = "mecanica", schema = "")
+@Table(name = "veiculo")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Veiculo.findAll", query = "SELECT v FROM Veiculo v"),
     @NamedQuery(name = "Veiculo.findByIdVeiculo", query = "SELECT v FROM Veiculo v WHERE v.idVeiculo = :idVeiculo"),
@@ -32,8 +40,7 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Veiculo.findByMarca", query = "SELECT v FROM Veiculo v WHERE v.marca = :marca"),
     @NamedQuery(name = "Veiculo.findByModelo", query = "SELECT v FROM Veiculo v WHERE v.modelo = :modelo"),
     @NamedQuery(name = "Veiculo.findByKm", query = "SELECT v FROM Veiculo v WHERE v.km = :km"),
-    @NamedQuery(name = "Veiculo.findByStatus", query = "SELECT v FROM Veiculo v WHERE v.status = :status"),
-    @NamedQuery(name = "Veiculo.findByIdCliente", query = "SELECT v FROM Veiculo v WHERE v.idCliente = :idCliente")})
+    @NamedQuery(name = "Veiculo.findByStatus", query = "SELECT v FROM Veiculo v WHERE v.status = :status")})
 public class Veiculo implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -59,9 +66,11 @@ public class Veiculo implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private boolean status;
-    @Basic(optional = false)
-    @Column(name = "id_cliente")
-    private int idCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVeiculo")
+    private Collection<OrdemServico> ordemServicoCollection;
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+    @ManyToOne(optional = false)
+    private Cliente idCliente;
 
     public Veiculo() {
     }
@@ -70,13 +79,12 @@ public class Veiculo implements Serializable {
         this.idVeiculo = idVeiculo;
     }
 
-    public Veiculo(Integer idVeiculo, String placa, String marca, String modelo, boolean status, int idCliente) {
+    public Veiculo(Integer idVeiculo, String placa, String marca, String modelo, boolean status) {
         this.idVeiculo = idVeiculo;
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.status = status;
-        this.idCliente = idCliente;
     }
 
     public Integer getIdVeiculo() {
@@ -149,12 +157,21 @@ public class Veiculo implements Serializable {
         changeSupport.firePropertyChange("status", oldStatus, status);
     }
 
-    public int getIdCliente() {
+    @XmlTransient
+    public Collection<OrdemServico> getOrdemServicoCollection() {
+        return ordemServicoCollection;
+    }
+
+    public void setOrdemServicoCollection(Collection<OrdemServico> ordemServicoCollection) {
+        this.ordemServicoCollection = ordemServicoCollection;
+    }
+
+    public Cliente getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        int oldIdCliente = this.idCliente;
+    public void setIdCliente(Cliente idCliente) {
+        Cliente oldIdCliente = this.idCliente;
         this.idCliente = idCliente;
         changeSupport.firePropertyChange("idCliente", oldIdCliente, idCliente);
     }
@@ -181,7 +198,7 @@ public class Veiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "mechanicalmanagement.Veiculo[ idVeiculo=" + idVeiculo + " ]";
+        return "entidadesJPA.Veiculo[ idVeiculo=" + idVeiculo + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

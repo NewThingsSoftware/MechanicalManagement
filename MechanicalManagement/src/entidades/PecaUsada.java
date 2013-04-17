@@ -1,5 +1,5 @@
 package entidades;
-// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
+// Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -22,7 +22,6 @@ public class PecaUsada  implements java.io.Serializable {
         this.peca = peca;
         this.quantidade = quantidade;
     }
-    
 
     public PecaUsada(PecaUsadaId id, OrdemServico ordemServico, Peca peca, double quantidade) {
        this.id = id;

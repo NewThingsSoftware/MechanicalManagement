@@ -1,5 +1,5 @@
 package entidades;
-// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
+// Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -14,6 +14,11 @@ public class PecaUsadaId  implements java.io.Serializable {
      private int idPeca;
 
     public PecaUsadaId() {
+    }
+
+    public PecaUsadaId(int idOrdemServico, int idPeca) {
+        this.idOrdemServico = idOrdemServico;
+        this.idPeca = idPeca;
     }
 
     public PecaUsadaId(int idPecaUsada, int idOrdemServico, int idPeca) {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="entidades.OrdemServico" table="ordem_servico" catalog="mecanica">
         <id name="idOrdemServico" type="java.lang.Integer">
@@ -20,8 +20,8 @@
         <property name="descricao" type="string">
             <column name="descricao" length="150" />
         </property>
-        <property name="status" type="boolean">
-            <column name="status" length="1" not-null="true" />
+        <property name="status" type="java.lang.Boolean">
+            <column name="status" />
         </property>
         <set name="contasRecebers" inverse="true">
             <key>
@@ -30,30 +30,6 @@
             <one-to-many class="entidades.ContasReceber" />
         </set>
         <set name="pecaUsadas" inverse="true">
-            <key>
-                <column name="id_ordem_servico" not-null="true" />
-            </key>
-            <one-to-many class="entidades.PecaUsada" />
-        </set>
-        <set name="contasRecebers_1" inverse="true">
-            <key>
-                <column name="id_ordem_servico" not-null="true" />
-            </key>
-            <one-to-many class="entidades.ContasReceber" />
-        </set>
-        <set name="pecaUsadas_1" inverse="true">
-            <key>
-                <column name="id_ordem_servico" not-null="true" />
-            </key>
-            <one-to-many class="entidades.PecaUsada" />
-        </set>
-        <set name="contasRecebers_2" inverse="true">
-            <key>
-                <column name="id_ordem_servico" not-null="true" />
-            </key>
-            <one-to-many class="entidades.ContasReceber" />
-        </set>
-        <set name="pecaUsadas_2" inverse="true">
             <key>
                 <column name="id_ordem_servico" not-null="true" />
             </key>

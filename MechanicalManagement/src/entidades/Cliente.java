@@ -1,5 +1,5 @@
 package entidades;
-// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
+// Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,27 +13,25 @@ public class Cliente  implements java.io.Serializable {
 
      private Integer idCliente;
      private String nome;
-     private int cpf;
-     private int rg;
+     private String cpf;
+     private String rg;
      private String telefone;
      private String endereco;
      private boolean status;
      private Set veiculos = new HashSet(0);
-     private Set veiculos_1 = new HashSet(0);
-     private Set veiculos_2 = new HashSet(0);
 
     public Cliente() {
     }
 
 	
-    public Cliente(String nome, int cpf, int rg, boolean status) {
+    public Cliente(String nome, String cpf, String rg, boolean status) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.status = status;
     }
 
-    public Cliente(String nome, int cpf, int rg, String telefone, String endereco, boolean status) {
+    public Cliente(String nome, String cpf, String rg, String telefone, String endereco, boolean status) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
@@ -42,7 +40,7 @@ public class Cliente  implements java.io.Serializable {
         this.status = status;
     }
     
-    public Cliente(String nome, int cpf, int rg, String telefone, String endereco, boolean status, Set veiculos, Set veiculos_1, Set veiculos_2) {
+    public Cliente(String nome, String cpf, String rg, String telefone, String endereco, boolean status, Set veiculos) {
        this.nome = nome;
        this.cpf = cpf;
        this.rg = rg;
@@ -50,8 +48,6 @@ public class Cliente  implements java.io.Serializable {
        this.endereco = endereco;
        this.status = status;
        this.veiculos = veiculos;
-       this.veiculos_1 = veiculos_1;
-       this.veiculos_2 = veiculos_2;
     }
    
     public Integer getIdCliente() {
@@ -68,18 +64,18 @@ public class Cliente  implements java.io.Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getCpf() {
+    public String getCpf() {
         return this.cpf;
     }
     
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public int getRg() {
+    public String getRg() {
         return this.rg;
     }
     
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
     public String getTelefone() {
@@ -109,20 +105,6 @@ public class Cliente  implements java.io.Serializable {
     
     public void setVeiculos(Set veiculos) {
         this.veiculos = veiculos;
-    }
-    public Set getVeiculos_1() {
-        return this.veiculos_1;
-    }
-    
-    public void setVeiculos_1(Set veiculos_1) {
-        this.veiculos_1 = veiculos_1;
-    }
-    public Set getVeiculos_2() {
-        return this.veiculos_2;
-    }
-    
-    public void setVeiculos_2(Set veiculos_2) {
-        this.veiculos_2 = veiculos_2;
     }
 
 

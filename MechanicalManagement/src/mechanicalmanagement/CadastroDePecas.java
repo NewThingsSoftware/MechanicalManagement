@@ -42,7 +42,6 @@ public class CadastroDePecas extends javax.swing.JFrame {
         jCBstatus = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTFmarca = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -50,6 +49,7 @@ public class CadastroDePecas extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jBvoltar = new javax.swing.JButton();
         jFTFvalor_venda = new javax.swing.JFormattedTextField();
+        jFTFquantidade = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -133,7 +133,6 @@ public class CadastroDePecas extends javax.swing.JFrame {
         jLabel8.setText("Status do produto:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 260, 20));
-        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 110, -1));
 
         jLabel7.setText("Descrição da peça:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
@@ -173,6 +172,9 @@ public class CadastroDePecas extends javax.swing.JFrame {
         });
         jPanel2.add(jFTFvalor_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 100, -1));
 
+        jFTFquantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000"))));
+        jPanel2.add(jFTFquantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 80, -1));
+
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 600, 60));
@@ -191,7 +193,7 @@ public class CadastroDePecas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(642, 438));
@@ -268,6 +270,7 @@ public class CadastroDePecas extends javax.swing.JFrame {
     private javax.swing.JButton jBsalvar;
     private javax.swing.JButton jBvoltar;
     private javax.swing.JCheckBox jCBstatus;
+    private javax.swing.JFormattedTextField jFTFquantidade;
     private javax.swing.JFormattedTextField jFTFvalor_compra;
     private javax.swing.JFormattedTextField jFTFvalor_venda;
     private javax.swing.JLabel jLabel1;
@@ -285,6 +288,5 @@ public class CadastroDePecas extends javax.swing.JFrame {
     private javax.swing.JTextField jTFcodigo;
     private javax.swing.JTextField jTFdescricao;
     private javax.swing.JTextField jTFmarca;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

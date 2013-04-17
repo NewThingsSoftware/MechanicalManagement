@@ -1,5 +1,5 @@
 package entidades;
-// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
+// Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -26,6 +26,7 @@ public class ContasReceber  implements java.io.Serializable {
         this.valorTotal = valorTotal;
         this.dataVencimento = dataVencimento;
     }
+    
     public ContasReceber(OrdemServico ordemServico, BigDecimal valorTotal, Date dataPagamento, Date dataVencimento) {
        this.ordemServico = ordemServico;
        this.valorTotal = valorTotal;

@@ -29,9 +29,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mecanica?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         veiculoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v.placa FROM Veiculo v");
-        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : veiculoQuery.getResultList();
+        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(veiculoQuery.getResultList());
         mecanicoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT m.nome FROM Mecanico m");
-        mecanicoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : mecanicoQuery.getResultList();
+        mecanicoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(mecanicoQuery.getResultList());
         jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
 
@@ -113,9 +113,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private java.util.List<mechanicalmanagement.Mecanico> mecanicoList;
+    private java.util.List<entidadesJPA.Mecanico> mecanicoList;
     private javax.persistence.Query mecanicoQuery;
-    private java.util.List<mechanicalmanagement.Veiculo> veiculoList;
+    private java.util.List<entidadesJPA.Veiculo> veiculoList;
     private javax.persistence.Query veiculoQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

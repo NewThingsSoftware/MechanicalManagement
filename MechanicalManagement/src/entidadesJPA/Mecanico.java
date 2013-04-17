@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mechanicalmanagement;
+package entidadesJPA;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,21 +17,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Bruno
+ * @author ctb03
  */
 @Entity
-@Table(name = "mecanico", catalog = "mecanica", schema = "")
+@Table(name = "mecanico")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mecanico.findAll", query = "SELECT m FROM Mecanico m"),
     @NamedQuery(name = "Mecanico.findByIdMecanico", query = "SELECT m FROM Mecanico m WHERE m.idMecanico = :idMecanico"),
     @NamedQuery(name = "Mecanico.findByNome", query = "SELECT m FROM Mecanico m WHERE m.nome = :nome"),
-    @NamedQuery(name = "Mecanico.findByCpf", query = "SELECT m FROM Mecanico m WHERE m.cpf = :cpf"),
     @NamedQuery(name = "Mecanico.findByRg", query = "SELECT m FROM Mecanico m WHERE m.rg = :rg"),
+    @NamedQuery(name = "Mecanico.findByCpf", query = "SELECT m FROM Mecanico m WHERE m.cpf = :cpf"),
     @NamedQuery(name = "Mecanico.findByTelefone", query = "SELECT m FROM Mecanico m WHERE m.telefone = :telefone"),
     @NamedQuery(name = "Mecanico.findByEspecialidade", query = "SELECT m FROM Mecanico m WHERE m.especialidade = :especialidade"),
     @NamedQuery(name = "Mecanico.findByStatus", query = "SELECT m FROM Mecanico m WHERE m.status = :status")})
@@ -46,11 +52,11 @@ public class Mecanico implements Serializable {
     @Column(name = "nome")
     private String nome;
     @Basic(optional = false)
-    @Column(name = "cpf")
-    private int cpf;
-    @Basic(optional = false)
     @Column(name = "rg")
-    private int rg;
+    private String rg;
+    @Basic(optional = false)
+    @Column(name = "cpf")
+    private String cpf;
     @Column(name = "telefone")
     private String telefone;
     @Basic(optional = false)
@@ -59,6 +65,8 @@ public class Mecanico implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private boolean status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMecanico")
+    private Collection<OrdemServico> ordemServicoCollection;
 
     public Mecanico() {
     }
@@ -67,11 +75,11 @@ public class Mecanico implements Serializable {
         this.idMecanico = idMecanico;
     }
 
-    public Mecanico(Integer idMecanico, String nome, int cpf, int rg, String especialidade, boolean status) {
+    public Mecanico(Integer idMecanico, String nome, String rg, String cpf, String especialidade, boolean status) {
         this.idMecanico = idMecanico;
         this.nome = nome;
-        this.cpf = cpf;
         this.rg = rg;
+        this.cpf = cpf;
         this.especialidade = especialidade;
         this.status = status;
     }
@@ -96,24 +104,24 @@ public class Mecanico implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
-    public int getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(int cpf) {
-        int oldCpf = this.cpf;
-        this.cpf = cpf;
-        changeSupport.firePropertyChange("cpf", oldCpf, cpf);
-    }
-
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
-        int oldRg = this.rg;
+    public void setRg(String rg) {
+        String oldRg = this.rg;
         this.rg = rg;
         changeSupport.firePropertyChange("rg", oldRg, rg);
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        String oldCpf = this.cpf;
+        this.cpf = cpf;
+        changeSupport.firePropertyChange("cpf", oldCpf, cpf);
     }
 
     public String getTelefone() {
@@ -146,6 +154,15 @@ public class Mecanico implements Serializable {
         changeSupport.firePropertyChange("status", oldStatus, status);
     }
 
+    @XmlTransient
+    public Collection<OrdemServico> getOrdemServicoCollection() {
+        return ordemServicoCollection;
+    }
+
+    public void setOrdemServicoCollection(Collection<OrdemServico> ordemServicoCollection) {
+        this.ordemServicoCollection = ordemServicoCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,7 +185,7 @@ public class Mecanico implements Serializable {
 
     @Override
     public String toString() {
-        return "mechanicalmanagement.Mecanico[ idMecanico=" + idMecanico + " ]";
+        return "entidadesJPA.Mecanico[ idMecanico=" + idMecanico + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

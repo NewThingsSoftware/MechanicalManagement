@@ -84,10 +84,10 @@ public class ClienteTableModel extends AbstractTableModel{
                 cliente.setNome(aValue.toString());
                 break;
             case 1:
-                cliente.setCpf(Integer.parseInt(aValue.toString()));
+                cliente.setCpf(aValue.toString());
                 break;
             case 2:
-                cliente.setRg(Integer.parseInt(aValue.toString()));
+                cliente.setRg(aValue.toString());
                 break;
             case 3:
                 cliente.setTelefone(aValue.toString());

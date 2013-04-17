@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="entidades.Cliente" table="cliente" catalog="mecanica">
         <id name="idCliente" type="java.lang.Integer">
@@ -11,14 +11,14 @@
         <property name="nome" type="string">
             <column name="nome" length="150" not-null="true" />
         </property>
-        <property name="cpf" type="int">
-            <column name="cpf" not-null="true" unique="true" />
+        <property name="cpf" type="string">
+            <column name="cpf" length="20" not-null="true" unique="true" />
         </property>
-        <property name="rg" type="int">
-            <column name="rg" not-null="true" unique="true" />
+        <property name="rg" type="string">
+            <column name="rg" length="20" not-null="true" unique="true" />
         </property>
         <property name="telefone" type="string">
-            <column name="telefone" />
+            <column name="telefone" length="150" />
         </property>
         <property name="endereco" type="string">
             <column name="endereco" length="150" />
@@ -27,18 +27,6 @@
             <column name="status" not-null="true" />
         </property>
         <set name="veiculos" inverse="true">
-            <key>
-                <column name="id_cliente" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Veiculo" />
-        </set>
-        <set name="veiculos_1" inverse="true">
-            <key>
-                <column name="id_cliente" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Veiculo" />
-        </set>
-        <set name="veiculos_2" inverse="true">
             <key>
                 <column name="id_cliente" not-null="true" />
             </key>

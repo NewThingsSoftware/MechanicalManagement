@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mechanicalmanagement;
+package entidadesJPA;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,15 +17,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author ctb03
  */
 @Entity
-@Table(name = "cliente", catalog = "mecanica", schema = "")
+@Table(name = "cliente")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
     @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
@@ -47,10 +53,10 @@ public class Cliente implements Serializable {
     private String nome;
     @Basic(optional = false)
     @Column(name = "cpf")
-    private int cpf;
+    private String cpf;
     @Basic(optional = false)
     @Column(name = "rg")
-    private int rg;
+    private String rg;
     @Column(name = "telefone")
     private String telefone;
     @Column(name = "endereco")
@@ -58,6 +64,8 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private boolean status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private Collection<Veiculo> veiculoCollection;
 
     public Cliente() {
     }
@@ -66,7 +74,7 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Cliente(Integer idCliente, String nome, int cpf, int rg, boolean status) {
+    public Cliente(Integer idCliente, String nome, String cpf, String rg, boolean status) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
@@ -94,22 +102,22 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
-        int oldCpf = this.cpf;
+    public void setCpf(String cpf) {
+        String oldCpf = this.cpf;
         this.cpf = cpf;
         changeSupport.firePropertyChange("cpf", oldCpf, cpf);
     }
 
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
-        int oldRg = this.rg;
+    public void setRg(String rg) {
+        String oldRg = this.rg;
         this.rg = rg;
         changeSupport.firePropertyChange("rg", oldRg, rg);
     }
@@ -144,6 +152,15 @@ public class Cliente implements Serializable {
         changeSupport.firePropertyChange("status", oldStatus, status);
     }
 
+    @XmlTransient
+    public Collection<Veiculo> getVeiculoCollection() {
+        return veiculoCollection;
+    }
+
+    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
+        this.veiculoCollection = veiculoCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -166,7 +183,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "mechanicalmanagement.Cliente[ idCliente=" + idCliente + " ]";
+        return "entidadesJPA.Cliente[ idCliente=" + idCliente + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

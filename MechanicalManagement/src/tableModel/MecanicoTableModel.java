@@ -85,10 +85,10 @@ public class MecanicoTableModel extends AbstractTableModel{
                 mecanico.setNome(aValue.toString());
                 break;
             case 1:
-                mecanico.setCpf(Integer.parseInt(aValue.toString()));
+                mecanico.setCpf(aValue.toString());
                 break;
             case 2:
-                mecanico.setRg(Integer.parseInt(aValue.toString()));
+                mecanico.setRg(aValue.toString());
                 break;
             case 3:
                 mecanico.setTelefone(aValue.toString());

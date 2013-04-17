@@ -1,5 +1,5 @@
 package entidades;
-// Generated 13/04/2013 16:02:52 by Hibernate Tools 3.2.1.GA
+// Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -17,26 +17,21 @@ public class OrdemServico  implements java.io.Serializable {
      private Mecanico mecanico;
      private Date data;
      private String descricao;
-     private boolean status;
+     private Boolean status;
      private Set contasRecebers = new HashSet(0);
      private Set pecaUsadas = new HashSet(0);
-     private Set contasRecebers_1 = new HashSet(0);
-     private Set pecaUsadas_1 = new HashSet(0);
-     private Set contasRecebers_2 = new HashSet(0);
-     private Set pecaUsadas_2 = new HashSet(0);
 
     public OrdemServico() {
     }
 
 	
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, boolean status) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data) {
         this.veiculo = veiculo;
         this.mecanico = mecanico;
         this.data = data;
-        this.status = status;
     }
 
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, boolean status) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, Boolean status) {
         this.veiculo = veiculo;
         this.mecanico = mecanico;
         this.data = data;
@@ -44,7 +39,7 @@ public class OrdemServico  implements java.io.Serializable {
         this.status = status;
     }
     
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, boolean status, Set contasRecebers, Set pecaUsadas, Set contasRecebers_1, Set pecaUsadas_1, Set contasRecebers_2, Set pecaUsadas_2) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, Boolean status, Set contasRecebers, Set pecaUsadas) {
        this.veiculo = veiculo;
        this.mecanico = mecanico;
        this.data = data;
@@ -52,10 +47,6 @@ public class OrdemServico  implements java.io.Serializable {
        this.status = status;
        this.contasRecebers = contasRecebers;
        this.pecaUsadas = pecaUsadas;
-       this.contasRecebers_1 = contasRecebers_1;
-       this.pecaUsadas_1 = pecaUsadas_1;
-       this.contasRecebers_2 = contasRecebers_2;
-       this.pecaUsadas_2 = pecaUsadas_2;
     }
    
     public Integer getIdOrdemServico() {
@@ -93,11 +84,11 @@ public class OrdemServico  implements java.io.Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public boolean getStatus() {
+    public Boolean getStatus() {
         return this.status;
     }
     
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
     public Set getContasRecebers() {
@@ -113,34 +104,6 @@ public class OrdemServico  implements java.io.Serializable {
     
     public void setPecaUsadas(Set pecaUsadas) {
         this.pecaUsadas = pecaUsadas;
-    }
-    public Set getContasRecebers_1() {
-        return this.contasRecebers_1;
-    }
-    
-    public void setContasRecebers_1(Set contasRecebers_1) {
-        this.contasRecebers_1 = contasRecebers_1;
-    }
-    public Set getPecaUsadas_1() {
-        return this.pecaUsadas_1;
-    }
-    
-    public void setPecaUsadas_1(Set pecaUsadas_1) {
-        this.pecaUsadas_1 = pecaUsadas_1;
-    }
-    public Set getContasRecebers_2() {
-        return this.contasRecebers_2;
-    }
-    
-    public void setContasRecebers_2(Set contasRecebers_2) {
-        this.contasRecebers_2 = contasRecebers_2;
-    }
-    public Set getPecaUsadas_2() {
-        return this.pecaUsadas_2;
-    }
-    
-    public void setPecaUsadas_2(Set pecaUsadas_2) {
-        this.pecaUsadas_2 = pecaUsadas_2;
     }
 
 
