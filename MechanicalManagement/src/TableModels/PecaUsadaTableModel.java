@@ -1,25 +1,24 @@
 package TableModels;
 
-import entidades.Mecanico;
+import entidades.PecaUsada;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author Bruno
  */
-public class MecanicoTableModel extends AbstractTableModel{
-    
+public class PecaUsadaTableModel extends AbstractTableModel{
     private static final long serialVersionUID = 1L;
     /* Lista de Cliente que representam as linhas. */
-    private List<Mecanico> mecanicos;
+    private List<PecaUsada> pecaUsadas;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Nome", "CPF", "RG", "Telefone", "Especialidade"};
+        "Código da Peça", "Descrição", "Quantidade"};
 
     /* Cria um ClienteTableModel carregado com 
      * a lista de Cliente especificada. */
-    public MecanicoTableModel(List<Mecanico> mecanicos) {
-        this.mecanicos = mecanicos;
+    public PecaUsadaTableModel(List<PecaUsada> pecas) {
+        this.pecaUsadas = pecas;
     }
 
     /* Retorna a quantidade de colunas. */
@@ -33,7 +32,7 @@ public class MecanicoTableModel extends AbstractTableModel{
     @Override
     public int getRowCount() {
         // Retorna o tamanho da lista de Cliente.  
-        return mecanicos.size();
+        return pecaUsadas.size();
     }
 
     @Override
@@ -51,7 +50,7 @@ public class MecanicoTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Mecanico mecanico = mecanicos.get(rowIndex);
+        PecaUsada pecaUsada = pecaUsadas.get(rowIndex);
         /*Retorna o campo referente a coluna especificada.  
          Aqui é feito um switch para verificar qual é a coluna  
          e retornar o campo adequado. As colunas são as mesmas  
@@ -59,15 +58,11 @@ public class MecanicoTableModel extends AbstractTableModel{
         switch (columnIndex) {
             // "Placa", "Modelo", "Marca", "Ano", "Km";  
             case 0:
-                return mecanico.getNome();
+                return pecaUsada.getPeca().getIdPeca();
             case 1:
-                return mecanico.getCpf();
+                return pecaUsada.getPeca().getDescricao();
             case 2:
-                return mecanico.getRg();
-            case 3:
-                return mecanico.getTelefone();
-            case 4:
-                return mecanico.getEspecialidade();
+                return pecaUsada.getQuantidade();
             default:
                 // Isto não deveria acontecer...  
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -77,24 +72,18 @@ public class MecanicoTableModel extends AbstractTableModel{
     @Override
     //modifica na linha e coluna especificada  
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Mecanico mecanico = mecanicos.get(rowIndex);
+        PecaUsada pecaUsada = pecaUsadas.get(rowIndex);
         // Carrega o item da linha que deve ser modificado  
 
         switch (columnIndex) { // Seta o valor do campo respectivo  
             case 0:
-                mecanico.setNome(aValue.toString());
+                pecaUsada.getPeca().setIdPeca(Integer.parseInt(aValue.toString()));
                 break;
             case 1:
-                mecanico.setCpf(Integer.parseInt(aValue.toString()));
+                pecaUsada.getPeca().setDescricao(aValue.toString());
                 break;
             case 2:
-                mecanico.setRg(Integer.parseInt(aValue.toString()));
-                break;
-            case 3:
-                mecanico.setTelefone(aValue.toString());
-                break;
-            case 4:
-                mecanico.setEspecialidade(aValue.toString());
+                pecaUsada.setQuantidade(Double.parseDouble(aValue.toString()));
                 break;
             default:
             // Isto não deveria acontecer... 
@@ -103,20 +92,16 @@ public class MecanicoTableModel extends AbstractTableModel{
     }
 
     //modifica na linha especificada  
-    public void setValueAt(Mecanico aValue, int rowIndex) {
-        Mecanico mecanico = mecanicos.get(rowIndex); // Carrega o item da linha que deve ser modificado  
+    public void setValueAt(PecaUsada aValue, int rowIndex) {
+        PecaUsada pecaUsada = pecaUsadas.get(rowIndex); // Carrega o item da linha que deve ser modificado  
 
-        mecanico.setNome(aValue.getNome());
-        mecanico.setCpf(aValue.getCpf());
-        mecanico.setRg(aValue.getRg());
-        mecanico.setTelefone(aValue.getTelefone());
-        mecanico.setEspecialidade(aValue.getEspecialidade());
+        pecaUsada.getPeca().setIdPeca(aValue.getPeca().getIdPeca());
+        pecaUsada.getPeca().setDescricao(aValue.getPeca().getDescricao());
+        pecaUsada.setQuantidade(aValue.getQuantidade());
 
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
-        fireTableCellUpdated(rowIndex, 3);
-        fireTableCellUpdated(rowIndex, 4);
     }
 
     @Override
@@ -124,43 +109,43 @@ public class MecanicoTableModel extends AbstractTableModel{
         return false;
     }
 
-    public Mecanico getMecanico(int indiceLinha) {
-        return mecanicos.get(indiceLinha);
+    public PecaUsada getPecaUsada(int indiceLinha) {
+        return pecaUsadas.get(indiceLinha);
     }
 
     /* Adiciona um registro. */
-    public void addMecanico(Mecanico mecanico) {
+    public void addPecaUsada(PecaUsada pecaUsada) {
         // Adiciona o registro.  
-        mecanicos.add(mecanico);
+        pecaUsadas.add(pecaUsada);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
 
     /* Remove a linha especificada. */
-    public void removeMecanico(int indiceLinha) {
-        mecanicos.remove(indiceLinha);
+    public void removePecaUsada(int indiceLinha) {
+        pecaUsadas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
     /* Adiciona uma lista de Cliente ao final dos registros. */
-    public void addListaDeVeiculo(List<Mecanico> mecanicos) {
+    public void addListaDePecaUsada(List<PecaUsada> pecaUsadas) {
         // Pega o tamanho antigo da tabela.  
         int tamanhoAntigo = getRowCount();
 
         // Adiciona os registros.  
-        mecanicos.addAll(mecanicos);
+        pecaUsadas.addAll(pecaUsadas);
 
         fireTableRowsInserted(tamanhoAntigo, getRowCount() - 1);
     }
 
     /* Remove todos os registros. */
     public void limpar() {
-        mecanicos.clear();
+        pecaUsadas.clear();
         fireTableDataChanged();
     }
 
     /* Verifica se este table model esta vazio. */
     public boolean isEmpty() {
-        return mecanicos.isEmpty();
+        return pecaUsadas.isEmpty();
     }
 }

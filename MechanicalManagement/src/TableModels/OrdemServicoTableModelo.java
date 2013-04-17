@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ctb03
+ * @author Bruno
  */
 public class OrdemServicoTableModelo extends AbstractTableModel {
 

@@ -1,11 +1,11 @@
 package TableModels;
 
-import javax.swing.table.AbstractTableModel;
 import entidades.Cliente;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 /**
  *
- * @author ctb03
+ * @author Bruno
  */
 public class ClienteTableModel extends AbstractTableModel{
     private static final long serialVersionUID = 1L;

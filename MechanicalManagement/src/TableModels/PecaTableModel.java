@@ -1,13 +1,12 @@
 package TableModels;
 
-import javax.swing.table.AbstractTableModel;
 import entidades.Peca;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 /**
  *
- * @author ctb03
+ * @author Bruno
  */
 public class PecaTableModel extends AbstractTableModel {
     
@@ -139,9 +138,9 @@ public class PecaTableModel extends AbstractTableModel {
     }
 
     /* Adiciona um registro. */
-    public void addPeca(Peca veiculo) {
+    public void addPeca(Peca peca) {
         // Adiciona o registro.  
-        pecas.add(veiculo);
+        pecas.add(peca);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
