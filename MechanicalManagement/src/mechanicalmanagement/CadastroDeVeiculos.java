@@ -59,8 +59,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jTFkm = new javax.swing.JFormattedTextField();
         jLborda = new javax.swing.JLabel();
 
-        entityManager.setFlushMode(javax.persistence.FlushModeType.COMMIT);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículos");
         setResizable(false);
