@@ -4,11 +4,13 @@
  */
 package mechanicalmanagement;
 
+import interfaces.IJanela;
+
 /**
  *
  * @author Bruno
  */
-public class CadastroDeOrdemServico extends javax.swing.JFrame {
+public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanela{
 
     /**
      * Creates new form CadastroDeOrdemServico
@@ -119,4 +121,24 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame {
     private javax.persistence.Query veiculoQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void limparCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object obterCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void prencherCampos(Object objetc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean camposPreenchidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

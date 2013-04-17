@@ -4,16 +4,16 @@
  */
 package mechanicalmanagement;
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import dao.ClienteDAO;
+import entidades.Cliente;
+import interfaces.IJanela;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Francis
  */
-public class CadastroDeClientes extends javax.swing.JFrame {
+public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
     /**
      * Creates new form CadastordeClientes
@@ -177,6 +177,11 @@ public class CadastroDeClientes extends javax.swing.JFrame {
         jBcancelar.setForeground(new java.awt.Color(102, 102, 102));
         jBcancelar.setMnemonic('a');
         jBcancelar.setText("Cancelar");
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 100, -1));
 
         jBconsultar.setBackground(new java.awt.Color(255, 255, 255));
@@ -211,20 +216,46 @@ public class CadastroDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBstatusActionPerformed
 
     private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
-        // TODO add your handling code here:
+        if (camposPreenchidos()) {
+            ClienteDAO.gravar(obterCampos());
+            limparCampos();
+        }
     }//GEN-LAST:event_jBsalvarActionPerformed
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
-        // TODO add your handling code here:
+        if (camposPreenchidos()) {
+            Cliente cliente = ClienteDAO.obterPorNome(obterCampos().getNome()).get(0);
+            cliente.setNome(obterCampos().getNome());
+            cliente.setCpf(obterCampos().getCpf());
+            cliente.setRg(obterCampos().getRg());
+            cliente.setTelefone(obterCampos().getTelefone());
+            cliente.setEndereco(obterCampos().getTelefone());
+            cliente.setStatus(obterCampos().isStatus());
+            ClienteDAO.alterar(cliente);
+            jBsalvar.setEnabled(true);
+            jBalterar.setEnabled(false);
+            limparCampos();
+        }
     }//GEN-LAST:event_jBalterarActionPerformed
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
-        // TODO add your handling code here:
+        jBsalvar.setEnabled(false);
+        jBalterar.setEnabled(true);
+        new ConsultaCliente(this).setVisible(true);
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        limparCampos();
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
         dispose(); /* Marihelly: Volta para a Tela Central. */
     }//GEN-LAST:event_jBvoltarActionPerformed
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        limparCampos();
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
+    }//GEN-LAST:event_jBcancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,6 +286,7 @@ public class CadastroDeClientes extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CadastroDeClientes().setVisible(true);
             }
@@ -288,4 +320,55 @@ public class CadastroDeClientes extends javax.swing.JFrame {
     private javax.swing.JTextField jTFnome;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void limparCampos() {
+        //Francis Hilla
+        jTFcodigo.setText("");
+        jTFnome.setText("");
+        jFTFcpf.setText("");
+        jFTFrg.setText("");
+        jFTFtelefone.setText("");
+        jTFendereco.setText("");
+        jCBstatus.setSelected(false);
+        jBconsultar.requestFocus();
+    }
+
+    @Override
+    public Cliente obterCampos() {
+        String nome = jTFnome.getText();
+        String cpf = jFTFcpf.getText();
+        String rg = jFTFrg.getText();
+        String telefone = jFTFtelefone.getText();
+        String endereco = jTFendereco.getText();
+        boolean status = jCBstatus.isSelected();
+        return new Cliente(nome, cpf, rg, telefone, endereco, status);
+    }
+
+    @Override
+    public void prencherCampos(Object objetc) {
+        Cliente cliente = (Cliente) objetc;
+        jTFnome.setText(cliente.getNome());
+        jFTFcpf.setText(String.valueOf(cliente.getCpf()));
+        jFTFrg.setText(String.valueOf(cliente.getRg()));
+        jFTFtelefone.setText(cliente.getTelefone());
+        jTFendereco.setText(cliente.getEndereco());        
+        jCBstatus.setSelected(cliente.isStatus());
+    }
+
+    @Override
+    public boolean camposPreenchidos() {
+    if (jTFnome.getText().isEmpty()
+                || jFTFcpf.getText().isEmpty()
+                || jFTFrg.getText().isEmpty()
+                || jFTFtelefone.getText().isEmpty()
+                || jTFendereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
+            return false;
+        }
+        return true;
+    }
+    public void consultaCliente(Cliente cliente){
+        prencherCampos(cliente);
+    }
 }

@@ -4,13 +4,13 @@
  */
 package mechanicalmanagement;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import interfaces.IJanela;
 
 /**
  *
  * @author Marihelly
  */
-public class CadastroDePecas extends javax.swing.JFrame {
+public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
 
     /**
      * Creates new form CadastroDePecas
@@ -289,4 +289,24 @@ public class CadastroDePecas extends javax.swing.JFrame {
     private javax.swing.JTextField jTFdescricao;
     private javax.swing.JTextField jTFmarca;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void limparCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object obterCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void prencherCampos(Object objetc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean camposPreenchidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

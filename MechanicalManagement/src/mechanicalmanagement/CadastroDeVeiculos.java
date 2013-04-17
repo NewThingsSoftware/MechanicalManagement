@@ -1,20 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mechanicalmanagement;
 
 import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
 import entidades.Veiculo;
+import interfaces.IJanela;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Bruno
  */
-public class CadastroDeVeiculos extends javax.swing.JFrame {
+public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
 
     /**
      * Creates new form CadastroDeVeiculos
@@ -236,7 +233,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         /*BrunoDePerto*/
         if (camposPreenchidos()) {
             VeiculoDAO.gravar(obterCampos());
-            limpaTela();
+            limparCampos();
         }
         jTFplaca.setEnabled(true);
     }//GEN-LAST:event_jBsalvarActionPerformed
@@ -245,16 +242,16 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         /*BrunoDePerto*/
         if (camposPreenchidos()) {
             Veiculo veiculo = VeiculoDAO.obterPorPlaca(obterCampos().getPlaca()).get(0);
-            veiculo.setCliente(ClienteDAO.obertPorNome(obterCampos().getCliente().getNome()).get(0));
+            veiculo.setCliente(ClienteDAO.obterPorNome(obterCampos().getCliente().getNome()).get(0));
             veiculo.setMarca(obterCampos().getMarca());
             veiculo.setModelo(obterCampos().getModelo());
             veiculo.setAno(obterCampos().getAno());
             veiculo.setKm(obterCampos().getKm());
-            veiculo.setStatus(obterCampos().getStatus());
+            veiculo.setStatus(obterCampos().isStatus());
             VeiculoDAO.alterar(veiculo);
             jBsalvar.setEnabled(true);
             jBalterar.setEnabled(false);
-            limpaTela();
+            limparCampos();
         }
     }//GEN-LAST:event_jBalterarActionPerformed
 
@@ -268,7 +265,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         /*BrunoDePerto*/
-        limpaTela();
+        limparCampos();
         jTFplaca.setEnabled(true);
         jBsalvar.setEnabled(true);
         jBalterar.setEnabled(false);
@@ -276,7 +273,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
         /*BrunoDePerto*/
-        limpaTela();
+        limparCampos();
         jTFplaca.setEnabled(true);
         jBsalvar.setEnabled(true);
         jBalterar.setEnabled(false);
@@ -286,66 +283,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     private void jTFanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFanoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFanoActionPerformed
-
-    /*Metodo para verificar se todos os campos da tela de cadastro de veiculo
-     * estão preenchidos*/
-    private boolean camposPreenchidos() {
-        if (jTFplaca.getText().isEmpty()
-                || jTFano.getText().isEmpty()
-                || jTFmarca.getText().isEmpty()
-                || jTFmodelo.getText().isEmpty()
-                || jTFkm.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
-            return false;
-        }
-        return true;
-    }
-
-    /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
-    private void limpaTela() {
-        /*BrunoDePerto*/
-        jCBcliente.setSelectedIndex(0);
-        jTFplaca.setText("");
-        jTFano.setText("");
-        jTFmarca.setText("");
-        jTFmodelo.setText("");
-        jTFkm.setText("");
-        jChBstatus.setSelected(false);
-    }
-    /*Metodp que pega todos os valores dos campos da tela de cadastro de veiculos
-     * e cria um objeto do tipo veiculo que é retornado com os valores*/
-
-    private Veiculo obterCampos() {
-        /*BrunoDePerto*/
-        Cliente cliente = ClienteDAO.obertPorNome((String) jCBcliente.getSelectedItem()).get(0);
-        String placa = jTFplaca.getText();
-        int ano = Integer.parseInt(jTFano.getText());
-        String marca = jTFmarca.getText();
-        String modelo = jTFmodelo.getText();
-        int km = Integer.parseInt(jTFkm.getText());
-        boolean status = jChBstatus.isSelected();
-        return new Veiculo(cliente, placa, ano, marca, modelo, km, status);
-    }
-
-    /*Metodo que preenche todos os campos da tela de cadastro de veiculo, 
-     * recebendo por parametro um objeto do tipo veiculo*/
-    private void preencherCampos(Veiculo veiculo) {
-        /*BrunoDePerto*/
-        jCBcliente.setSelectedItem(veiculo.getCliente().getNome());
-        jTFplaca.setText(veiculo.getPlaca());
-        jTFano.setText(veiculo.getAno().toString());
-        jTFmarca.setText(veiculo.getMarca());
-        jTFmodelo.setText(veiculo.getModelo());
-        jTFkm.setText(veiculo.getKm().toString());
-        jChBstatus.setSelected(veiculo.getStatus());
-    }
-
-    /* Metodo de retorno da janela de consulta de veiculo, setando os valores
-     * lidos para os campos da janela*/
-    public void consultaVeiculo(Veiculo veiculo) {
-        /*BrunoDePerto*/
-        preencherCampos(veiculo);
-    }
 
     /**
      * @param args the command line arguments
@@ -412,4 +349,70 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTFplaca;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+    /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
+    @Override
+    public void limparCampos() {
+        /*BrunoDePerto*/
+        jCBcliente.setSelectedIndex(0);
+        jTFplaca.setText("");
+        jTFano.setText("");
+        jTFmarca.setText("");
+        jTFmodelo.setText("");
+        jTFkm.setText("");
+        jChBstatus.setSelected(false);
+    }
+
+    /*Metodo que preenche todos os campos da tela de cadastro de veiculo, 
+     * recebendo por parametro um objeto do tipo veiculo*/
+    @Override
+    public void prencherCampos(Object object) {
+        /*BrunoDePerto*/
+        Veiculo veiculo = (Veiculo) object;
+        jCBcliente.setSelectedItem(veiculo.getCliente().getNome());
+        jTFplaca.setText(veiculo.getPlaca());
+        jTFano.setText(veiculo.getAno().toString());
+        jTFmarca.setText(veiculo.getMarca());
+        jTFmodelo.setText(veiculo.getModelo());
+        jTFkm.setText(veiculo.getKm().toString());
+        jChBstatus.setSelected(veiculo.isStatus());
+    }
+    
+    /*Metodo para verificar se todos os campos da tela de cadastro de veiculo
+     * estão preenchidos*/
+    @Override
+    public boolean camposPreenchidos() {
+        if (jTFplaca.getText().isEmpty()
+                || jTFano.getText().isEmpty()
+                || jTFmarca.getText().isEmpty()
+                || jTFmodelo.getText().isEmpty()
+                || jTFkm.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
+            return false;
+        }
+        return true;
+    }
+   
+    /*Metodo que pega todos os valores dos campos da tela de cadastro de veiculos
+     * e cria um objeto do tipo veiculo que é retornado com os valores*/
+    @Override
+    public Veiculo obterCampos() {
+        /*BrunoDePerto*/
+        Cliente cliente = ClienteDAO.obterPorNome((String) jCBcliente.getSelectedItem()).get(0);
+        String placa = jTFplaca.getText();
+        int ano = Integer.parseInt(jTFano.getText());
+        String marca = jTFmarca.getText();
+        String modelo = jTFmodelo.getText();
+        int km = Integer.parseInt(jTFkm.getText());
+        boolean status = jChBstatus.isSelected();
+        return new Veiculo(cliente, placa, ano, marca, modelo, km, status);
+    }
+
+    
+    /* Metodo de retorno da janela de consulta de veiculo, setando os valores
+     * lidos para os campos da janela*/
+    public void consultaVeiculo(Veiculo veiculo) {
+        /*BrunoDePerto*/
+        prencherCampos(veiculo);
+    }
 }
