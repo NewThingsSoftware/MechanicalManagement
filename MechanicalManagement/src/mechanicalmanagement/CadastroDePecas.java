@@ -4,6 +4,7 @@
  */
 package mechanicalmanagement;
 
+import entidades.Peca;
 import interfaces.IJanela;
 
 /**
@@ -17,6 +18,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
      */
     public CadastroDePecas() {
         initComponents();
+        jBalterar.setEnabled(false);
     }
 
     /**
@@ -213,7 +215,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
-        // TODO add your handling code here:
+           
     }//GEN-LAST:event_jBsalvarActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
@@ -292,7 +294,13 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
 
     @Override
     public void limparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jTFcodigo.setText("");
+        jTFdescricao.setText("");
+        jTFmarca.setText("");
+        jCBstatus.setSelected(false);
+        jFTFvalor_compra.setText("");
+        jFTFvalor_venda.setText("");
+        jFTFquantidade.setText("");
     }
 
     @Override
@@ -301,8 +309,15 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     }
 
     @Override
-    public void prencherCampos(Object objetc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void prencherCampos(Object object) {
+        Peca peca = (Peca) object;
+        jTFdescricao.setText(peca.getDescricao());
+        jTFmarca.setText(peca.getMarca());
+        jCBstatus.setSelected(peca.isStatus());
+        jFTFvalor_compra.setText(String.valueOf(peca.getPrecoCompra()));
+        jFTFvalor_venda.setText(String.valueOf(peca.getPrecoVenda()));
+        jFTFquantidade.setText(String.valueOf(peca.getQuantidade()));
+        
     }
 
     @Override
