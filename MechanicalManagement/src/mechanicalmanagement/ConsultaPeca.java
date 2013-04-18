@@ -4,31 +4,31 @@
  */
 package mechanicalmanagement;
 
-import tableModel.ClienteTableModel;
-import dao.ClienteDAO;
-import entidades.Cliente;
+import tableModel.PecaTableModel;
+import dao.PecaDAO;
+import entidades.Peca;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ConsultaCliente extends javax.swing.JFrame {
+public class ConsultaPeca extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsultaVeiculo
      */
-    private CadastroDeClientes cadastroDeClientes;
-    private CadastroDeVeiculos cadastroDeVeiculos;
+    private CadastroDePecas cadastroDePecas;
+    private CadastroDeOrdemServico cadastroDeOrdemServico;
 
-    public ConsultaCliente() {
+    public ConsultaPeca() {
         initComponents();
     }
 
-    public ConsultaCliente(CadastroDeClientes cadastroDeClientes) {
-        this.cadastroDeClientes = cadastroDeClientes;
+    public ConsultaPeca(CadastroDePecas cadastroDePecas) {
+        this.cadastroDePecas = cadastroDePecas;
         initComponents();
     }
 
-    public ConsultaCliente(CadastroDeVeiculos cadastroDeVeiculos) {
-        this.cadastroDeVeiculos = cadastroDeVeiculos;
+    public ConsultaPeca(CadastroDeOrdemServico cadastroDeOrdemServico) {
+        this.cadastroDeOrdemServico = cadastroDeOrdemServico;
         initComponents();
     }
 
@@ -47,12 +47,12 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jTFbusca = new javax.swing.JTextField();
         jBprocurar = new javax.swing.JButton();
-        jRBnome = new javax.swing.JRadioButton();
-        jRBcpf = new javax.swing.JRadioButton();
-        jRBrg = new javax.swing.JRadioButton();
-        jRBtodos = new javax.swing.JRadioButton();
+        jRBcodigo = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jRBtodos = new javax.swing.JRadioButton();
+        jRBmarca = new javax.swing.JRadioButton();
+        jRBdescricao = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -66,7 +66,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
-        jTable1.setModel(new ClienteTableModel(ClienteDAO.obterTodos()));
+        jTable1.setModel(new PecaTableModel(PecaDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
@@ -80,30 +80,37 @@ public class ConsultaCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jBprocurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 80, -1));
 
-        jRBnome.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBnome);
-        jRBnome.setText("Nome");
-        getContentPane().add(jRBnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jRBcodigo.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBcodigo);
+        jRBcodigo.setText("Código");
+        getContentPane().add(jRBcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jRBcpf.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBcpf);
-        jRBcpf.setText("CPF");
-        getContentPane().add(jRBcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jRBrg.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBrg);
-        jRBrg.setText("RG");
-        getContentPane().add(jRBrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
+        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
-        getContentPane().add(jRBtodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jRBtodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBtodosActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBmarca);
+        jRBmarca.setText("Marca");
 
-        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
+        jRBdescricao.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBdescricao);
+        jRBdescricao.setText("Descrição");
+        jRBdescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBdescricaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,11 +120,24 @@ public class ConsultaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(155, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jRBmarca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRBdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRBtodos)
+                .addGap(135, 135, 135))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBtodos)
+                    .addComponent(jRBmarca)
+                    .addComponent(jRBdescricao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22))
         );
@@ -130,13 +150,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
         if (jTable1.getSelectedRow() > -1) {
-            String nome = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            Cliente cliente = ClienteDAO.obterPorNome(nome).get(0);
-            if (cadastroDeClientes != null) {
-                cadastroDeClientes.consultaCliente(cliente);
+            int codigo = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            Peca peca = PecaDAO.obterPorCodigo(codigo).get(0);
+            if (cadastroDePecas != null) {
+                cadastroDePecas.consultaDePeca(peca);
             }
-            if (cadastroDeVeiculos != null) {
-                cadastroDeVeiculos.consultaCliente(cliente);
+            if (cadastroDeOrdemServico != null) {
+                cadastroDeOrdemServico.consultaPeca(peca);
             }
             dispose();
         } else {
@@ -145,23 +165,34 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBselecionarActionPerformed
 
     private void jBprocurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBprocurarActionPerformed
-        if (jRBcpf.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorCpf(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
+        if (jRBmarca.isSelected()) {
+            List<Peca> pecas = PecaDAO.obterPorMarca(jTFbusca.getText());
+            jTable1.setModel(new PecaTableModel(pecas));
         }
-        if (jRBrg.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorRG(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
+
+        if (jRBcodigo.isSelected()) {
+            List<Peca> pecas = PecaDAO.obterPorCodigo(Integer.parseInt(jTFbusca.getText()));
+            jTable1.setModel(new PecaTableModel(pecas));
         }
-        if (jRBnome.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorNome(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
+
+        if (jRBdescricao.isSelected()) {
+            List<Peca> mecanicos = PecaDAO.obterPorDescricao(jTFbusca.getText());
+            jTable1.setModel(new PecaTableModel(mecanicos));
         }
+
         if (jRBtodos.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterTodos();
-            jTable1.setModel(new ClienteTableModel(clientes));
+            List<Peca> mecanicos = PecaDAO.obterTodos();
+            jTable1.setModel(new PecaTableModel(mecanicos));
         }
     }//GEN-LAST:event_jBprocurarActionPerformed
+
+    private void jRBtodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBtodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBtodosActionPerformed
+
+    private void jRBdescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBdescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBdescricaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,13 +211,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPeca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -194,7 +225,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ConsultaCliente().setVisible(true);
+                new ConsultaPeca().setVisible(true);
             }
         });
     }
@@ -204,9 +235,9 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBselecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRBcpf;
-    private javax.swing.JRadioButton jRBnome;
-    private javax.swing.JRadioButton jRBrg;
+    private javax.swing.JRadioButton jRBcodigo;
+    private javax.swing.JRadioButton jRBdescricao;
+    private javax.swing.JRadioButton jRBmarca;
     private javax.swing.JRadioButton jRBtodos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFbusca;

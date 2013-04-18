@@ -16,16 +16,20 @@ public class ConsultaMecanico extends javax.swing.JFrame {
      * Creates new form ConsultaVeiculo
      */
     private CadastroDeMecanicos cadastroDeMecanicos;
+    private CadastroDeOrdemServico cadastroDeOrdemServico;
 
     public ConsultaMecanico() {
         initComponents();
-        jTable1.setModel(new MecanicoTableModel(MecanicoDAO.obterTodos()));
     }
 
     public ConsultaMecanico(CadastroDeMecanicos cadastroDeMecanicos) {
         this.cadastroDeMecanicos = cadastroDeMecanicos;
         initComponents();
-        jTable1.setModel(new MecanicoTableModel(MecanicoDAO.obterTodos()));
+    }
+
+    public ConsultaMecanico(CadastroDeOrdemServico cadastroDeOrdemServico) {
+        this.cadastroDeOrdemServico = cadastroDeOrdemServico;
+        initComponents();
     }
 
     /**
@@ -62,6 +66,7 @@ public class ConsultaMecanico extends javax.swing.JFrame {
         });
         getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
+        jTable1.setModel(new MecanicoTableModel(MecanicoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
@@ -134,15 +139,20 @@ public class ConsultaMecanico extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-408)/2, (screenSize.height-389)/2, 408, 389);
+        setSize(new java.awt.Dimension(408, 389));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
         if (jTable1.getSelectedRow() > -1) {
             String nome = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
             Mecanico mecanico = MecanicoDAO.obterPorNome(nome).get(0);
-           cadastroDeMecanicos.consultaMecanico(mecanico);
+            if (cadastroDeMecanicos != null) {
+                cadastroDeMecanicos.consultaMecanico(mecanico);
+            }
+            if (cadastroDeOrdemServico != null) {
+                cadastroDeOrdemServico.consultaMecanico(mecanico);
+            }
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");
@@ -154,17 +164,17 @@ public class ConsultaMecanico extends javax.swing.JFrame {
             List<Mecanico> mecanicos = MecanicoDAO.obterPorCpf(jTFbusca.getText());
             jTable1.setModel(new MecanicoTableModel(mecanicos));
         }
-        
+
         if (jRBnome.isSelected()) {
             List<Mecanico> mecanicos = MecanicoDAO.obterPorNome(jTFbusca.getText());
             jTable1.setModel(new MecanicoTableModel(mecanicos));
         }
-        
-        if(jRBEspecialidade.isSelected()){
+
+        if (jRBEspecialidade.isSelected()) {
             List<Mecanico> mecanicos = MecanicoDAO.obterPorEspecialidade(jTFbusca.getText());
             jTable1.setModel(new MecanicoTableModel(mecanicos));
-         }
-        
+        }
+
         if (jRBtodos.isSelected()) {
             List<Mecanico> mecanicos = MecanicoDAO.obterTodos();
             jTable1.setModel(new MecanicoTableModel(mecanicos));

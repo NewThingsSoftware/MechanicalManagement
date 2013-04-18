@@ -4,14 +4,18 @@
  */
 package mechanicalmanagement;
 
+import dao.PecaDAO;
+import dao.VeiculoDAO;
 import entidades.Peca;
 import interfaces.IJanela;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Marihelly
  */
-public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
+public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
 
     /**
      * Creates new form CadastroDePecas
@@ -47,10 +51,10 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
         jLabel7 = new javax.swing.JLabel();
         jTFmarca = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jFTFvalor_compra = new javax.swing.JFormattedTextField();
+        jFTFprecoCompra = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         jBvoltar = new javax.swing.JButton();
-        jFTFvalor_venda = new javax.swing.JFormattedTextField();
+        jFTFprecoVenda = new javax.swing.JFormattedTextField();
         jFTFquantidade = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -148,13 +152,13 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
         jLabel9.setText("Valor de compra:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 10));
 
-        jFTFvalor_compra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        jFTFvalor_compra.addActionListener(new java.awt.event.ActionListener() {
+        jFTFprecoCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        jFTFprecoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTFvalor_compraActionPerformed(evt);
+                jFTFprecoCompraActionPerformed(evt);
             }
         });
-        jPanel2.add(jFTFvalor_compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, -1));
+        jPanel2.add(jFTFprecoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, -1));
 
         jLabel10.setText("Valor de venda:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, 10));
@@ -171,13 +175,13 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
         });
         jPanel2.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 100, -1));
 
-        jFTFvalor_venda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        jFTFvalor_venda.addActionListener(new java.awt.event.ActionListener() {
+        jFTFprecoVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        jFTFprecoVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFTFvalor_vendaActionPerformed(evt);
+                jFTFprecoVendaActionPerformed(evt);
             }
         });
-        jPanel2.add(jFTFvalor_venda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 100, -1));
+        jPanel2.add(jFTFprecoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 100, -1));
 
         jFTFquantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000"))));
         jPanel2.add(jFTFquantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 80, -1));
@@ -208,7 +212,19 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
-        // TODO add your handling code here:
+        if(camposPreenchidos()){
+            Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo.getText())).get(0);
+            peca.setDescricao(obterCampos().getDescricao());
+            peca.setMarca(obterCampos().getMarca());
+            peca.setStatus(obterCampos().isStatus());
+            peca.setPrecoCompra(obterCampos().getPrecoCompra());
+            peca.setPrecoVenda(obterCampos().getPrecoVenda());
+            peca.setQuantidade(obterCampos().getQuantidade());
+            PecaDAO.alterar(peca);
+            jBsalvar.setEnabled(true);
+            jBalterar.setEnabled(false);
+            limparCampos();
+        }
     }//GEN-LAST:event_jBalterarActionPerformed
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -216,28 +232,38 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     }//GEN-LAST:event_jCBstatusActionPerformed
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
-        // TODO add your handling code here:
+       jBalterar.setEnabled(true);
+       jBsalvar.setEnabled(false);
+       new ConsultaPeca(this);
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
-           
+        if(camposPreenchidos()){
+            PecaDAO.gravar(obterCampos());
+            limparCampos();
+        }
     }//GEN-LAST:event_jBsalvarActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        limparCampos();
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
         dispose(); /* Marihelly: Volta para a Tela Central. */
 
     }//GEN-LAST:event_jBvoltarActionPerformed
 
-    private void jFTFvalor_compraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFvalor_compraActionPerformed
+    private void jFTFprecoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFprecoCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFTFvalor_compraActionPerformed
+    }//GEN-LAST:event_jFTFprecoCompraActionPerformed
 
-    private void jFTFvalor_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFvalor_vendaActionPerformed
+    private void jFTFprecoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFprecoVendaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFTFvalor_vendaActionPerformed
+    }//GEN-LAST:event_jFTFprecoVendaActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
+        jBsalvar.setEnabled(true);
+        jBalterar.setEnabled(false);
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     /**
@@ -281,9 +307,9 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     private javax.swing.JButton jBsalvar;
     private javax.swing.JButton jBvoltar;
     private javax.swing.JCheckBox jCBstatus;
+    private javax.swing.JFormattedTextField jFTFprecoCompra;
+    private javax.swing.JFormattedTextField jFTFprecoVenda;
     private javax.swing.JFormattedTextField jFTFquantidade;
-    private javax.swing.JFormattedTextField jFTFvalor_compra;
-    private javax.swing.JFormattedTextField jFTFvalor_venda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -307,30 +333,50 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
         jTFdescricao.setText("");
         jTFmarca.setText("");
         jCBstatus.setSelected(false);
-        jFTFvalor_compra.setText("");
-        jFTFvalor_venda.setText("");
+        jFTFprecoCompra.setText("");
+        jFTFprecoVenda.setText("");
         jFTFquantidade.setText("");
     }
 
     @Override
-    public Object obterCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Peca obterCampos() {
+        String descricao = jTFdescricao.getText();
+        String marca = jTFmarca.getText();
+        boolean status = jCBstatus.isSelected();
+        BigDecimal precoCompra = new BigDecimal(jFTFprecoCompra.getText());
+        BigDecimal precoVenda = new BigDecimal(jFTFprecoVenda.getText());
+        double quantidade = Double.parseDouble(jFTFquantidade.getText());
+        return new Peca(descricao, marca, precoCompra, precoVenda, quantidade, status);
     }
 
     @Override
     public void prencherCampos(Object object) {
         Peca peca = (Peca) object;
+        jTFcodigo.setText(peca.getIdPeca().toString());
         jTFdescricao.setText(peca.getDescricao());
         jTFmarca.setText(peca.getMarca());
         jCBstatus.setSelected(peca.isStatus());
-        jFTFvalor_compra.setText(String.valueOf(peca.getPrecoCompra()));
-        jFTFvalor_venda.setText(String.valueOf(peca.getPrecoVenda()));
+        jFTFprecoCompra.setText(String.valueOf(peca.getPrecoCompra()));
+        jFTFprecoVenda.setText(String.valueOf(peca.getPrecoVenda()));
         jFTFquantidade.setText(String.valueOf(peca.getQuantidade()));
-        
+
     }
 
     @Override
     public boolean camposPreenchidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (jTFcodigo.getText().isEmpty()
+                || jTFdescricao.getText().isEmpty()
+                || jTFmarca.getText().isEmpty()
+                || jFTFprecoCompra.getText().isEmpty()
+                || jFTFprecoVenda.getText().isEmpty()
+                || jFTFquantidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
+            return false;
+        }
+        return true;
+    }
+
+    public void consultaDePeca(Peca peca) {
+        prencherCampos(peca);
     }
 }

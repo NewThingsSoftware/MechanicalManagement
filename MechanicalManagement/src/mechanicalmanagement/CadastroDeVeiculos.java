@@ -57,6 +57,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jBcancelar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jTFkm = new javax.swing.JFormattedTextField();
+        jBconsultaCliente = new javax.swing.JButton();
         jLborda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -201,6 +202,14 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jTFkm.setToolTipText("");
         jPanel2.add(jTFkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 140, -1));
 
+        jBconsultaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupa.gif"))); // NOI18N
+        jBconsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconsultaClienteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jBconsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 30, 30));
+
         jLborda.setForeground(new java.awt.Color(102, 102, 102));
         jLborda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Veículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
         jPanel2.add(jLborda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 600, 220));
@@ -285,6 +294,10 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFanoActionPerformed
 
+    private void jBconsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultaClienteActionPerformed
+        new ConsultaCliente(this).setVisible(true);
+    }//GEN-LAST:event_jBconsultaClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -326,6 +339,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jBalterar;
     private javax.swing.JButton jBcancelar;
+    private javax.swing.JButton jBconsultaCliente;
     private javax.swing.JButton jBconsultar;
     private javax.swing.JButton jBsalvar;
     private javax.swing.JButton jBvoltar;
@@ -416,4 +430,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         /*BrunoDePerto*/
         prencherCampos(veiculo);
     }
+    
+    /* Metodo de retorno da janela de consutla de cliente, sentado o valor 
+     * lido no campo jCBcliente da janela */
+     public void consultaCliente(Cliente cliente){
+         /*BrunoDePerto*/
+         jCBcliente.setSelectedItem(cliente.getNome());
+     }
 }
