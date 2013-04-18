@@ -209,8 +209,8 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
+        setSize(new java.awt.Dimension(635, 451));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -232,7 +232,6 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
             mecanico.setCpf(obterCampos().getCpf());
             mecanico.setRg(obterCampos().getRg());
             mecanico.setTelefone(obterCampos().getTelefone());
-
             mecanico.setStatus(obterCampos().isStatus());
             MecanicoDAO.alterar(mecanico);
             jBsalvar.setEnabled(true);
@@ -326,13 +325,12 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
     @Override
     public void limparCampos() {
-        //Francis Hilla
+        //Kaue
         jTFcodigo.setText("");
         jTFnome.setText("");
         jFTFcpf.setText("");
         jFTFrg.setText("");
         jFTFtelefone.setText("");
-
         jTFEspecialidade.setText("");
         jCBstatus.setSelected(false);
         jBconsultar.requestFocus();
@@ -344,7 +342,6 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
         String cpf = jFTFcpf.getText();
         String rg = jFTFrg.getText();
         String telefone = jFTFtelefone.getText();
-
         String especialidade = jTFEspecialidade.getText();
         boolean status = jCBstatus.isSelected();
         return new Mecanico(nome, rg, cpf, telefone, especialidade, status);
@@ -359,7 +356,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
         jFTFcpf.setText(String.valueOf(mecanico.getCpf()));
         jFTFrg.setText(String.valueOf(mecanico.getRg()));
         jFTFtelefone.setText(mecanico.getTelefone());
-
+        jTFEspecialidade.setText(mecanico.getEspecialidade());
         jCBstatus.setSelected(mecanico.isStatus());
     }
 

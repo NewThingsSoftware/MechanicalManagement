@@ -165,7 +165,6 @@ public class ConsultaMecanico extends javax.swing.JFrame {
             jTable1.setModel(new MecanicoTableModel(mecanicos));
          }
         
-        
         if (jRBtodos.isSelected()) {
             List<Mecanico> mecanicos = MecanicoDAO.obterTodos();
             jTable1.setModel(new MecanicoTableModel(mecanicos));

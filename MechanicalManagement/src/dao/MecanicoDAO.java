@@ -56,8 +56,8 @@ public class MecanicoDAO {
     public static List<Mecanico> obterPorCpf(String cpf) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.cpf = :cpf");
-        qry.setParameter("cpf", cpf );
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.cpf LIKE :cpf");
+        qry.setParameter("cpf","%"+ cpf+"%" );
         List<Mecanico> mecanicos = qry.list();
         return mecanicos;
     }
@@ -65,7 +65,7 @@ public class MecanicoDAO {
     public static List<Mecanico> obterPorEspecialidade(String especialidade) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.especialidade LIKE :especilidade");
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.especialidade LIKE :especialidade");
         qry.setParameter("especialidade", "%" + especialidade + "%");
         List<Mecanico> mecanicos = qry.list();
         return mecanicos;

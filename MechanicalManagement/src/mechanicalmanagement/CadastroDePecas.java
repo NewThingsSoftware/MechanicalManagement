@@ -72,6 +72,11 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
         jBcancelar.setForeground(new java.awt.Color(102, 102, 102));
         jBcancelar.setMnemonic('a');
         jBcancelar.setText("Cancelar");
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 100, -1));
 
         jBsalvar.setBackground(new java.awt.Color(255, 255, 255));
@@ -230,6 +235,10 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela{
     private void jFTFvalor_vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFvalor_vendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFTFvalor_vendaActionPerformed
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBcancelarActionPerformed
 
     /**
      * @param args the command line arguments
