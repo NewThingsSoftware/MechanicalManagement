@@ -44,6 +44,14 @@ public class MecanicoDAO {
         return mecanicos;
     }
 
+    public static List<Mecanico> obterPorCodigo(Integer idMecanico){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.idMecanico = :idMecanico");
+        qry.setParameter("idMecanico", idMecanico);
+        List<Mecanico> mecanicos = qry.list();
+        return mecanicos;
+    }
     public static List<Mecanico> obterPorNome(String nome) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();

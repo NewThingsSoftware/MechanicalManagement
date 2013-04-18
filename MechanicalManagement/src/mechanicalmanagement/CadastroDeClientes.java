@@ -227,7 +227,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
         if (camposPreenchidos()) {
-            Cliente cliente = ClienteDAO.obterPorNome(obterCampos().getNome()).get(0);
+            Cliente cliente = ClienteDAO.obterPorCodigo(obterCampos().getIdCliente()).get(0);
             cliente.setNome(obterCampos().getNome());
             cliente.setCpf(obterCampos().getCpf());
             cliente.setRg(obterCampos().getRg());

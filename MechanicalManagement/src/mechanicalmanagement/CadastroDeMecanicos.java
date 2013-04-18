@@ -227,7 +227,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
         if (camposPreenchidos()) {
-            Mecanico mecanico = MecanicoDAO.obterPorNome(obterCampos().getNome()).get(0);
+            Mecanico mecanico = MecanicoDAO.obterPorCodigo(obterCampos().getIdMecanico()).get(0);
             mecanico.setNome(obterCampos().getNome());
             mecanico.setCpf(obterCampos().getCpf());
             mecanico.setRg(obterCampos().getRg());
