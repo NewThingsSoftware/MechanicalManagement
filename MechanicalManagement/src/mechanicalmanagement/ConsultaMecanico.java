@@ -4,31 +4,31 @@
  */
 package mechanicalmanagement;
 
-import tableModel.ClienteTableModel;
-import dao.ClienteDAO;
-import entidades.Cliente;
+import tableModel.MecanicoTableModel;
+import dao.MecanicoDAO;
+import entidades.Mecanico;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ConsultaCliente extends javax.swing.JFrame {
+public class ConsultaMecanico extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsultaVeiculo
      */
-    private CadastroDeClientes cadastroDeClientes;
-    private CadastroDeVeiculos cadastroDeVeiculos;
+    private CadastroDeMecanicos cadastroDeMecanicos;
+    private CadastroDeOrdemServico cadastroDeOrdemServico;
 
-    public ConsultaCliente() {
+    public ConsultaMecanico() {
         initComponents();
     }
 
-    public ConsultaCliente(CadastroDeClientes cadastroDeClientes) {
-        this.cadastroDeClientes = cadastroDeClientes;
+    public ConsultaMecanico(CadastroDeMecanicos cadastroDeMecanicos) {
+        this.cadastroDeMecanicos = cadastroDeMecanicos;
         initComponents();
     }
 
-    public ConsultaCliente(CadastroDeVeiculos cadastroDeVeiculos) {
-        this.cadastroDeVeiculos = cadastroDeVeiculos;
+    public ConsultaMecanico(CadastroDeOrdemServico cadastroDeOrdemServico) {
+        this.cadastroDeOrdemServico = cadastroDeOrdemServico;
         initComponents();
     }
 
@@ -49,10 +49,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jBprocurar = new javax.swing.JButton();
         jRBnome = new javax.swing.JRadioButton();
         jRBcpf = new javax.swing.JRadioButton();
-        jRBrg = new javax.swing.JRadioButton();
-        jRBtodos = new javax.swing.JRadioButton();
+        jRBEspecialidade = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jRBtodos = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -66,7 +66,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
-        jTable1.setModel(new ClienteTableModel(ClienteDAO.obterTodos()));
+        jTable1.setModel(new MecanicoTableModel(MecanicoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
@@ -90,20 +90,29 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jRBcpf.setText("CPF");
         getContentPane().add(jRBcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jRBrg.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBrg);
-        jRBrg.setText("RG");
-        getContentPane().add(jRBrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
+        jRBEspecialidade.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBEspecialidade);
+        jRBEspecialidade.setText("especialidade");
+        jRBEspecialidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBEspecialidadeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRBEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 90, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
-        getContentPane().add(jRBtodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
+        jRBtodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBtodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,11 +122,17 @@ public class ConsultaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(155, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRBtodos)
+                .addGap(135, 135, 135))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addComponent(jRBtodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22))
         );
@@ -131,12 +146,12 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
         if (jTable1.getSelectedRow() > -1) {
             String nome = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            Cliente cliente = ClienteDAO.obterPorNome(nome).get(0);
-            if (cadastroDeClientes != null) {
-                cadastroDeClientes.consultaCliente(cliente);
+            Mecanico mecanico = MecanicoDAO.obterPorNome(nome).get(0);
+            if (cadastroDeMecanicos != null) {
+                cadastroDeMecanicos.consultaMecanico(mecanico);
             }
-            if (cadastroDeVeiculos != null) {
-                cadastroDeVeiculos.consultaCliente(cliente);
+            if (cadastroDeOrdemServico != null) {
+                cadastroDeOrdemServico.consultaMecanico(mecanico);
             }
             dispose();
         } else {
@@ -146,22 +161,33 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
     private void jBprocurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBprocurarActionPerformed
         if (jRBcpf.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorCpf(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
+            List<Mecanico> mecanicos = MecanicoDAO.obterPorCpf(jTFbusca.getText());
+            jTable1.setModel(new MecanicoTableModel(mecanicos));
         }
-        if (jRBrg.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorRG(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
-        }
+
         if (jRBnome.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterPorNome(jTFbusca.getText());
-            jTable1.setModel(new ClienteTableModel(clientes));
+            List<Mecanico> mecanicos = MecanicoDAO.obterPorNome(jTFbusca.getText());
+            jTable1.setModel(new MecanicoTableModel(mecanicos));
         }
+
+        if (jRBEspecialidade.isSelected()) {
+            List<Mecanico> mecanicos = MecanicoDAO.obterPorEspecialidade(jTFbusca.getText());
+            jTable1.setModel(new MecanicoTableModel(mecanicos));
+        }
+
         if (jRBtodos.isSelected()) {
-            List<Cliente> clientes = ClienteDAO.obterTodos();
-            jTable1.setModel(new ClienteTableModel(clientes));
+            List<Mecanico> mecanicos = MecanicoDAO.obterTodos();
+            jTable1.setModel(new MecanicoTableModel(mecanicos));
         }
     }//GEN-LAST:event_jBprocurarActionPerformed
+
+    private void jRBtodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBtodosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBtodosActionPerformed
+
+    private void jRBEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEspecialidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBEspecialidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,13 +206,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -194,7 +220,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ConsultaCliente().setVisible(true);
+                new ConsultaMecanico().setVisible(true);
             }
         });
     }
@@ -204,9 +230,9 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBselecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRBEspecialidade;
     private javax.swing.JRadioButton jRBcpf;
     private javax.swing.JRadioButton jRBnome;
-    private javax.swing.JRadioButton jRBrg;
     private javax.swing.JRadioButton jRBtodos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFbusca;

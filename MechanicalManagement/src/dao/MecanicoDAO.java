@@ -44,6 +44,14 @@ public class MecanicoDAO {
         return mecanicos;
     }
 
+    public static List<Mecanico> obterPorCodigo(Integer idMecanico){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.idMecanico = :idMecanico");
+        qry.setParameter("idMecanico", idMecanico);
+        List<Mecanico> mecanicos = qry.list();
+        return mecanicos;
+    }
     public static List<Mecanico> obterPorNome(String nome) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -53,34 +61,19 @@ public class MecanicoDAO {
         return mecanicos;
     }
 
-    public static List<Mecanico> obterPorCpf(int cpf) {
+    public static List<Mecanico> obterPorCpf(String cpf) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.cpf = :cpf");
-        qry.setParameter("cpf", cpf );
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.cpf LIKE :cpf");
+        qry.setParameter("cpf","%"+ cpf+"%" );
         List<Mecanico> mecanicos = qry.list();
         return mecanicos;
     }
-    public static List<Mecanico> obterPorRg(int rg) {
-        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
-        s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.rg = :rg");
-        qry.setParameter("rg", rg);
-        List<Mecanico> mecanicos = qry.list();
-        return mecanicos;
-    }
-    public static List<Mecanico> obterPorTelefone(String telefone) {
-        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
-        s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.telefone LIKE :telefone");
-        qry.setParameter("telefone", "%" + telefone + "%");
-        List<Mecanico> mecanicos = qry.list();
-        return mecanicos;
-    }
+    
     public static List<Mecanico> obterPorEspecialidade(String especialidade) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.especialidade LIKE :especilidade");
+        Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.especialidade LIKE :especialidade");
         qry.setParameter("especialidade", "%" + especialidade + "%");
         List<Mecanico> mecanicos = qry.list();
         return mecanicos;

@@ -39,6 +39,15 @@ public class ClienteDAO {
         return qry.list();
     }
 
+    public static List<Cliente> obterPorCodigo(Integer idCliente) {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT c FROM Cliente c WHERE c.idCliente = :idCliente");
+        qry.setParameter("idCliente", idCliente);
+        List<Cliente> clientes = qry.list();
+        return clientes;
+    }
+
     public static List<Cliente> obterPorNome(String nome) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -52,7 +61,7 @@ public class ClienteDAO {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT c FROM Cliente c WHERE c.cpf LIKE :cpf");
-        qry.setParameter("cpf","%"+ cpf+"%");
+        qry.setParameter("cpf", "%" + cpf + "%");
         List<Cliente> clientes = qry.list();
         return clientes;
     }
@@ -61,7 +70,7 @@ public class ClienteDAO {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT c FROM Cliente c WHERE c.rg LIKE :rg");
-        qry.setParameter("rg","%"+ rg+"%");
+        qry.setParameter("rg", "%" + rg + "%");
         List<Cliente> clientes = qry.list();
         return clientes;
     }
