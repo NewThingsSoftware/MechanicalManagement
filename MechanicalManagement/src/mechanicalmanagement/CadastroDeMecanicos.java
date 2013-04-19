@@ -51,14 +51,14 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
         jSeparator1 = new javax.swing.JSeparator();
         jFTFrg = new javax.swing.JFormattedTextField();
         jBvoltar = new javax.swing.JButton();
+        jTFEspecialidade = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jBsalvar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jBalterar = new javax.swing.JButton();
         jBcancelar = new javax.swing.JButton();
         jBconsultar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jTFEspecialidade = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -141,6 +141,10 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
             }
         });
         jPanel2.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 100, -1));
+        jPanel2.add(jTFEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 330, -1));
+
+        jLabel9.setText("Especialidade");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 90, -1));
 
         jBsalvar.setBackground(new java.awt.Color(255, 255, 255));
         jBsalvar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -198,10 +202,6 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 600, 60));
-        jPanel2.add(jTFEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 260, -1));
-
-        jLabel9.setText("Especialidade");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 286, 90, -1));
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 630, 420);
@@ -210,8 +210,8 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
+        setSize(new java.awt.Dimension(635, 451));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed

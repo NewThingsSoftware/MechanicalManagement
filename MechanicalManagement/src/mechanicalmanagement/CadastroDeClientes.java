@@ -210,8 +210,8 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
+        setSize(new java.awt.Dimension(635, 451));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -368,7 +368,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
                 || jFTFrg.getText().isEmpty()
                 || jFTFtelefone.getText().isEmpty()
                 || jTFendereco.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Favor preencher todos os campos");
+            JOptionPane.showMessageDialog(rootPane, "Preencher todos os campos!");
             return false;
         }
         return true;

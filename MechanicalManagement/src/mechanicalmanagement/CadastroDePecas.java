@@ -124,7 +124,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
 
         jLabel3.setText("Código:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 70, -1));
-        jPanel2.add(jTFdescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 460, -1));
+        jPanel2.add(jTFdescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 450, -1));
 
         jLabel4.setText("Marca:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
@@ -133,7 +133,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
 
         jCBstatus.setBackground(new java.awt.Color(255, 255, 255));
-        jCBstatus.setText("Inativo");
+        jCBstatus.setText("Ativo");
         jCBstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBstatusActionPerformed(evt);
@@ -213,8 +213,8 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-642)/2, (screenSize.height-438)/2, 642, 438);
+        setSize(new java.awt.Dimension(642, 438));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed

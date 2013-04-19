@@ -13,7 +13,8 @@ public class TelaCentral extends javax.swing.JFrame {
     CadastroDeClientes cliente = new CadastroDeClientes();
     CadastroDeMecanicos mecanico = new CadastroDeMecanicos();
     CadastroDeVeiculos veiculo = new CadastroDeVeiculos();
-    CadastroDePecas pecas = new CadastroDePecas();
+    CadastroDePecas pecas = new CadastroDePecas(); 
+    CadastroDeOrdemServico ordem_servico = new CadastroDeOrdemServico();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,6 +30,8 @@ public class TelaCentral extends javax.swing.JFrame {
         jMMecanicos = new javax.swing.JMenuItem();
         jMVeiculos = new javax.swing.JMenuItem();
         jMPecas = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMIordemServico = new javax.swing.JMenuItem();
         JMExit = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -126,6 +129,19 @@ public class TelaCentral extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Operações");
+
+        jMIordemServico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMIordemServico.setText("Ordem de Serviço");
+        jMIordemServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIordemServicoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMIordemServico);
+
+        jMenuBar1.add(jMenu2);
+
         JMExit.setText("Sistema");
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_MASK));
@@ -164,6 +180,10 @@ public class TelaCentral extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
        System.exit(WIDTH);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMIordemServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIordemServicoActionPerformed
+        ordem_servico.setVisible(true);
+    }//GEN-LAST:event_jMIordemServicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,10 +224,12 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenuItem jMIordemServico;
     private javax.swing.JMenuItem jMMecanicos;
     private javax.swing.JMenuItem jMPecas;
     private javax.swing.JMenuItem jMVeiculos;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
