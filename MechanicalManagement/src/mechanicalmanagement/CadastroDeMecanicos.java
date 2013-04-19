@@ -21,6 +21,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
     public CadastroDeMecanicos() {
         initComponents();
         jBalterar.setEnabled(false);
+        limparCampos();
     }
 
     /**
@@ -209,8 +210,8 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(635, 451));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -227,7 +228,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
         if (camposPreenchidos()) {
-            Mecanico mecanico = MecanicoDAO.obterPorCodigo(obterCampos().getIdMecanico()).get(0);
+            Mecanico mecanico = MecanicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo.getText())).get(0);
             mecanico.setNome(obterCampos().getNome());
             mecanico.setCpf(obterCampos().getCpf());
             mecanico.setRg(obterCampos().getRg());

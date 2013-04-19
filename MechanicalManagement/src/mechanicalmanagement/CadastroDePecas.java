@@ -5,7 +5,6 @@
 package mechanicalmanagement;
 
 import dao.PecaDAO;
-import dao.VeiculoDAO;
 import entidades.Peca;
 import interfaces.IJanela;
 import java.math.BigDecimal;
@@ -23,6 +22,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
     public CadastroDePecas() {
         initComponents();
         jBalterar.setEnabled(false);
+        limparCampos();
     }
 
     /**
@@ -152,7 +152,8 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         jLabel9.setText("Valor de compra:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 10));
 
-        jFTFprecoCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        jFTFprecoCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
+        jFTFprecoCompra.setToolTipText("");
         jFTFprecoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTFprecoCompraActionPerformed(evt);
@@ -175,7 +176,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         });
         jPanel2.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 100, -1));
 
-        jFTFprecoVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        jFTFprecoVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
         jFTFprecoVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTFprecoVendaActionPerformed(evt);
@@ -183,7 +184,12 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         });
         jPanel2.add(jFTFprecoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 100, -1));
 
-        jFTFquantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000"))));
+        jFTFquantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
+        jFTFquantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTFquantidadeActionPerformed(evt);
+            }
+        });
         jPanel2.add(jFTFquantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 80, -1));
 
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
@@ -204,15 +210,15 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(642, 438));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-642)/2, (screenSize.height-438)/2, 642, 438);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
-        if(camposPreenchidos()){
+        if (camposPreenchidos()) {
             Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo.getText())).get(0);
             peca.setDescricao(obterCampos().getDescricao());
             peca.setMarca(obterCampos().getMarca());
@@ -232,13 +238,13 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
     }//GEN-LAST:event_jCBstatusActionPerformed
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
-       jBalterar.setEnabled(true);
-       jBsalvar.setEnabled(false);
-       new ConsultaPeca(this);
+        jBalterar.setEnabled(true);
+        jBsalvar.setEnabled(false);
+        new ConsultaPeca(this).setVisible(true);
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     private void jBsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalvarActionPerformed
-        if(camposPreenchidos()){
+        if (camposPreenchidos()) {
             PecaDAO.gravar(obterCampos());
             limparCampos();
         }
@@ -265,6 +271,10 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         jBsalvar.setEnabled(true);
         jBalterar.setEnabled(false);
     }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jFTFquantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFquantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTFquantidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,9 +353,9 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         String descricao = jTFdescricao.getText();
         String marca = jTFmarca.getText();
         boolean status = jCBstatus.isSelected();
-        BigDecimal precoCompra = new BigDecimal(jFTFprecoCompra.getText());
-        BigDecimal precoVenda = new BigDecimal(jFTFprecoVenda.getText());
-        double quantidade = Double.parseDouble(jFTFquantidade.getText());
+        BigDecimal precoCompra = new BigDecimal(jFTFprecoCompra.getText().replace(',', '.'));
+        BigDecimal precoVenda = new BigDecimal(jFTFprecoVenda.getText().replace(',', '.'));
+        double quantidade = Double.parseDouble(jFTFquantidade.getText().replace(',', '.'));
         return new Peca(descricao, marca, precoCompra, precoVenda, quantidade, status);
     }
 
@@ -364,8 +374,7 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
 
     @Override
     public boolean camposPreenchidos() {
-        if (jTFcodigo.getText().isEmpty()
-                || jTFdescricao.getText().isEmpty()
+        if (jTFdescricao.getText().isEmpty()
                 || jTFmarca.getText().isEmpty()
                 || jFTFprecoCompra.getText().isEmpty()
                 || jFTFprecoVenda.getText().isEmpty()

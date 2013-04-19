@@ -20,6 +20,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
+        limparCampos();
     }
 
     /**

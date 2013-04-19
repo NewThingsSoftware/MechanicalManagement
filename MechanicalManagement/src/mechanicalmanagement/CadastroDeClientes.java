@@ -21,6 +21,7 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
     public CadastroDeClientes() {
         initComponents();
         jBalterar.setEnabled(false);
+        limparCampos();
     }
 
     /**
@@ -209,8 +210,8 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(635, 451));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -227,12 +228,12 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
     private void jBalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBalterarActionPerformed
         if (camposPreenchidos()) {
-            Cliente cliente = ClienteDAO.obterPorCodigo(obterCampos().getIdCliente()).get(0);
+            Cliente cliente = ClienteDAO.obterPorCodigo(Integer.parseInt(jTFcodigo.getText())).get(0);
             cliente.setNome(obterCampos().getNome());
             cliente.setCpf(obterCampos().getCpf());
             cliente.setRg(obterCampos().getRg());
             cliente.setTelefone(obterCampos().getTelefone());
-            cliente.setEndereco(obterCampos().getTelefone());
+            cliente.setEndereco(obterCampos().getEndereco());
             cliente.setStatus(obterCampos().isStatus());
             ClienteDAO.alterar(cliente);
             jBsalvar.setEnabled(true);
