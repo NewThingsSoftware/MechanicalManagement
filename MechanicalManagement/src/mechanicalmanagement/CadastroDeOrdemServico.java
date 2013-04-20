@@ -81,7 +81,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBgera_crediario = new javax.swing.JButton();
         jBfinalizar_os = new javax.swing.JButton();
         jBconsultar = new javax.swing.JButton();
-        jBcancelar = new javax.swing.JToggleButton();
+        jBgravar_alteracoes = new javax.swing.JToggleButton();
         jbConfirmar = new javax.swing.JButton();
         jBvoltar = new javax.swing.JToggleButton();
         jLabel15 = new javax.swing.JLabel();
@@ -251,6 +251,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jCBstatus.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCBstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBstatusActionPerformed(evt);
+            }
+        });
         jPanel4.add(jCBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 150, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -305,9 +310,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBconsultar.setText("Consulta OS");
         jPanel1.add(jBconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 140, -1));
 
-        jBcancelar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jBcancelar.setText("Cancelar");
-        jPanel1.add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 140, -1));
+        jBgravar_alteracoes.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBgravar_alteracoes.setText("Gravar alterações");
+        jPanel1.add(jBgravar_alteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 140, -1));
 
         jbConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jbConfirmar.setText("Confirmar Abertura");
@@ -342,6 +347,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private void jBfinalizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizar_osActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBfinalizar_osActionPerformed
+
+    private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBstatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,11 +388,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JToggleButton jBcancelar;
     private javax.swing.JButton jBconsultar;
     private javax.swing.JButton jBfinalizar_os;
     private javax.swing.JButton jBgera_crediario;
     private javax.swing.JButton jBgravar;
+    private javax.swing.JToggleButton jBgravar_alteracoes;
     private javax.swing.JButton jBpecas;
     private javax.swing.JToggleButton jBvoltar;
     private javax.swing.JComboBox jCBcondicao_parcelamento;
@@ -446,7 +455,13 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_mao_obra.setText("");
         jFTFvalor_pecas.setText("");
         jFTFvalor_total.setText("");
-        /*Marihelly Santini*/
+             
+        }
+
+    @Override
+    public Object obterCampos() {
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
     }
 
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
