@@ -15,7 +15,7 @@ import interfaces.IJanela;
  *
  * @author Bruno
  */
-public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanela{
+public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanela {
 
     /**
      * Creates new form CadastroDeOrdemServico
@@ -432,7 +432,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-      /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
+    /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
     @Override
     public void limparCampos() {
         /*Marihelly Santini*/
@@ -446,34 +446,53 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_mao_obra.setText("");
         jFTFvalor_pecas.setText("");
         jFTFvalor_total.setText("");
-        /*Marihelly Santini*/       
-        }
-
-    @Override
-    public Object obterCampos() {
-      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    
+        /*Marihelly Santini*/
     }
 
+    /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
+    @Override
+    public OrdemServico obterCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    /*Metodo que recebe um objeto do tipo OrdemServico e preenche os campos*/
     @Override
     public void prencherCampos(Object objetc) {
-       
     }
 
+    /*Metodo para verificar se os campos necessarios para abertura da OrdemServico
+     * estão preenchidos*/
+    public boolean camposPreenchidosAberturaOrdemServico() {
+        return true;
+    }
+
+    /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
+     OrdemServico*/
     @Override
     public boolean camposPreenchidos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void consultaPeca(Peca peca){
-        
+
+    /*Metodo que a consulta de peça seta os valores da peca selecionada*/
+    public void consultaPeca(Peca peca) {
     }
-    
-    public void consultaMecanico(Mecanico mecanico){
+
+    /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/
+    public void consultaMecanico(Mecanico mecanico) {
         jCBmecanico.setSelectedItem(mecanico.getNome());
     }
-    
-    public void consultaVeiculo(Veiculo veiculo){
+
+    /*Metodo que selecioan o veiculo na JCBveiculo conforme a consulta*/
+    public void consultaVeiculo(Veiculo veiculo) {
         jCBveiculo.setSelectedItem(veiculo.getPlaca());
+    }
+
+    /*Metodo que desabilita campos para nova OrdemServico*/
+    public void desabitaCamposNovaOrdemServico() {
+    }
+
+    /*Metodo que habilita campos para OrdemServico já criada*/
+    public void habilitaCamposOrdemServicoAberta() {
     }
 }
