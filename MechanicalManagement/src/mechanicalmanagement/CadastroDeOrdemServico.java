@@ -458,12 +458,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
              
         }
 
-    @Override
-    public Object obterCampos() {
-      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    
-    }
-
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
     @Override
     public OrdemServico obterCampos() {
