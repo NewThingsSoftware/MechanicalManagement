@@ -17,7 +17,7 @@ public class OrdemServico  implements java.io.Serializable {
      private Mecanico mecanico;
      private Date data;
      private String descricao;
-     private Boolean status;
+     private char status;
      private Set contasRecebers = new HashSet(0);
      private Set pecaUsadas = new HashSet(0);
 
@@ -31,7 +31,7 @@ public class OrdemServico  implements java.io.Serializable {
         this.data = data;
     }
 
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, Boolean status) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status) {
         this.veiculo = veiculo;
         this.mecanico = mecanico;
         this.data = data;
@@ -39,7 +39,7 @@ public class OrdemServico  implements java.io.Serializable {
         this.status = status;
     }
     
-    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, Boolean status, Set contasRecebers, Set pecaUsadas) {
+    public OrdemServico(Veiculo veiculo, Mecanico mecanico, Date data, String descricao, char status, Set contasRecebers, Set pecaUsadas) {
        this.veiculo = veiculo;
        this.mecanico = mecanico;
        this.data = data;
@@ -84,11 +84,11 @@ public class OrdemServico  implements java.io.Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public Boolean getStatus() {
+    public char getStatus() {
         return this.status;
     }
     
-    public void setStatus(Boolean status) {
+    public void setStatus(char status) {
         this.status = status;
     }
     public Set getContasRecebers() {

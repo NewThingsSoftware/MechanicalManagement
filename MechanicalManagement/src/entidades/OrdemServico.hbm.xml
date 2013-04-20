@@ -20,7 +20,7 @@
         <property name="descricao" type="string">
             <column name="descricao" length="150" />
         </property>
-        <property name="status" type="java.lang.Boolean">
+        <property name="status" type="character">
             <column name="status" />
         </property>
         <set name="contasRecebers" inverse="true">
