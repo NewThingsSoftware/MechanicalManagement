@@ -4,8 +4,8 @@
  */
 package mechanicalmanagement;
 
-import ComboBoxModel.MecanicoComboBoxModel;
-import ComboBoxModel.VeiculoComboBoxModel;
+import comboBoxModel.MecanicoComboBoxModel;
+import comboBoxModel.VeiculoComboBoxModel;
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
 import dao.VeiculoDAO;

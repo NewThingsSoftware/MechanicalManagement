@@ -1,6 +1,6 @@
 package mechanicalmanagement;
 
-import ComboBoxModel.ClienteComboBoxModel;
+import comboBoxModel.ClienteComboBoxModel;
 import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
