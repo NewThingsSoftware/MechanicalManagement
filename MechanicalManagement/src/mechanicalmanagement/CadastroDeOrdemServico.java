@@ -4,6 +4,8 @@
  */
 package mechanicalmanagement;
 
+import ComboBoxModel.MecanicoComboBoxModel;
+import ComboBoxModel.VeiculoComboBoxModel;
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
 import dao.VeiculoDAO;
@@ -29,8 +31,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        limparCampos();
-        desabitaCamposNovaOrdemServico();
+        
     }
 
     /**
@@ -41,13 +42,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mecanica?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
-        veiculoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v.placa FROM Veiculo v");
-        veiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(veiculoQuery.getResultList());
-        mecanicoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT m.nome FROM Mecanico m");
-        mecanicoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(mecanicoQuery.getResultList());
         jPanel1 = new javax.swing.JPanel();
         jPmanutencao_os = new javax.swing.JPanel();
         jFTFquantidade = new javax.swing.JFormattedTextField();
@@ -100,11 +95,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         setTitle("Ordem de Serviço");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -193,11 +188,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jCBveiculo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCBveiculo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, veiculoQuery, eLProperty, jCBveiculo);
-        bindingGroup.addBinding(jComboBoxBinding);
-
         jCBveiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBveiculoActionPerformed(evt);
@@ -278,11 +268,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jCBmecanico.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCBmecanico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, mecanicoQuery, eLProperty, jCBmecanico);
-        bindingGroup.addBinding(jComboBoxBinding);
-
         jPanel4.add(jCBmecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
 
         jCBstatus.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -378,10 +363,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        bindingGroup.bind();
-
-        setSize(new java.awt.Dimension(918, 464));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
@@ -409,7 +392,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         /*MarihellySantini
          * Preenche automaticamente no campo "Data" a data atual do sistema*/
         jFTFdata.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-        /*Fim MarihellySantini*/
+        /*Bruno DePerto*/
+        jCBmecanico.setModel(new MecanicoComboBoxModel(MecanicoDAO.obterTodos()));
+        jCBveiculo.setModel(new VeiculoComboBoxModel(VeiculoDAO.obterTodos()));
+        limparCampos();
+        desabitaCamposNovaOrdemServico();
     }//GEN-LAST:event_formWindowActivated
 
     private void jTFcodigo_pecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcodigo_pecaActionPerformed
@@ -468,7 +455,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jBconfirmar_abertura;
     private javax.swing.JButton jBconsultar;
     private javax.swing.JButton jBfinalizar_os;
@@ -516,11 +502,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private javax.swing.JTextField jTFdescricao_peca;
     private javax.swing.JTextPane jTPdescricao_problema;
     private javax.swing.JTable jTpecas_vinculadas;
-    private java.util.List<entidadesJPA.Mecanico> mecanicoList;
-    private javax.persistence.Query mecanicoQuery;
-    private java.util.List<entidadesJPA.Veiculo> veiculoList;
-    private javax.persistence.Query veiculoQuery;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/

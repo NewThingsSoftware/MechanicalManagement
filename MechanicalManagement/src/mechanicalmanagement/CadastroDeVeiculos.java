@@ -1,5 +1,6 @@
 package mechanicalmanagement;
 
+import ComboBoxModel.ClienteComboBoxModel;
 import dao.ClienteDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
@@ -18,8 +19,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
      */
     public CadastroDeVeiculos() {
         initComponents();
-        jBalterar.setEnabled(false);
-        limparCampos();
+        
     }
 
     /**
@@ -30,11 +30,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mecanica?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
-        clienteQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c.nome FROM Cliente c");
-        clienteList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(clienteQuery.getResultList());
         jPanel2 = new javax.swing.JPanel();
         jCBcliente = new javax.swing.JComboBox();
         jTFmarca = new javax.swing.JTextField();
@@ -65,6 +61,9 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         setTitle("Cadastro de Veículos");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -75,11 +74,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jCBcliente.setMaximumRowCount(5);
-
-        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${resultList}");
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteQuery, eLProperty, jCBcliente, "");
-        bindingGroup.addBinding(jComboBoxBinding);
-
+        jCBcliente.setModel(new ClienteComboBoxModel(ClienteDAO.obterTodos()));
         jPanel2.add(jCBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 380, 20));
         jPanel2.add(jTFmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 330, -1));
 
@@ -235,10 +230,8 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bindingGroup.bind();
-
-        setSize(new java.awt.Dimension(642, 457));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-642)/2, (screenSize.height-457)/2, 642, 457);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jChBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBstatusActionPerformed
@@ -305,9 +298,15 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
     }//GEN-LAST:event_jBconsultaClienteActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-   /*Limpa os campos quando a janela é fechada no "X"*/
-         limparCampos();
+        /*Limpa os campos quando a janela é fechada no "X"*/
+        limparCampos();
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        jCBcliente.setModel(new ClienteComboBoxModel(ClienteDAO.obterTodos()));
+        jBalterar.setEnabled(false);
+        limparCampos();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -345,9 +344,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.util.List<entidadesJPA.Cliente> clienteList;
-    private javax.persistence.Query clienteQuery;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jBalterar;
     private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBconsultaCliente;
@@ -373,7 +369,6 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
     private javax.swing.JTextField jTFmarca;
     private javax.swing.JTextField jTFmodelo;
     private javax.swing.JFormattedTextField jTFplaca;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     /*Metodo que limpa todos os campos da tela de cadastro de veiculo*/
@@ -403,7 +398,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         jTFkm.setText(veiculo.getKm().toString());
         jChBstatus.setSelected(veiculo.isStatus());
     }
-    
+
     /*Metodo para verificar se todos os campos da tela de cadastro de veiculo
      * estão preenchidos*/
     @Override
@@ -418,7 +413,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         }
         return true;
     }
-   
+
     /*Metodo que pega todos os valores dos campos da tela de cadastro de veiculos
      * e cria um objeto do tipo veiculo que é retornado com os valores*/
     @Override
@@ -434,18 +429,17 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         return new Veiculo(cliente, placa, ano, marca, modelo, km, status);
     }
 
-    
     /* Metodo de retorno da janela de consulta de veiculo, setando os valores
      * lidos para os campos da janela*/
     public void consultaVeiculo(Veiculo veiculo) {
         /*BrunoDePerto*/
         prencherCampos(veiculo);
     }
-    
+
     /* Metodo de retorno da janela de consutla de cliente, sentado o valor 
      * lido no campo jCBcliente da janela */
-     public void consultaCliente(Cliente cliente){
-         /*BrunoDePerto*/
-         jCBcliente.setSelectedItem(cliente.getNome());
-     }
+    public void consultaCliente(Cliente cliente) {
+        /*BrunoDePerto*/
+        jCBcliente.setSelectedItem(cliente.getNome());
+    }
 }
