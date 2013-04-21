@@ -540,6 +540,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @Override
     public void prencherCampos(Object objetc) {
         OrdemServico ordemServico = (OrdemServico) objetc;
+        jTFcodigo_os.setText(ordemServico.getIdOrdemServico().toString());
+        jCBveiculo.setSelectedItem(ordemServico.getVeiculo().getPlaca());
+        
 
     }
 
