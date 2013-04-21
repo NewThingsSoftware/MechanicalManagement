@@ -29,10 +29,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
-                PecaUsadaDAO.obterPorOrdemServico(
-                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
-                jTFcodigo_os.getText())).get(0))));
+        
     }
 
     /**
@@ -153,6 +150,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jBgravar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBgravar.setText("Gravar");
+        jBgravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBgravarActionPerformed(evt);
+            }
+        });
         jPmanutencao_os.add(jBgravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 80, -1));
 
         jFTFvalor_unitario.setEnabled(false);
@@ -422,6 +424,13 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jCBmecanico.setModel(new MecanicoComboBoxModel(MecanicoDAO.obterTodos()));
         jCBveiculo.setModel(new VeiculoComboBoxModel(VeiculoDAO.obterTodos()));
     }//GEN-LAST:event_formWindowOpened
+
+    private void jBgravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBgravarActionPerformed
+        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
+                PecaUsadaDAO.obterPorOrdemServico(
+                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
+                jTFcodigo_os.getText())).get(0))));
+    }//GEN-LAST:event_jBgravarActionPerformed
 
     /**
      * @param args the command line arguments
