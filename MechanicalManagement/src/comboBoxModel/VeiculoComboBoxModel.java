@@ -8,7 +8,7 @@ import javax.swing.MutableComboBoxModel;
 
 /**
  *
- * @author Bruno
+ * @author Bruno DePerto
  */
 public class VeiculoComboBoxModel extends AbstractListModel implements MutableComboBoxModel {
 
