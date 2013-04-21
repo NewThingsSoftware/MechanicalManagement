@@ -78,7 +78,7 @@ public class MecanicoDAO {
         List<Mecanico> mecanicos = qry.list();
         return mecanicos;
     }
-    public static List<Mecanico> obterPorStatus(boolean status) {
+    public static List<Mecanico> obterPorStatus(Boolean status) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT m FROM Mecanico m WHERE m.status = :status");

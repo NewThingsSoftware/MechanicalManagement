@@ -5,10 +5,9 @@
 package entidadesJPA;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,16 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ctb03
+ * @author Bruno
  */
 @Entity
 @Table(name = "ordem_servico")
@@ -37,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OrdemServico.findByIdOrdemServico", query = "SELECT o FROM OrdemServico o WHERE o.idOrdemServico = :idOrdemServico"),
     @NamedQuery(name = "OrdemServico.findByData", query = "SELECT o FROM OrdemServico o WHERE o.data = :data"),
     @NamedQuery(name = "OrdemServico.findByDescricao", query = "SELECT o FROM OrdemServico o WHERE o.descricao = :descricao"),
-    @NamedQuery(name = "OrdemServico.findByStatus", query = "SELECT o FROM OrdemServico o WHERE o.status = :status")})
+    @NamedQuery(name = "OrdemServico.findByStatus", query = "SELECT o FROM OrdemServico o WHERE o.status = :status"),
+    @NamedQuery(name = "OrdemServico.findByValorMaoObra", query = "SELECT o FROM OrdemServico o WHERE o.valorMaoObra = :valorMaoObra")})
 public class OrdemServico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,18 +49,18 @@ public class OrdemServico implements Serializable {
     private Date data;
     @Column(name = "descricao")
     private String descricao;
+    @Basic(optional = false)
     @Column(name = "status")
-    private Boolean status;
+    private char status;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "valor_mao_obra")
+    private BigDecimal valorMaoObra;
     @JoinColumn(name = "id_veiculo", referencedColumnName = "id_veiculo")
     @ManyToOne(optional = false)
     private Veiculo idVeiculo;
     @JoinColumn(name = "id_mecanico", referencedColumnName = "id_mecanico")
     @ManyToOne(optional = false)
     private Mecanico idMecanico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdemServico")
-    private Collection<ContasReceber> contasReceberCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordemServico")
-    private Collection<PecaUsada> pecaUsadaCollection;
 
     public OrdemServico() {
     }
@@ -71,9 +69,10 @@ public class OrdemServico implements Serializable {
         this.idOrdemServico = idOrdemServico;
     }
 
-    public OrdemServico(Integer idOrdemServico, Date data) {
+    public OrdemServico(Integer idOrdemServico, Date data, char status) {
         this.idOrdemServico = idOrdemServico;
         this.data = data;
+        this.status = status;
     }
 
     public Integer getIdOrdemServico() {
@@ -100,12 +99,20 @@ public class OrdemServico implements Serializable {
         this.descricao = descricao;
     }
 
-    public Boolean getStatus() {
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(char status) {
         this.status = status;
+    }
+
+    public BigDecimal getValorMaoObra() {
+        return valorMaoObra;
+    }
+
+    public void setValorMaoObra(BigDecimal valorMaoObra) {
+        this.valorMaoObra = valorMaoObra;
     }
 
     public Veiculo getIdVeiculo() {
@@ -122,24 +129,6 @@ public class OrdemServico implements Serializable {
 
     public void setIdMecanico(Mecanico idMecanico) {
         this.idMecanico = idMecanico;
-    }
-
-    @XmlTransient
-    public Collection<ContasReceber> getContasReceberCollection() {
-        return contasReceberCollection;
-    }
-
-    public void setContasReceberCollection(Collection<ContasReceber> contasReceberCollection) {
-        this.contasReceberCollection = contasReceberCollection;
-    }
-
-    @XmlTransient
-    public Collection<PecaUsada> getPecaUsadaCollection() {
-        return pecaUsadaCollection;
-    }
-
-    public void setPecaUsadaCollection(Collection<PecaUsada> pecaUsadaCollection) {
-        this.pecaUsadaCollection = pecaUsadaCollection;
     }
 
     @Override

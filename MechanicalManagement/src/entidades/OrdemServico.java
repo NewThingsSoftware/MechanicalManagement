@@ -2,6 +2,7 @@ package entidades;
 // Generated 17/04/2013 10:28:10 by Hibernate Tools 3.2.1.GA
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,7 @@ public class OrdemServico  implements java.io.Serializable {
      private Date data;
      private String descricao;
      private char status;
+     private BigDecimal valorMaoObra;
      private Set contasRecebers = new HashSet(0);
      private Set pecaUsadas = new HashSet(0);
 
@@ -91,6 +93,15 @@ public class OrdemServico  implements java.io.Serializable {
     public void setStatus(char status) {
         this.status = status;
     }
+
+    public BigDecimal getValorMaoObra() {
+        return valorMaoObra;
+    }
+
+    public void setValorMaoObra(BigDecimal valorMaoObra) {
+        this.valorMaoObra = valorMaoObra;
+    }
+    
     public Set getContasRecebers() {
         return this.contasRecebers;
     }

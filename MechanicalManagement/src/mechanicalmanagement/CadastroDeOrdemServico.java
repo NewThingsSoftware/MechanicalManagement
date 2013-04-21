@@ -12,12 +12,8 @@ import entidades.OrdemServico;
 import entidades.Peca;
 import entidades.Veiculo;
 import interfaces.IJanela;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -411,6 +407,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         Date data = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         jFTFdata.setText(formato.format(data));
+        //jFTFdata.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
         /*Fim MarihellySantini*/
     }//GEN-LAST:event_formWindowActivated
 
@@ -424,7 +421,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_formWindowClosing
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
-       new ConsultaOrdemServico().setVisible(true);
+        new ConsultaOrdemServico().setVisible(true);
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     /**
@@ -456,6 +453,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CadastroDeOrdemServico().setVisible(true);
             }
@@ -521,7 +519,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @Override
     public void limparCampos() {
         /*Marihelly Santini*/
-        jFTFdata.setText("");
+        jFTFdata.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
         jTFcodigo_os.setText("");
         jTFcliente.setText("");
         jTPdescricao_problema.setText("");
@@ -533,7 +531,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_total.setText("");
 
         //Combos
-        //jTpecas_vinculadas.setModel(new PecaUsadaTableModel(dao.PecaUsadaDAO.obterPorOrdemServico(OrdemServicoDAO.obterPorCodigo(0))));
+        jTpecas_vinculadas.removeAll();
         jCBcondicao_parcelamento.setSelectedIndex(0);
         jCBmecanico.setSelectedIndex(0);
         jCBstatus.setSelectedIndex(0);
@@ -548,22 +546,14 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         char status = valorStatusCombo();
         Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
         String descricao = jTPdescricao_problema.getText();
-        String data = jFTFdata.getText();
-
-        DateFormat formatter;
-        Date date = null;
-        formatter = new SimpleDateFormat("dd/MM/yy");
-        try {
-            date = (Date) formatter.parse(data);
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroDeOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new OrdemServico(veiculo, mecanico, date, descricao, status);
+        Date data = new Date(new SimpleDateFormat("yyyy/MM/dd").format(jFTFdata.getText()));
+        return new OrdemServico(veiculo, mecanico, data, descricao, status);
     }
 
     /*Metodo que recebe um objeto do tipo OrdemServico e preenche os campos*/
     @Override
     public void prencherCampos(Object objetc) {
+        OrdemServico ordemServico = (OrdemServico)objetc;
     }
 
     /*Metodo para verificar se os campos necessarios para abertura da OrdemServico
@@ -574,7 +564,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
                 || jTFcliente.getText().isEmpty()
                 || jTPdescricao_problema.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos!");
-
             return false;
         }
         return true;
