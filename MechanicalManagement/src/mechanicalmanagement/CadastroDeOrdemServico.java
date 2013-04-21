@@ -29,7 +29,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        
+
     }
 
     /**
@@ -361,6 +361,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jBvoltar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBvoltar.setText("Voltar");
+        jBvoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBvoltarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 140, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -371,8 +376,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
+        setSize(new java.awt.Dimension(918, 464));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
@@ -431,6 +436,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
                 OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
                 jTFcodigo_os.getText())).get(0))));
     }//GEN-LAST:event_jBgravarActionPerformed
+
+    private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+       dispose();
+    }//GEN-LAST:event_jBvoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -565,7 +574,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTPdescricao_problema.setText(ordemServico.getDescricao());
         jCBmecanico.setSelectedItem(ordemServico.getMecanico().getNome());
         jCBstatus.setSelectedItem(ordemServico.getStatus());
-        
+
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -598,6 +607,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     /*Metodo que selecioan o veiculo na JCBveiculo conforme a consulta*/
     public void consultaVeiculo(Veiculo veiculo) {
         jCBveiculo.setSelectedItem(veiculo.getPlaca());
+    }
+
+    public void consultaOrdemServico(OrdemServico ordemServico) {
+        prencherCampos(ordemServico);
+
     }
 
     /*Metodo que desabilita campos para nova OrdemServico*/

@@ -27,11 +27,11 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ConsultaVeiculo(CadastroDeOrdemServico cadastroDeOrdemServico){
+    public ConsultaVeiculo(CadastroDeOrdemServico cadastroDeOrdemServico) {
         this.cadastroDeOrdemServico = cadastroDeOrdemServico;
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,12 +132,10 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         if (jTable1.getSelectedRow() > -1) {
             String placa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
             Veiculo veiculo = VeiculoDAO.obterPorPlaca(placa).get(0);
-            if(cadastroDeVeiculos != null){
+            if (cadastroDeVeiculos != null) {
                 cadastroDeVeiculos.consultaVeiculo(veiculo);
-            }else{
-                System.out.println("Nula");
             }
-            
+
             dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");

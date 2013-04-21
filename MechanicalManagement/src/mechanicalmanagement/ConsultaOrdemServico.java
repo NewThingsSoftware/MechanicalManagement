@@ -1,6 +1,8 @@
 package mechanicalmanagement;
 
 import dao.OrdemServicoDAO;
+import entidades.OrdemServico;
+import javax.swing.JOptionPane;
 import tableModel.OrdemServicoTableModelo;
 
 /**
@@ -12,14 +14,13 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaOrdemServico
      */
-    
     private CadastroDeOrdemServico cadastroDeOrdemServico;
-    
+
     public ConsultaOrdemServico() {
         initComponents();
     }
-    
-    public ConsultaOrdemServico(CadastroDeOrdemServico cadastroDeOrdemServico){
+
+    public ConsultaOrdemServico(CadastroDeOrdemServico cadastroDeOrdemServico) {
         this.cadastroDeOrdemServico = cadastroDeOrdemServico;
         initComponents();
     }
@@ -93,9 +94,13 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
-       if(cadastroDeOrdemServico != null){
-           //Mari me preencha *-*
-       }
+        if (jTable1.getSelectedRow() > -1) {
+            String codigo = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            cadastroDeOrdemServico.consultaOrdemServico(OrdemServicoDAO.obterPorCodigo(Integer.parseInt(codigo)).get(0));
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");
+        }
     }//GEN-LAST:event_jBselecionarActionPerformed
 
     /**
