@@ -586,7 +586,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que a consulta de peça seta os valores da peca selecionada*/
     public void consultaPeca(Peca peca) {
-        jTFcodigo_peca.setText();
+        
         
     }
 
