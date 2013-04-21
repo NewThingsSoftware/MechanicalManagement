@@ -288,7 +288,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jPanel4.add(jCBmecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
 
         jCBstatus.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jCBstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "P - Pendente", "E - Em andamento", "F - Finalizada", "C - Cancelada" }));
         jCBstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBstatusActionPerformed(evt);
@@ -342,6 +342,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jBconsultar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBconsultar.setText("Consulta OS");
+        jBconsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconsultarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBconsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 140, -1));
 
         jBgravar_alteracoes.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -392,13 +397,16 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_jCBstatusActionPerformed
 
     private void jBconfirmar_aberturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconfirmar_aberturaActionPerformed
-       if (camposPreenchidosAberturaOrdemServico()) {
+        /*MarihellySantini*/
+        if (camposPreenchidosAberturaOrdemServico()) {
             OrdemServicoDAO.gravar(obterCampos());
-            limparCampos();}
+            JOptionPane.showMessageDialog(rootPane, "Abertura da Ordem de Serviço realizada com sucesso!");
+            habilitaCamposOrdemServicoAberta();
+        }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-         /*MarihellySantini
+        /*MarihellySantini
          * Preenche automaticamente no campo "Data" a data atual do sistema*/
         Date data = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -412,8 +420,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         /*Limpa os campos quando a janela é fechada no "X"*/
-         limparCampos();
+        limparCampos();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+       new ConsultaOrdemServico().setVisible(true);
+    }//GEN-LAST:event_jBconsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,12 +538,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jCBmecanico.setSelectedIndex(0);
         jCBstatus.setSelectedIndex(0);
         jCBveiculo.setSelectedIndex(0);
-        }
+    }
 
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
     @Override
     public OrdemServico obterCampos() {
-          /*MarihellySantini*/
+        /*MarihellySantini*/
         Veiculo veiculo = VeiculoDAO.obterPorPlaca((String) jCBveiculo.getSelectedItem()).get(0);
         char status = valorStatusCombo();
         Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
@@ -546,7 +558,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         } catch (ParseException ex) {
             Logger.getLogger(CadastroDeOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new OrdemServico(veiculo, mecanico, date, descricao, status);}
+        return new OrdemServico(veiculo, mecanico, date, descricao, status);
+    }
 
     /*Metodo que recebe um objeto do tipo OrdemServico e preenche os campos*/
     @Override
@@ -556,7 +569,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     /*Metodo para verificar se os campos necessarios para abertura da OrdemServico
      * estão preenchidos*/
     public boolean camposPreenchidosAberturaOrdemServico() {
-       /*MarihelySantini*/
+        /*MarihelySantini*/
         if (jFTFdata.getText().isEmpty()
                 || jTFcliente.getText().isEmpty()
                 || jTPdescricao_problema.getText().isEmpty()) {
@@ -591,38 +604,38 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que desabilita campos para nova OrdemServico*/
     public void desabitaCamposNovaOrdemServico() {
-     /*MarihellySantini*/
-        jTFcodigo_peca.setEnabled(false);
-        jTFdescricao_peca.setEnabled(false);
+        /*MarihellySantini*/
+        // jTFcodigo_peca.setEnabled(false);
+        //  jTFdescricao_peca.setEnabled(false);
         jFTFquantidade.setEnabled(false);
-        jFTFvalor_unitario.setEnabled(false);
+        // jFTFvalor_unitario.setEnabled(false);
         jBgravar.setEnabled(false);
         jBpecas.setEnabled(false);
 
-        jFTFvalor_pecas.setEnabled(false);
+        // jFTFvalor_pecas.setEnabled(false);
         jFTFvalor_mao_obra.setEnabled(false);
-        jFTFvalor_total.setEnabled(false);
+        // jFTFvalor_total.setEnabled(false);
         jCBcondicao_parcelamento.setEnabled(false);
         jBfinalizar_os.setEnabled(false);
 
         jBgravar_alteracoes.setEnabled(false);
-    
+
     }
 
     /*Metodo que habilita campos para OrdemServico já criada*/
     public void habilitaCamposOrdemServicoAberta() {
-         /*MarihellySantini
-         *Habilita os campos da "ManutenÃ§Ã£o" e "Pagamento" da OS: */
-        jTFcodigo_peca.setEnabled(true);
-        jTFdescricao_peca.setEnabled(true);
+        /*MarihellySantini
+         *Habilita os campos da "Manutenção" e "Pagamento" da OS: */
+        //  jTFcodigo_peca.setEnabled(true);
+        // jTFdescricao_peca.setEnabled(true);
         jFTFquantidade.setEnabled(true);
-        jFTFvalor_unitario.setEnabled(true);
+        ///  jFTFvalor_unitario.setEnabled(true);
         jBgravar.setEnabled(true);
         jBpecas.setEnabled(true);
 
-        jFTFvalor_pecas.setEnabled(true);
+        //jFTFvalor_pecas.setEnabled(true);
         jFTFvalor_mao_obra.setEnabled(true);
-        jFTFvalor_total.setEnabled(true);
+        // jFTFvalor_total.setEnabled(true);
         jCBcondicao_parcelamento.setEnabled(true);
         jBfinalizar_os.setEnabled(true);
 
@@ -635,10 +648,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTPdescricao_problema.setEnabled(false);
 
         jBconfirmar_abertura.setEnabled(false);
-        
-        
+
+
     }
-   /*MarihellySantini: Retorna os valores do tipo "Char" da ComboBox "Status"*/
+    /*MarihellySantini: Retorna os valores do tipo "Char" da ComboBox "Status"*/
+
     public char valorStatusCombo() {
         String status_c = (String) jCBstatus.getSelectedItem().toString();
 
@@ -658,5 +672,4 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         }
         return status_c.charAt(0);
     }
-
 }

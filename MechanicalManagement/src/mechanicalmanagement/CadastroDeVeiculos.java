@@ -214,7 +214,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
                 jBconsultaClienteActionPerformed(evt);
             }
         });
-        jPanel2.add(jBconsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 30, 30));
+        jPanel2.add(jBconsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 20, 20));
 
         jLborda.setForeground(new java.awt.Color(102, 102, 102));
         jLborda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Dados do Veículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(102, 102, 102))); // NOI18N
