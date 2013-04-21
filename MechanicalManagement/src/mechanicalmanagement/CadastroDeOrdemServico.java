@@ -387,7 +387,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
-        // TODO add your handling code here:
+        new ConsultaPeca().setVisible(true);
     }//GEN-LAST:event_jBpecasActionPerformed
 
     private void jBfinalizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizar_osActionPerformed
@@ -568,6 +568,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @Override
     public void prencherCampos(Object objetc) {
         OrdemServico ordemServico = (OrdemServico) objetc;
+        
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -585,6 +586,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que a consulta de peça seta os valores da peca selecionada*/
     public void consultaPeca(Peca peca) {
+        jTFcodigo_peca.setText();
+        
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/
