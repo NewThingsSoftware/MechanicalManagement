@@ -363,8 +363,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
+        setSize(new java.awt.Dimension(918, 464));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
@@ -563,6 +563,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que a consulta de peça seta os valores da peca selecionada*/
     public void consultaPeca(Peca peca) {
+        jTFcodigo_peca.setText(peca.getIdPeca().toString());
+        jTFdescricao_peca.setText(peca.getDescricao());
+        jFTFvalor_unitario.setText(peca.getPrecoVenda().toString());
+        
+        
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/
