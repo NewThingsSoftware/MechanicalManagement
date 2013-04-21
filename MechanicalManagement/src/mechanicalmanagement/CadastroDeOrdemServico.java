@@ -210,6 +210,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel3.setText("Cliente:");
 
+        jTFcliente.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel9.setText("Descrição do problema:");
 
@@ -402,6 +404,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             OrdemServicoDAO.gravar(obterCampos());
             JOptionPane.showMessageDialog(rootPane, "Abertura da Ordem de Serviço realizada com sucesso!");
             habilitaCamposOrdemServicoAberta();
+            jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]",""));
         }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
 
