@@ -18,7 +18,7 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
     private List<OrdemServico> ordemServicos;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Data", "Nome do Cliente", "Placa do Veiculo", "Marca do Veiculo", 
+        "Nº OS" , "Data", "Nome do Cliente", "Placa do Veiculo", "Marca do Veiculo", 
         "Modelo do Veiculo", "Nome do Mecânico", "Descrição do serviço"};
 
     /* Cria um ClienteTableModel carregado com 
@@ -63,18 +63,20 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
          que foram especificadas no array "colunas". */
         switch (columnIndex) {
             case 0:
-                return ordemServico.getData();
+                return ordemServico.getIdOrdemServico();
             case 1:
-                return ordemServico.getVeiculo().getCliente().getNome();
+                return ordemServico.getData();
             case 2:
-                return ordemServico.getVeiculo().getPlaca();
+                return ordemServico.getVeiculo().getCliente().getNome();
             case 3:
-                return ordemServico.getVeiculo().getMarca();
+                return ordemServico.getVeiculo().getPlaca();
             case 4:
-                return ordemServico.getVeiculo().getModelo();
+                return ordemServico.getVeiculo().getMarca();
             case 5:
-                return ordemServico.getMecanico().getNome();
+                return ordemServico.getVeiculo().getModelo();
             case 6:
+                return ordemServico.getMecanico().getNome();
+            case 7:
                 return ordemServico.getDescricao();
             default:
                 // Isto não deveria acontecer...  
@@ -90,27 +92,31 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
 
         switch (columnIndex) { // Seta o valor do campo respectivo  
             case 0:
+                ordemServico.setIdOrdemServico(Integer.parseInt(aValue.toString()));
+                break;
+            case 1:
                 try {
                     ordemServico.setData(new SimpleDateFormat("dd/MM/yyyy").parse(aValue.toString()));
                 } catch (ParseException ex) {
                     JOptionPane.showMessageDialog(null, "Formato incorreto de Data");
                 }
-            case 1:
-                ordemServico.getVeiculo().getCliente().setNome(aValue.toString());
                 break;
             case 2:
-                ordemServico.getVeiculo().setPlaca(aValue.toString());
+                ordemServico.getVeiculo().getCliente().setNome(aValue.toString());
                 break;
             case 3:
-                ordemServico.getVeiculo().setMarca(aValue.toString());
+                ordemServico.getVeiculo().setPlaca(aValue.toString());
                 break;
             case 4:
-                ordemServico.getVeiculo().setModelo(aValue.toString());
+                ordemServico.getVeiculo().setMarca(aValue.toString());
                 break;
             case 5:
-                ordemServico.getMecanico().setNome(aValue.toString());
+                ordemServico.getVeiculo().setModelo(aValue.toString());
                 break;
             case 6:
+                ordemServico.getMecanico().setNome(aValue.toString());
+                break;
+            case 7:
                 ordemServico.setDescricao(aValue.toString());
                 break;
             default:
@@ -123,6 +129,7 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
     public void setValueAt(OrdemServico aValue, int rowIndex) {
         OrdemServico ordemServico = ordemServicos.get(rowIndex); // Carrega o item da linha que deve ser modificado  
 
+        ordemServico.setIdOrdemServico(aValue.getIdOrdemServico());
         ordemServico.setData(aValue.getData());
         ordemServico.getVeiculo().getCliente().setNome(aValue.getVeiculo().getCliente().getNome());
         ordemServico.getVeiculo().setPlaca(aValue.getVeiculo().getPlaca());
@@ -138,6 +145,7 @@ public class OrdemServicoTableModelo extends AbstractTableModel {
         fireTableCellUpdated(rowIndex, 4);
         fireTableCellUpdated(rowIndex, 5);
         fireTableCellUpdated(rowIndex, 6);
+        fireTableCellUpdated(rowIndex, 7);
     }
 
     @Override
