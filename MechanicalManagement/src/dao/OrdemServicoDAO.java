@@ -47,6 +47,15 @@ public class OrdemServicoDAO {
         return ordemServicos;
     }
 
+    public static List<OrdemServico> obterPorCodigo(Integer idOrdemServico) {
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT o FROM OrdemServico o WHERE o.idOrdemServico = :idOrdemServico");
+        qry.setParameter("idOrdemServico", idOrdemServico);
+        List<OrdemServico> ordemServicos = qry.list();
+        return ordemServicos;
+    }
+
     public static List<OrdemServico> obterPorData(Date data) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
