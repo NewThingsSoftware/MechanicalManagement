@@ -104,6 +104,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFTFtelefone.setNextFocusableComponent(jTFEspecialidade);
         jPanel2.add(jFTFtelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 170, -1));
 
         jLabel2.setText("Telefone:");
@@ -141,6 +142,8 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
             }
         });
         jPanel2.add(jBvoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 100, -1));
+
+        jTFEspecialidade.setNextFocusableComponent(jCBstatus);
         jPanel2.add(jTFEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 330, -1));
 
         jLabel9.setText("Especialidade");
@@ -210,8 +213,8 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(635, 451));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -242,6 +245,7 @@ public class CadastroDeMecanicos extends javax.swing.JFrame implements IJanela {
     }//GEN-LAST:event_jBalterarActionPerformed
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+        limparCampos();
         jBsalvar.setEnabled(false);
         jBalterar.setEnabled(true);
         new ConsultaMecanico(this).setVisible(true);

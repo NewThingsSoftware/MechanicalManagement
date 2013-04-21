@@ -21,7 +21,6 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
     public CadastroDeClientes() {
         initComponents();
         jBalterar.setEnabled(false);
-        limparCampos();
     }
 
     /**
@@ -210,8 +209,8 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(635, 451));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed

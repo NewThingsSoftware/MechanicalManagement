@@ -30,7 +30,7 @@ public class MechanicalManagement {
 //        MecanicoDAO.gravar(mecanico);
 //        Peca peca = new Peca("Parafuso", "Marca", new BigDecimal("45.50"), new BigDecimal("54.30"), 25.0, true);
 //        PecaDAO.gravar(peca);
-//        OrdemServico ordemServico = new OrdemServico(veiculo, mecanico, new Date(2013, 4, 16), "Concerto", true);
+//        OrdemServico ordemServico = new OrdemServico(veiculo, mecanico, new Date(2013, 4, 16), "Concerto", 'E');
 //        OrdemServicoDAO.gravar(ordemServico);
 
     }
