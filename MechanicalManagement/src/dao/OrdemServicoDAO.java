@@ -83,7 +83,7 @@ public class OrdemServicoDAO {
         return ordemServicos;
     }
 
-    public static List<OrdemServico> obterPorStatus(char status) {
+    public static List<OrdemServico> obterPorStatus(Character status) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT o FROM OrdemServico o WHERE o.status = :status");

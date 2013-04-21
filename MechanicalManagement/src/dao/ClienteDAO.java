@@ -35,7 +35,7 @@ public class ClienteDAO {
     public static List<Cliente> obterTodos() {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT v FROM Cliente v");
+        Query qry = s.createQuery("SELECT c FROM Cliente c");
         return qry.list();
     }
 

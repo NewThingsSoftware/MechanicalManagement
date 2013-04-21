@@ -23,6 +23,9 @@
         <property name="status" type="character">
             <column name="status" />
         </property>
+        <property name="valorMaoObra" type="big_decimal">
+            <column name="valor_mao_obra" />
+        </property>
         <set name="contasRecebers" inverse="true">
             <key>
                 <column name="id_ordem_servico" not-null="true" />

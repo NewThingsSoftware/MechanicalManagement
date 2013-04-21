@@ -4,7 +4,6 @@ import entidades.OrdemServico;
 import entidades.Peca;
 import entidades.PecaUsada;
 import java.util.List;
-import org.eclipse.persistence.config.HintValues;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
@@ -42,7 +41,7 @@ public class PecaUsadaDAO {
     public static List<PecaUsada> obterTodos(){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT p FROM PecaUsada");
+        Query qry = s.createQuery("SELECT p FROM PecaUsada p");
         List<PecaUsada> pecaUsadas = qry.list();
         return pecaUsadas;
     }
@@ -50,7 +49,7 @@ public class PecaUsadaDAO {
     public static List<PecaUsada> obterPorOrdemServico(OrdemServico ordemServico){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT p FROM PecaUsada WHERE idOrdemServico = : idOrdemServico");
+        Query qry = s.createQuery("SELECT p FROM PecaUsada p WHERE p.ordemServico.idOrdemServico = : idOrdemServico");
         qry.setParameter("idOrdemServico", ordemServico.getIdOrdemServico());
         List<PecaUsada> pecaUsadas = qry.list();
         return pecaUsadas;
@@ -59,7 +58,7 @@ public class PecaUsadaDAO {
     public static List<PecaUsada> obterPorPeca(Peca peca){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT p FROM PecaUsada WHERE idPeca = : idPeca");
+        Query qry = s.createQuery("SELECT p FROM PecaUsada p WHERE p.peca.idPeca = : idPeca");
         qry.setParameter("idPeca", peca.getIdPeca());
         List<PecaUsada> pecaUsadas = qry.list();
         return pecaUsadas;
