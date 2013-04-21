@@ -31,7 +31,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        
+
     }
 
     /**
@@ -95,6 +95,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         setTitle("Ordem de Serviço");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
@@ -159,11 +162,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jPmanutencao_os.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
         jTFcodigo_peca.setEnabled(false);
-        jTFcodigo_peca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFcodigo_pecaActionPerformed(evt);
-            }
-        });
         jPmanutencao_os.add(jTFcodigo_peca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 60, -1));
 
         jLabel16.setText("Código:");
@@ -385,26 +383,16 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         /*MarihellySantini*/
         if (camposPreenchidos()) {
             OrdemServicoDAO.gravar(obterCampos());
-            JOptionPane.showMessageDialog(rootPane, "Abertura da Ordem de Serviço realizada com sucesso!");
+            jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]", ""));
             habilitaCamposOrdemServicoAberta();
-            jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]",""));
+            JOptionPane.showMessageDialog(null, "Abertura da Ordem de Serviço realizada com sucesso!");
+
         }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        /*MarihellySantini
-         * Preenche automaticamente no campo "Data" a data atual do sistema*/
         jFTFdata.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-        /*Bruno DePerto*/
-        jCBmecanico.setModel(new MecanicoComboBoxModel(MecanicoDAO.obterTodos()));
-        jCBveiculo.setModel(new VeiculoComboBoxModel(VeiculoDAO.obterTodos()));
-        limparCampos();
-        desabitaCamposNovaOrdemServico();
     }//GEN-LAST:event_formWindowActivated
-
-    private void jTFcodigo_pecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcodigo_pecaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFcodigo_pecaActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         /*Limpa os campos quando a janela é fechada no "X"*/
@@ -421,6 +409,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
                     jCBveiculo.getSelectedItem().toString()).get(0).getCliente().getNome());
         }
     }//GEN-LAST:event_jCBveiculoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        desabitaCamposNovaOrdemServico();
+        jCBmecanico.setModel(new MecanicoComboBoxModel(MecanicoDAO.obterTodos()));
+        jCBveiculo.setModel(new VeiculoComboBoxModel(VeiculoDAO.obterTodos()));
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -549,7 +543,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @Override
     public void prencherCampos(Object objetc) {
         OrdemServico ordemServico = (OrdemServico) objetc;
-        
+
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -558,7 +552,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     public boolean camposPreenchidos() {
         if (jFTFdata.getText().isEmpty()
                 || jTFcliente.getText().isEmpty()
-                || jTPdescricao_problema.getText().isEmpty()) {
+                || jTPdescricao_problema.getText().isEmpty()
+                || jCBmecanico.getSelectedIndex() < 0
+                || jCBveiculo.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos!");
             return false;
         }
@@ -567,8 +563,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que a consulta de peça seta os valores da peca selecionada*/
     public void consultaPeca(Peca peca) {
-        
-        
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/

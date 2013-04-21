@@ -17,7 +17,7 @@ public class MechanicalManagement {
 
     public static void main(String[] args) {
         TelaCentral telaCentral = new TelaCentral();
-        telaCentral.setVisible(true);
+        telaCentral.ordem_servico.setVisible(true);
 
 
         /*Código abaixo para poluir primeira vez o banco*/
