@@ -65,6 +65,12 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("Cadastro de Clientes"), this, org.jdesktop.beansbinding.BeanProperty.create("title"));
         bindingGroup.addBinding(binding);
 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -209,8 +215,8 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-635)/2, (screenSize.height-451)/2, 635, 451);
+        setSize(new java.awt.Dimension(635, 451));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -259,6 +265,11 @@ public class CadastroDeClientes extends javax.swing.JFrame implements IJanela {
         jBsalvar.setEnabled(true);
         jBalterar.setEnabled(false);
     }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+     /*Limpa os campos quando a janela é fechada no "X"*/
+         limparCampos();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

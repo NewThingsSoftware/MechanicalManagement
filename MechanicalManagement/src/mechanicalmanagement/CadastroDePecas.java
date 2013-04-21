@@ -62,6 +62,11 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Peças");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -275,6 +280,11 @@ public class CadastroDePecas extends javax.swing.JFrame implements IJanela {
     private void jFTFquantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTFquantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFTFquantidadeActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         /*Limpa os campos quando a janela é fechada no "X"*/
+         limparCampos();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

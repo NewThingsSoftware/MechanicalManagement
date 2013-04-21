@@ -4,12 +4,21 @@
  */
 package mechanicalmanagement;
 
+import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
+import dao.VeiculoDAO;
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Peca;
 import entidades.Veiculo;
 import interfaces.IJanela;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +32,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     public CadastroDeOrdemServico() {
         initComponents();
         limparCampos();
+        desabitaCamposNovaOrdemServico();
     }
 
     /**
@@ -52,6 +62,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBgravar = new javax.swing.JButton();
         jFTFvalor_unitario = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
+        jTFcodigo_peca = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jPabertura = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTPdescricao_problema = new javax.swing.JTextPane();
@@ -78,11 +90,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel13 = new javax.swing.JLabel();
         jCBcondicao_parcelamento = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        jBgera_crediario = new javax.swing.JButton();
         jBfinalizar_os = new javax.swing.JButton();
         jBconsultar = new javax.swing.JButton();
         jBgravar_alteracoes = new javax.swing.JToggleButton();
-        jbConfirmar = new javax.swing.JButton();
+        jBconfirmar_abertura = new javax.swing.JButton();
         jBvoltar = new javax.swing.JToggleButton();
         jLabel15 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -90,6 +101,14 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ordem de Serviço");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -98,7 +117,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jPmanutencao_os.setBackground(new java.awt.Color(255, 255, 255));
         jPmanutencao_os.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manutenção ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 10), new java.awt.Color(51, 51, 51))); // NOI18N
         jPmanutencao_os.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPmanutencao_os.add(jFTFquantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 70, -1));
+        jPmanutencao_os.add(jFTFquantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 70, -1));
 
         jTpecas_vinculadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,12 +136,14 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel6.setText("Descrição:");
-        jPmanutencao_os.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-        jPmanutencao_os.add(jTFdescricao_peca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 230, -1));
+        jPmanutencao_os.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+
+        jTFdescricao_peca.setEnabled(false);
+        jPmanutencao_os.add(jTFdescricao_peca, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 180, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel8.setText("Quantidade:");
-        jPmanutencao_os.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+        jPmanutencao_os.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
 
         jBpecas.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBpecas.setText("Peças");
@@ -136,11 +157,24 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBgravar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBgravar.setText("Gravar");
         jPmanutencao_os.add(jBgravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 80, -1));
+
+        jFTFvalor_unitario.setEnabled(false);
         jPmanutencao_os.add(jFTFvalor_unitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 70, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel11.setText("Valor Unitário:");
         jPmanutencao_os.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
+
+        jTFcodigo_peca.setEnabled(false);
+        jTFcodigo_peca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFcodigo_pecaActionPerformed(evt);
+            }
+        });
+        jPmanutencao_os.add(jTFcodigo_peca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 60, -1));
+
+        jLabel16.setText("Código:");
+        jPmanutencao_os.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jPanel1.add(jPmanutencao_os, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 520, 180));
 
@@ -152,8 +186,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("OS:");
 
+        jTFcodigo_os.setEnabled(false);
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel2.setText("Data:");
+
+        jFTFdata.setEnabled(false);
 
         jCBveiculo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCBveiculo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -284,16 +322,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jPpagamento_os.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 80, -1));
 
         jCBcondicao_parcelamento.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jCBcondicao_parcelamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBcondicao_parcelamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 - A Vista", "2 - A Prazo" }));
         jPpagamento_os.add(jCBcondicao_parcelamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel7.setText("Condição de Pagamento:");
         jPpagamento_os.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, 20));
-
-        jBgera_crediario.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jBgera_crediario.setText("Gerar Crediário");
-        jPpagamento_os.add(jBgera_crediario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 110, -1));
 
         jBfinalizar_os.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBfinalizar_os.setText("Finalizar OS");
@@ -314,9 +348,14 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBgravar_alteracoes.setText("Gravar alterações");
         jPanel1.add(jBgravar_alteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 140, -1));
 
-        jbConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jbConfirmar.setText("Confirmar Abertura");
-        jPanel1.add(jbConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 140, -1));
+        jBconfirmar_abertura.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBconfirmar_abertura.setText("Confirmar Abertura");
+        jBconfirmar_abertura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconfirmar_aberturaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBconfirmar_abertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 140, -1));
 
         jBvoltar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBvoltar.setText("Voltar");
@@ -351,6 +390,30 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBstatusActionPerformed
+
+    private void jBconfirmar_aberturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconfirmar_aberturaActionPerformed
+       if (camposPreenchidosAberturaOrdemServico()) {
+            OrdemServicoDAO.gravar(obterCampos());
+            limparCampos();}
+    }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         /*MarihellySantini
+         * Preenche automaticamente no campo "Data" a data atual do sistema*/
+        Date data = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        jFTFdata.setText(formato.format(data));
+        /*Fim MarihellySantini*/
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jTFcodigo_pecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcodigo_pecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFcodigo_pecaActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        /*Limpa os campos quando a janela é fechada no "X"*/
+         limparCampos();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -388,9 +451,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
+    private javax.swing.JButton jBconfirmar_abertura;
     private javax.swing.JButton jBconsultar;
     private javax.swing.JButton jBfinalizar_os;
-    private javax.swing.JButton jBgera_crediario;
     private javax.swing.JButton jBgravar;
     private javax.swing.JToggleButton jBgravar_alteracoes;
     private javax.swing.JButton jBpecas;
@@ -412,6 +475,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -430,10 +494,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTFcliente;
     private javax.swing.JTextField jTFcodigo_os;
+    private javax.swing.JTextField jTFcodigo_peca;
     private javax.swing.JTextField jTFdescricao_peca;
     private javax.swing.JTextPane jTPdescricao_problema;
     private javax.swing.JTable jTpecas_vinculadas;
-    private javax.swing.JButton jbConfirmar;
     private java.util.List<entidadesJPA.Mecanico> mecanicoList;
     private javax.persistence.Query mecanicoQuery;
     private java.util.List<entidadesJPA.Veiculo> veiculoList;
@@ -455,15 +519,34 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_mao_obra.setText("");
         jFTFvalor_pecas.setText("");
         jFTFvalor_total.setText("");
-             
+
+        //Combos
+        //jTpecas_vinculadas.setModel(new PecaUsadaTableModel(dao.PecaUsadaDAO.obterPorOrdemServico(OrdemServicoDAO.obterPorCodigo(0))));
+        jCBcondicao_parcelamento.setSelectedIndex(0);
+        jCBmecanico.setSelectedIndex(0);
+        jCBstatus.setSelectedIndex(0);
+        jCBveiculo.setSelectedIndex(0);
         }
 
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
     @Override
     public OrdemServico obterCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          /*MarihellySantini*/
+        Veiculo veiculo = VeiculoDAO.obterPorPlaca((String) jCBveiculo.getSelectedItem()).get(0);
+        char status = valorStatusCombo();
+        Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
+        String descricao = jTPdescricao_problema.getText();
+        String data = jFTFdata.getText();
 
-    }
+        DateFormat formatter;
+        Date date = null;
+        formatter = new SimpleDateFormat("dd/MM/yy");
+        try {
+            date = (Date) formatter.parse(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroDeOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new OrdemServico(veiculo, mecanico, date, descricao, status);}
 
     /*Metodo que recebe um objeto do tipo OrdemServico e preenche os campos*/
     @Override
@@ -473,7 +556,16 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     /*Metodo para verificar se os campos necessarios para abertura da OrdemServico
      * estão preenchidos*/
     public boolean camposPreenchidosAberturaOrdemServico() {
+       /*MarihelySantini*/
+        if (jFTFdata.getText().isEmpty()
+                || jTFcliente.getText().isEmpty()
+                || jTPdescricao_problema.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos!");
+
+            return false;
+        }
         return true;
+
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -499,9 +591,72 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que desabilita campos para nova OrdemServico*/
     public void desabitaCamposNovaOrdemServico() {
+     /*MarihellySantini*/
+        jTFcodigo_peca.setEnabled(false);
+        jTFdescricao_peca.setEnabled(false);
+        jFTFquantidade.setEnabled(false);
+        jFTFvalor_unitario.setEnabled(false);
+        jBgravar.setEnabled(false);
+        jBpecas.setEnabled(false);
+
+        jFTFvalor_pecas.setEnabled(false);
+        jFTFvalor_mao_obra.setEnabled(false);
+        jFTFvalor_total.setEnabled(false);
+        jCBcondicao_parcelamento.setEnabled(false);
+        jBfinalizar_os.setEnabled(false);
+
+        jBgravar_alteracoes.setEnabled(false);
+    
     }
 
     /*Metodo que habilita campos para OrdemServico já criada*/
     public void habilitaCamposOrdemServicoAberta() {
+         /*MarihellySantini
+         *Habilita os campos da "ManutenÃ§Ã£o" e "Pagamento" da OS: */
+        jTFcodigo_peca.setEnabled(true);
+        jTFdescricao_peca.setEnabled(true);
+        jFTFquantidade.setEnabled(true);
+        jFTFvalor_unitario.setEnabled(true);
+        jBgravar.setEnabled(true);
+        jBpecas.setEnabled(true);
+
+        jFTFvalor_pecas.setEnabled(true);
+        jFTFvalor_mao_obra.setEnabled(true);
+        jFTFvalor_total.setEnabled(true);
+        jCBcondicao_parcelamento.setEnabled(true);
+        jBfinalizar_os.setEnabled(true);
+
+        jBgravar_alteracoes.setEnabled(true);
+
+        /*Desabilita os campos da "Abertura" da OS: */
+        jTFcliente.setEnabled(false);
+        jCBveiculo.setEnabled(false);
+        jFTFdata.setEnabled(false);
+        jTPdescricao_problema.setEnabled(false);
+
+        jBconfirmar_abertura.setEnabled(false);
+        
+        
     }
+   /*MarihellySantini: Retorna os valores do tipo "Char" da ComboBox "Status"*/
+    public char valorStatusCombo() {
+        String status_c = (String) jCBstatus.getSelectedItem().toString();
+
+        switch (status_c) {
+            case "P - Pendente":
+                status_c.charAt(0);
+                break;
+            case "E - Em Andamento":
+                status_c.charAt(0);
+                break;
+            case "F - Finalizada":
+                status_c.charAt(0);
+                break;
+            case "C - Cancelada":
+                status_c.charAt(0);
+                break;
+        }
+        return status_c.charAt(0);
+    }
+
 }

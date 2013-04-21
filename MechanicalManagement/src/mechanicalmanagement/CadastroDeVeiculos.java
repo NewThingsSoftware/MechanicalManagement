@@ -64,6 +64,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículos");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -232,8 +237,8 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
 
         bindingGroup.bind();
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-642)/2, (screenSize.height-457)/2, 642, 457);
+        setSize(new java.awt.Dimension(642, 457));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jChBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBstatusActionPerformed
@@ -298,6 +303,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
     private void jBconsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultaClienteActionPerformed
         new ConsultaCliente(this).setVisible(true);
     }//GEN-LAST:event_jBconsultaClienteActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+   /*Limpa os campos quando a janela é fechada no "X"*/
+         limparCampos();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
