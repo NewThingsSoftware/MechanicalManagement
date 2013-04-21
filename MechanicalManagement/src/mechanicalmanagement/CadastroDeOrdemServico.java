@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mechanicalmanagement;
 
 import comboBoxModel.MecanicoComboBoxModel;
@@ -383,9 +379,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         /*MarihellySantini*/
         if (camposPreenchidos()) {
             OrdemServicoDAO.gravar(obterCampos());
+            /*Seta código da OS para o jTFcodigo_os*/
             jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]", ""));
             habilitaCamposOrdemServicoAberta();
-            JOptionPane.showMessageDialog(null, "Abertura da Ordem de Serviço realizada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Abertura da OS realizada com sucesso!");
 
         }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
@@ -566,7 +563,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTFcodigo_peca.setText(peca.getIdPeca().toString());
         jTFdescricao_peca.setText(peca.getDescricao());
         jFTFvalor_unitario.setText(peca.getPrecoVenda().toString());
-        
         
     }
 
