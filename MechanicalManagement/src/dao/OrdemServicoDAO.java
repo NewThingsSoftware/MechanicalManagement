@@ -1,5 +1,6 @@
 package dao;
 
+
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Veiculo;
@@ -91,4 +92,7 @@ public class OrdemServicoDAO {
         List<OrdemServico> ordemServicos = qry.list();
         return ordemServicos;
     }
+    
+    
+ 
 }

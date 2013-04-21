@@ -1,6 +1,7 @@
 package dao;
 
 import entidades.Cliente;
+import entidades.Veiculo;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -83,4 +84,8 @@ public class ClienteDAO {
         List<Cliente> clientes = qry.list();
         return clientes;
     }
+    
+      
+    
+    
 }
