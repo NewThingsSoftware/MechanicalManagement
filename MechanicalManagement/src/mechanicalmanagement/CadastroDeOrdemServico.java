@@ -4,6 +4,7 @@ import comboBoxModel.MecanicoComboBoxModel;
 import comboBoxModel.VeiculoComboBoxModel;
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
+import dao.PecaUsadaDAO;
 import dao.VeiculoDAO;
 import entidades.Mecanico;
 import entidades.OrdemServico;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import tableModel.PecaUsadaTableModel;
 
 /**
  *
@@ -27,7 +29,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-
+        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
+                PecaUsadaDAO.obterPorOrdemServico(
+                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
+                jTFcodigo_os.getText())).get(0))));
     }
 
     /**
@@ -173,6 +178,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("OS:");
 
+        jTFcodigo_os.setText("0");
         jTFcodigo_os.setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -288,6 +294,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel12.setText("Valor das peças:");
         jPpagamento_os.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 90, -1));
+
+        jFTFvalor_pecas.setEnabled(false);
         jPpagamento_os.add(jFTFvalor_pecas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 80, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -300,6 +308,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             ex.printStackTrace();
         }
         jPpagamento_os.add(jFTFvalor_mao_obra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 80, -1));
+
+        jFTFvalor_total.setEnabled(false);
         jPpagamento_os.add(jFTFvalor_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -359,12 +369,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        setSize(new java.awt.Dimension(918, 464));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
-        new ConsultaPeca().setVisible(true);
+        new ConsultaPeca(this).setVisible(true);
     }//GEN-LAST:event_jBpecasActionPerformed
 
     private void jBfinalizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizar_osActionPerformed
@@ -397,7 +407,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_formWindowClosing
 
     private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
-        new ConsultaOrdemServico().setVisible(true);
+        new ConsultaOrdemServico(this).setVisible(true);
     }//GEN-LAST:event_jBconsultarActionPerformed
 
     private void jCBveiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBveiculoActionPerformed
@@ -566,7 +576,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTFcodigo_peca.setText(peca.getIdPeca().toString());
         jTFdescricao_peca.setText(peca.getDescricao());
         jFTFvalor_unitario.setText(peca.getPrecoVenda().toString());
-        
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/

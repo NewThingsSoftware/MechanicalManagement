@@ -12,9 +12,16 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaOrdemServico
      */
+    
+    private CadastroDeOrdemServico cadastroDeOrdemServico;
+    
     public ConsultaOrdemServico() {
         initComponents();
-        jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterTodos()));
+    }
+    
+    public ConsultaOrdemServico(CadastroDeOrdemServico cadastroDeOrdemServico){
+        this.cadastroDeOrdemServico = cadastroDeOrdemServico;
+        initComponents();
     }
 
     /**
@@ -38,17 +45,7 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
         jBconsultar.setText("Consultar");
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -96,7 +93,9 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
-       
+       if(cadastroDeOrdemServico != null){
+           //Mari me preencha *-*
+       }
     }//GEN-LAST:event_jBselecionarActionPerformed
 
     /**
