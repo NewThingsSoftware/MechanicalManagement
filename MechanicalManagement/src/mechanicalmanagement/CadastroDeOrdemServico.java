@@ -582,8 +582,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         OrdemServico ordemServico = (OrdemServico) objetc;
         jTFcodigo_os.setText(ordemServico.getIdOrdemServico().toString());
         jCBveiculo.setSelectedItem(ordemServico.getVeiculo().getPlaca());
-
-
+        jTFcliente.setText(VeiculoDAO.obterPorPlaca(jCBveiculo.getSelectedItem().toString()).get(0).getCliente().getNome());
+        jTPdescricao_problema.setText(ordemServico.getDescricao());
+        jCBmecanico.setSelectedItem(ordemServico.getMecanico().getNome());
+        jCBstatus.setSelectedItem(ordemServico.getStatus());
+        habilitaCamposOrdemServicoAberta();
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
