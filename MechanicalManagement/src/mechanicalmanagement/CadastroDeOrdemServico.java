@@ -6,21 +6,15 @@ package mechanicalmanagement;
 
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
-import dao.PecaUsadaDAO;
 import dao.VeiculoDAO;
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Peca;
 import entidades.Veiculo;
 import interfaces.IJanela;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import tableModel.PecaUsadaTableModel;
 
 /**
  *

@@ -1,7 +1,7 @@
 package mechanicalmanagement;
 
-import tableModel.OrdemServicoTableModelo;
 import dao.OrdemServicoDAO;
+import tableModel.OrdemServicoTableModelo;
 
 /**
  *
@@ -116,6 +116,7 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ConsultaOrdemServico().setVisible(true);
             }
