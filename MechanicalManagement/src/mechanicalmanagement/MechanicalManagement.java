@@ -4,14 +4,17 @@ import dao.ClienteDAO;
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
 import dao.PecaDAO;
+import dao.PecaUsadaDAO;
 import dao.VeiculoDAO;
 import entidades.Cliente;
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Peca;
+import entidades.PecaUsada;
 import entidades.Veiculo;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 public class MechanicalManagement {
 
@@ -30,8 +33,18 @@ public class MechanicalManagement {
 //        MecanicoDAO.gravar(mecanico);
 //        Peca peca = new Peca("Parafuso", "Marca", new BigDecimal("45.50"), new BigDecimal("54.30"), 25.0, true);
 //        PecaDAO.gravar(peca);
-//        OrdemServico ordemServico = new OrdemServico(veiculo, mecanico, new Date(2013, 4, 16), "Concerto", 'E');
+//        OrdemServico ordemServico = new OrdemServico(veiculo, mecanico, new Date(2013, 04, 21), "Problema", 'P', null);
 //        OrdemServicoDAO.gravar(ordemServico);
-
+//        OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(20).get(0);
+//        Peca peca = PecaDAO.obterPorCodigo(3).get(0);
+//        PecaUsada pecaUsada = new PecaUsada(ordemServico, peca, 40);
+//        ordemServico.addPecaUsada(pecaUsada);
+//        OrdemServicoDAO.gravar(ordemServico);
+//        Set peca_usadas = ordemServico.getPecaUsadas();
+//        for (Object object : peca_usadas) {
+//            PecaUsada peca2 = (PecaUsada) object;
+//            System.out.println(peca2.getPeca().getDescricao());
+//        }
+        
     }
 }

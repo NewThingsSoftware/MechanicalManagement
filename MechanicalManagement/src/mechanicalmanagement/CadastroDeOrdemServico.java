@@ -4,11 +4,13 @@ import comboBoxModel.MecanicoComboBoxModel;
 import comboBoxModel.VeiculoComboBoxModel;
 import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
+import dao.PecaDAO;
 import dao.PecaUsadaDAO;
 import dao.VeiculoDAO;
 import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Peca;
+import entidades.PecaUsada;
 import entidades.Veiculo;
 import interfaces.IJanela;
 import java.math.BigDecimal;
@@ -29,7 +31,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-        
+
     }
 
     /**
@@ -426,10 +428,20 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_formWindowOpened
 
     private void jBgravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBgravarActionPerformed
-        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
-                PecaUsadaDAO.obterPorOrdemServico(
-                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
-                jTFcodigo_os.getText())).get(0))));
+       if(!jFTFquantidade.getText().isEmpty()){
+        OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
+        Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_peca.getText())).get(0);
+        PecaUsadaDAO.gravar(
+        new PecaUsada(ordemServico, peca, Double.parseDouble(jFTFquantidade.getText())));
+//        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
+//                PecaUsadaDAO.obterPorOrdemServico(
+//                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
+//                jTFcodigo_os.getText())).get(0))));
+        System.out.println("OrdemServico: " + ordemServico.getIdOrdemServico());
+        System.out.println("Peca: "+peca.getIdPeca());
+       }else{
+           JOptionPane.showMessageDialog(null, "Por favor informe a quantidade de peças");
+       }
     }//GEN-LAST:event_jBgravarActionPerformed
 
     /**
@@ -561,7 +573,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         OrdemServico ordemServico = (OrdemServico) objetc;
         jTFcodigo_os.setText(ordemServico.getIdOrdemServico().toString());
         jCBveiculo.setSelectedItem(ordemServico.getVeiculo().getPlaca());
-        
+
 
     }
 
@@ -585,6 +597,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTFcodigo_peca.setText(peca.getIdPeca().toString());
         jTFdescricao_peca.setText(peca.getDescricao());
         jFTFvalor_unitario.setText(peca.getPrecoVenda().toString());
+        jBgravar.setEnabled(true);
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/
@@ -614,7 +627,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         /*MarihellySantini
          *Habilita os campos da "Manutenção" e "Pagamento" da OS: */
         jFTFquantidade.setEnabled(true);
-        jBgravar.setEnabled(true);
+        jBgravar.setEnabled(false);
         jBpecas.setEnabled(true);
         jFTFvalor_mao_obra.setEnabled(true);
         jCBcondicao_parcelamento.setEnabled(true);
