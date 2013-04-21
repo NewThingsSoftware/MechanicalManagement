@@ -200,6 +200,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel3.setText("Cliente:");
 
+        jTFcliente.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel9.setText("Descrição do problema:");
 
@@ -368,7 +370,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
-        // TODO add your handling code here:
+        new ConsultaPeca().setVisible(true);
     }//GEN-LAST:event_jBpecasActionPerformed
 
     private void jBfinalizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizar_osActionPerformed
@@ -385,6 +387,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             OrdemServicoDAO.gravar(obterCampos());
             JOptionPane.showMessageDialog(rootPane, "Abertura da Ordem de Serviço realizada com sucesso!");
             habilitaCamposOrdemServicoAberta();
+            jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]",""));
         }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
 
@@ -546,6 +549,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     @Override
     public void prencherCampos(Object objetc) {
         OrdemServico ordemServico = (OrdemServico) objetc;
+        
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -563,6 +567,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     /*Metodo que a consulta de peça seta os valores da peca selecionada*/
     public void consultaPeca(Peca peca) {
+        
+        
     }
 
     /*Metodo que seleciona o mecanico na jCBmecanico conforme a consulta*/

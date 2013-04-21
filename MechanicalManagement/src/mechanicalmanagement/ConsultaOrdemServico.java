@@ -32,10 +32,12 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jBselecionar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jBconsultar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBconsultar.setText("Consultar");
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -49,7 +51,13 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBselecionar.setText("Selecionar");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBselecionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +94,10 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
+       
+    }//GEN-LAST:event_jBselecionarActionPerformed
 
     /**
      * @param args the command line arguments
