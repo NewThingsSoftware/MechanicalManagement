@@ -605,7 +605,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
             String descricao = jTPdescricao_problema.getText();
             Date data = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(jFTFdata.getText());
-            BigDecimal valorMaoObra = new BigDecimal(jFTFvalor_mao_obra.getText().replace(',', '.'));
+            BigDecimal valorMaoObra = new BigDecimal(!jFTFvalor_mao_obra.getText().isEmpty() ? jFTFvalor_mao_obra.toString().replace(',', '.') : "0");
             return new OrdemServico(veiculo, mecanico, data, descricao, status, valorMaoObra);
         } catch (ParseException ex) {
             return null;
