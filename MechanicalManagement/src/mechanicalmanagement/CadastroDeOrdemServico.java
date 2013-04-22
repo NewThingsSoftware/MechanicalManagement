@@ -15,6 +15,7 @@ import entidades.PecaUsadaId;
 import entidades.Veiculo;
 import interfaces.IJanela;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -563,11 +564,19 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_mao_obra.setText("");
         jFTFvalor_pecas.setText("");
         jFTFvalor_total.setText("");
-        jTpecas_vinculadas.removeAll();
+        ((PecaUsadaTableModel) jTpecas_vinculadas.getModel()).limpar();
         jCBcondicao_parcelamento.setSelectedIndex(0);
         jCBmecanico.setSelectedIndex(0);
         jCBstatus.setSelectedIndex(0);
         jCBveiculo.setSelectedIndex(0);
+        jBconfirmar_abertura.setEnabled(true);
+        jBgravar_alteracoes.setEnabled(false);
+        jCBveiculo.setEnabled(true);
+        jTPdescricao_problema.setEnabled(true);
+        jCBcondicao_parcelamento.setEnabled(false);
+        jBfinalizar_os.setEnabled(false);
+        jBpecas.setEnabled(false);
+        jFTFvalor_mao_obra.setEnabled(false);
     }
 
     /*Metodo que mostras as pecas e define os totais das peças e da OrdemServico*/
@@ -580,10 +589,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         double valorPecas = PecaUsadaDAO.obterValorTotalPeca(ordemServico);
         jFTFvalor_pecas.setText(String.valueOf(valorPecas));
         double valorServico = 0;
-        if(!jFTFvalor_mao_obra.getText().isEmpty()){
+        if (!jFTFvalor_mao_obra.getText().isEmpty()) {
             valorServico = Double.parseDouble(jFTFvalor_mao_obra.getText());
         }
-        jFTFvalor_total.setText(String.valueOf(valorPecas + valorServico));
+        jFTFvalor_total.setText(new DecimalFormat("R$###,##0.00").format(valorPecas + valorServico));
     }
 
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
@@ -613,8 +622,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTPdescricao_problema.setText(ordemServico.getDescricao());
         jCBmecanico.setSelectedItem(ordemServico.getMecanico().getNome());
         jCBstatus.setSelectedItem(statusComboBox(ordemServico.getStatus()));
-        System.out.println(ordemServico.getValorMaoObra());
-        jFTFvalor_mao_obra.setText(ordemServico.getValorMaoObra()!=null?ordemServico.getValorMaoObra().toString():"0");
+        jFTFvalor_mao_obra.setText(ordemServico.getValorMaoObra() != null ? ordemServico.getValorMaoObra().toString() : "0");
         pecasTotais(ordemServico);
         habilitaCamposOrdemServicoAberta();
     }
