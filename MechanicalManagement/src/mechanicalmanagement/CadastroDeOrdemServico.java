@@ -33,7 +33,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
      */
     public CadastroDeOrdemServico() {
         initComponents();
-
     }
 
     /**
@@ -119,15 +118,20 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jTpecas_vinculadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código da Peçca", "Descrição", "Quantidade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTpecas_vinculadas);
 
         jPmanutencao_os.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 410, 90));
@@ -381,8 +385,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
+        setSize(new java.awt.Dimension(918, 464));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
@@ -405,7 +409,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             jTFcodigo_os.setText(OrdemServicoDAO.obterMaxCodigo().toString().replace("[", "").replace("]", ""));
             habilitaCamposOrdemServicoAberta();
             JOptionPane.showMessageDialog(null, "Abertura da OS realizada com sucesso!");
-
+            pecasTotais(OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0));
         }
     }//GEN-LAST:event_jBconfirmar_aberturaActionPerformed
 
@@ -439,6 +443,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         if (!jFTFquantidade.getText().isEmpty()) {
             OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
             Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_peca.getText())).get(0);
+            peca.setQuantidade(peca.getQuantidade()-Double.parseDouble(jFTFquantidade.getText()));
+            PecaDAO.alterar(peca);
             PecaUsadaDAO.gravar(
                     new PecaUsada(new PecaUsadaId(ordemServico.getIdOrdemServico(), peca.getIdPeca()),
                     ordemServico, peca, Double.parseDouble(jFTFquantidade.getText())));
@@ -605,7 +611,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
             String descricao = jTPdescricao_problema.getText();
             Date data = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(jFTFdata.getText());
-            BigDecimal valorMaoObra = new BigDecimal(jFTFvalor_mao_obra.getText().replace(',', '.'));
+            BigDecimal valorMaoObra = new BigDecimal(!jFTFvalor_mao_obra.getText().isEmpty()?jFTFvalor_mao_obra.getText().replace(',', '.'):"0.00");
             return new OrdemServico(veiculo, mecanico, data, descricao, status, valorMaoObra);
         } catch (ParseException ex) {
             return null;
