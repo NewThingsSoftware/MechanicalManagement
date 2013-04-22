@@ -11,6 +11,7 @@ import entidades.Mecanico;
 import entidades.OrdemServico;
 import entidades.Peca;
 import entidades.PecaUsada;
+import entidades.PecaUsadaId;
 import entidades.Veiculo;
 import interfaces.IJanela;
 import java.math.BigDecimal;
@@ -306,11 +307,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jLabel14.setText("Mão de obra:");
         jPpagamento_os.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 80, -1));
 
-        try {
-            jFTFvalor_mao_obra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0.00")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jFTFvalor_mao_obra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
         jPpagamento_os.add(jFTFvalor_mao_obra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 80, -1));
 
         jFTFvalor_total.setEnabled(false);
@@ -350,6 +347,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         jBgravar_alteracoes.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBgravar_alteracoes.setText("Gravar alterações");
+        jBgravar_alteracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBgravar_alteracoesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBgravar_alteracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 140, -1));
 
         jBconfirmar_abertura.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -378,8 +380,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 430));
 
-        setSize(new java.awt.Dimension(918, 464));
-        setLocationRelativeTo(null);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-918)/2, (screenSize.height-464)/2, 918, 464);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpecasActionPerformed
@@ -433,25 +435,34 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_formWindowOpened
 
     private void jBgravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBgravarActionPerformed
-       if(!jFTFquantidade.getText().isEmpty()){
-        OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
-        Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_peca.getText())).get(0);
-        PecaUsadaDAO.gravar(
-        new PecaUsada(ordemServico, peca, Double.parseDouble(jFTFquantidade.getText())));
-//        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
-//                PecaUsadaDAO.obterPorOrdemServico(
-//                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
-//                jTFcodigo_os.getText())).get(0))));
-        System.out.println("OrdemServico: " + ordemServico.getIdOrdemServico());
-        System.out.println("Peca: "+peca.getIdPeca());
-       }else{
-           JOptionPane.showMessageDialog(null, "Por favor informe a quantidade de peças");
-       }
+        if (!jFTFquantidade.getText().isEmpty()) {
+            OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
+            Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_peca.getText())).get(0);
+            PecaUsadaDAO.gravar(
+                    new PecaUsada(new PecaUsadaId(ordemServico.getIdOrdemServico(), peca.getIdPeca()),
+                    ordemServico, peca, Double.parseDouble(jFTFquantidade.getText())));
+            pecasTotais(ordemServico);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor informe a quantidade de peças");
+        }
     }//GEN-LAST:event_jBgravarActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
+
+    private void jBgravar_alteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBgravar_alteracoesActionPerformed
+        OrdemServico ordemServicoCorrente = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
+        ordemServicoCorrente.setData(obterCampos().getData());
+        ordemServicoCorrente.setDescricao(obterCampos().getDescricao());
+        ordemServicoCorrente.setMecanico(obterCampos().getMecanico());
+        ordemServicoCorrente.setStatus(obterCampos().getStatus());
+        ordemServicoCorrente.setValorMaoObra(obterCampos().getValorMaoObra());
+        ordemServicoCorrente.setVeiculo(obterCampos().getVeiculo());
+        OrdemServicoDAO.alterar(ordemServicoCorrente);
+        jBgravar_alteracoes.setEnabled(false);
+        limparCampos();
+    }//GEN-LAST:event_jBgravar_alteracoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,6 +570,22 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jCBveiculo.setSelectedIndex(0);
     }
 
+    /*Metodo que mostras as pecas e define os totais das peças e da OrdemServico*/
+    private void pecasTotais(OrdemServico ordemServico) {
+        jTpecas_vinculadas.setModel(new PecaUsadaTableModel(
+                PecaUsadaDAO.obterPorOrdemServico(
+                OrdemServicoDAO.obterPorCodigo(Integer.parseInt(
+                jTFcodigo_os.getText())).get(0))));
+        jFTFquantidade.setText("");
+        double valorPecas = PecaUsadaDAO.obterValorTotalPeca(ordemServico);
+        jFTFvalor_pecas.setText(String.valueOf(valorPecas));
+        double valorServico = 0;
+        if(!jFTFvalor_mao_obra.getText().isEmpty()){
+            valorServico = Double.parseDouble(jFTFvalor_mao_obra.getText());
+        }
+        jFTFvalor_total.setText(String.valueOf(valorPecas + valorServico));
+    }
+
     /*Metodo que pega as informações do campo e retorna um objeto de OrdemDeServico*/
     @Override
     public OrdemServico obterCampos() {
@@ -585,7 +612,10 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jTFcliente.setText(VeiculoDAO.obterPorPlaca(jCBveiculo.getSelectedItem().toString()).get(0).getCliente().getNome());
         jTPdescricao_problema.setText(ordemServico.getDescricao());
         jCBmecanico.setSelectedItem(ordemServico.getMecanico().getNome());
-        jCBstatus.setSelectedItem(ordemServico.getStatus());
+        jCBstatus.setSelectedItem(statusComboBox(ordemServico.getStatus()));
+        System.out.println(ordemServico.getValorMaoObra());
+        jFTFvalor_mao_obra.setText(ordemServico.getValorMaoObra()!=null?ordemServico.getValorMaoObra().toString():"0");
+        pecasTotais(ordemServico);
         habilitaCamposOrdemServicoAberta();
     }
 
@@ -624,7 +654,6 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
     public void consultaOrdemServico(OrdemServico ordemServico) {
         prencherCampos(ordemServico);
-
     }
 
     /*Metodo que desabilita campos para nova OrdemServico*/
@@ -640,7 +669,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }
 
     /*Metodo que habilita campos para OrdemServico já criada*/
-    public void habilitaCamposOrdemServicoAberta() {
+    private void habilitaCamposOrdemServicoAberta() {
         /*MarihellySantini
          *Habilita os campos da "Manutenção" e "Pagamento" da OS: */
         jFTFquantidade.setEnabled(true);
@@ -655,5 +684,19 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFdata.setEnabled(false);
         jTPdescricao_problema.setEnabled(false);
         jBconfirmar_abertura.setEnabled(false);
+    }
+
+    private String statusComboBox(char status) {
+        switch (status) {
+            case 'P':
+                return "P - Pendente";
+            case 'E':
+                return "E - Em andamento";
+            case 'F':
+                return "F - Finalizada";
+            case 'C':
+                return "C - Cancelada";
+        }
+        return "";
     }
 }

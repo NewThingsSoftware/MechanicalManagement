@@ -32,7 +32,7 @@
             </key>
             <one-to-many class="entidades.ContasReceber" />
         </set>
-        <set name="pecaUsadas" inverse="true">
+        <set name="pecaUsadas" inverse="true"> 
             <key>
                 <column name="id_ordem_servico" not-null="true" />
             </key>

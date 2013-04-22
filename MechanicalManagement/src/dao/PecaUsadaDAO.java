@@ -49,7 +49,7 @@ public class PecaUsadaDAO {
     public static List<PecaUsada> obterPorOrdemServico(OrdemServico ordemServico){
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT p FROM PecaUsada p WHERE p.ordemServico.idOrdemServico = : idOrdemServico");
+        Query qry = s.createQuery("SELECT p FROM PecaUsada p WHERE p.ordemServico.idOrdemServico = :idOrdemServico");
         qry.setParameter("idOrdemServico", ordemServico.getIdOrdemServico());
         List<PecaUsada> pecaUsadas = qry.list();
         return pecaUsadas;
@@ -62,5 +62,18 @@ public class PecaUsadaDAO {
         qry.setParameter("idPeca", peca.getIdPeca());
         List<PecaUsada> pecaUsadas = qry.list();
         return pecaUsadas;
+    }
+    
+    public static double obterValorTotalPeca(OrdemServico ordemServico){
+        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        s.beginTransaction();
+        Query qry = s.createQuery("SELECT p FROM PecaUsada p WHERE p.ordemServico.idOrdemServico = :idOrdemServico");
+        qry.setParameter("idOrdemServico", ordemServico.getIdOrdemServico());
+        List<PecaUsada> pecaUsadas = qry.list();
+        double retorno = 0;
+        for (PecaUsada pecaUsada : pecaUsadas) {
+            retorno += pecaUsada.getQuantidade() * Double.parseDouble(pecaUsada.getPeca().getPrecoVenda().toString());
+        }
+        return retorno;
     }
 }

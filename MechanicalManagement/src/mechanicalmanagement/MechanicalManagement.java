@@ -1,26 +1,10 @@
 package mechanicalmanagement;
 
-import dao.ClienteDAO;
-import dao.MecanicoDAO;
-import dao.OrdemServicoDAO;
-import dao.PecaDAO;
-import dao.PecaUsadaDAO;
-import dao.VeiculoDAO;
-import entidades.Cliente;
-import entidades.Mecanico;
-import entidades.OrdemServico;
-import entidades.Peca;
-import entidades.PecaUsada;
-import entidades.Veiculo;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Set;
-
 public class MechanicalManagement {
 
     public static void main(String[] args) {
         TelaCentral telaCentral = new TelaCentral();
-        telaCentral.ordem_servico.setVisible(true);
+        telaCentral.setVisible(true);
 
 
         /*Código abaixo para poluir primeira vez o banco*/
@@ -37,14 +21,8 @@ public class MechanicalManagement {
 //        OrdemServicoDAO.gravar(ordemServico);
 //        OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(20).get(0);
 //        Peca peca = PecaDAO.obterPorCodigo(3).get(0);
-//        PecaUsada pecaUsada = new PecaUsada(ordemServico, peca, 40);
-//        ordemServico.addPecaUsada(pecaUsada);
-//        OrdemServicoDAO.gravar(ordemServico);
-//        Set peca_usadas = ordemServico.getPecaUsadas();
-//        for (Object object : peca_usadas) {
-//            PecaUsada peca2 = (PecaUsada) object;
-//            System.out.println(peca2.getPeca().getDescricao());
-//        }
-        
+//        PecaUsadaId pecaUsadaId = new PecaUsadaId(ordemServico.getIdOrdemServico(), peca.getIdPeca());
+//        PecaUsada pecaUsada = new PecaUsada(pecaUsadaId, ordemServico, peca, 50);
+//        PecaUsadaDAO.gravar(pecaUsada);
     }
 }
