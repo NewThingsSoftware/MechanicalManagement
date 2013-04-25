@@ -459,6 +459,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
                     new PecaUsada(new PecaUsadaId(ordemServico.getIdOrdemServico(), peca.getIdPeca()),
                     ordemServico, peca, Double.parseDouble(jFTFquantidade.getText())));
             pecasTotais(ordemServico);
+            jTFcodigo_peca.setText("");
+            jTFdescricao_peca.setText("");
+            jFTFquantidade.setText("");
+            jFTFquantidade.setEnabled(false);
+            jFTFvalor_unitario.setText("");
+            jBgravar.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(null, "Por favor informe a quantidade de peças");
         }
@@ -584,6 +590,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFdata.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
         jTFcodigo_os.setText("");
         jTFcliente.setText("");
+        jTFcodigo_peca.setText("");
         jTPdescricao_problema.setText("");
         jTFdescricao_peca.setText("");
         jFTFquantidade.setText("");
@@ -619,7 +626,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_pecas.setText(String.valueOf(valorPecas));
         double valorServico = 0;
         if (!jFTFvalor_mao_obra.getText().isEmpty()) {
-            valorServico = Double.parseDouble(jFTFvalor_mao_obra.getText());
+            valorServico = Double.parseDouble(jFTFvalor_mao_obra.getText().replace(',', '.'));
         }
         jFTFvalor_total.setText(new DecimalFormat("R$###,##0.00").format(valorPecas + valorServico));
     }
@@ -686,6 +693,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     public void consultaPeca(Peca peca) {
         jTFcodigo_peca.setText(peca.getIdPeca().toString());
         jTFdescricao_peca.setText(peca.getDescricao());
+        jFTFquantidade.setEnabled(true);
         jFTFvalor_unitario.setText(peca.getPrecoVenda().toString());
         jBgravar.setEnabled(true);
     }
@@ -723,7 +731,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         /*MarihellySantini
          *Habilita os campos da "Manutenção" e "Pagamento" da OS: */
         jTFcliente.setEnabled(false);
-        jFTFquantidade.setEnabled(true);
+        jFTFquantidade.setEnabled(false);
         jFTFvalor_mao_obra.setEnabled(true);
         jFTFdata.setEnabled(false);
         jTPdescricao_problema.setEnabled(false);
