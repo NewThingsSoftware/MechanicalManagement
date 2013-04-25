@@ -1,7 +1,12 @@
 package mechanicalmanagement;
 
+import dao.ClienteDAO;
+import dao.MecanicoDAO;
 import dao.OrdemServicoDAO;
+import dao.VeiculoDAO;
+import entidades.Cliente;
 import entidades.OrdemServico;
+import entidades.Veiculo;
 import javax.swing.JOptionPane;
 import tableModel.OrdemServicoTableModelo;
 
@@ -34,16 +39,25 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jBconsultar = new javax.swing.JButton();
         jTFconsulta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jBselecionar = new javax.swing.JButton();
+        jRBnomeCliente = new javax.swing.JRadioButton();
+        jRBplacaVeiculo = new javax.swing.JRadioButton();
+        jRBnomeMecanico = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBconsultar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBconsultar.setText("Consultar");
+        jBconsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconsultarActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterTodos()));
@@ -56,6 +70,15 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
                 jBselecionarActionPerformed(evt);
             }
         });
+
+        buttonGroup1.add(jRBnomeCliente);
+        jRBnomeCliente.setText("Nome do Cliente");
+
+        buttonGroup1.add(jRBplacaVeiculo);
+        jRBplacaVeiculo.setText("Placa do Veiculo");
+
+        buttonGroup1.add(jRBnomeMecanico);
+        jRBnomeMecanico.setText("Nome do Mecânico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,15 +98,28 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBconsultar)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jRBnomeCliente)
+                .addGap(18, 18, 18)
+                .addComponent(jRBplacaVeiculo)
+                .addGap(18, 18, 18)
+                .addComponent(jRBnomeMecanico)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBconsultar)
-                    .addComponent(jTFconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTFconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBconsultar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBnomeCliente)
+                    .addComponent(jRBplacaVeiculo)
+                    .addComponent(jRBnomeMecanico))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBselecionar)
@@ -102,6 +138,26 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Favor selecionar uma linha");
         }
     }//GEN-LAST:event_jBselecionarActionPerformed
+
+    private void jBconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultarActionPerformed
+        if (jRBnomeCliente.isSelected()) {
+            jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterPorVeiculo(
+                    VeiculoDAO.obterPorCliente(ClienteDAO.obterPorNome(jTFconsulta.getText()).isEmpty() ? null
+                    : ClienteDAO.obterPorNome(jTFconsulta.getText()).get(0)).isEmpty() ? null
+                    : VeiculoDAO.obterPorCliente(ClienteDAO.obterPorNome(jTFconsulta.getText()).isEmpty() ? null
+                    : ClienteDAO.obterPorNome(jTFconsulta.getText()).get(0)).get(0))));
+        }
+        if (jRBnomeMecanico.isSelected()) {
+            jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterPorMecanico(
+                    MecanicoDAO.obterPorNome(jTFconsulta.getText()).isEmpty()?null:
+                    MecanicoDAO.obterPorNome(jTFconsulta.getText()).get(0))));
+        }
+        if (jRBplacaVeiculo.isSelected()) {
+            jTable1.setModel(new OrdemServicoTableModelo(OrdemServicoDAO.obterPorVeiculo(
+                    VeiculoDAO.obterPorPlaca(jTFconsulta.getText()).isEmpty()?null:
+                    VeiculoDAO.obterPorPlaca(jTFconsulta.getText()).get(0))));
+        }
+    }//GEN-LAST:event_jBconsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,8 +195,12 @@ public class ConsultaOrdemServico extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBconsultar;
     private javax.swing.JButton jBselecionar;
+    private javax.swing.JRadioButton jRBnomeCliente;
+    private javax.swing.JRadioButton jRBnomeMecanico;
+    private javax.swing.JRadioButton jRBplacaVeiculo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFconsulta;
     private javax.swing.JTable jTable1;

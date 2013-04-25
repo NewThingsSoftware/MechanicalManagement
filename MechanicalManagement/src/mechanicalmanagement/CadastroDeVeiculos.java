@@ -61,11 +61,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         setTitle("Cadastro de Veículos");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -226,12 +226,12 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 1, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-642)/2, (screenSize.height-457)/2, 642, 457);
+        setSize(new java.awt.Dimension(642, 457));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jChBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChBstatusActionPerformed
@@ -302,11 +302,11 @@ public class CadastroDeVeiculos extends javax.swing.JFrame implements IJanela {
         limparCampos();
     }//GEN-LAST:event_formWindowClosing
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        jCBcliente.setModel(new ClienteComboBoxModel(ClienteDAO.obterTodos()));
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       jCBcliente.setModel(new ClienteComboBoxModel(ClienteDAO.obterTodos()));
         jBalterar.setEnabled(false);
         limparCampos();
-    }//GEN-LAST:event_formWindowActivated
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
