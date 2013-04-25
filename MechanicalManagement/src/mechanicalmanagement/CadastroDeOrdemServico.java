@@ -394,7 +394,17 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_jBpecasActionPerformed
 
     private void jBfinalizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinalizar_osActionPerformed
-        // TODO add your handling code here:
+        OrdemServico ordemServicoCorrente = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
+        ordemServicoCorrente.setData(obterCampos().getData());
+        ordemServicoCorrente.setDescricao(obterCampos().getDescricao());
+        ordemServicoCorrente.setMecanico(obterCampos().getMecanico());
+        ordemServicoCorrente.setStatus('F');
+        ordemServicoCorrente.setValorMaoObra(obterCampos().getValorMaoObra());
+        ordemServicoCorrente.setVeiculo(obterCampos().getVeiculo());
+        OrdemServicoDAO.alterar(ordemServicoCorrente);
+        jBgravar_alteracoes.setEnabled(false);
+        limparCampos();
+        JOptionPane.showMessageDialog(rootPane, "Ordem de Servico Finalizada");
     }//GEN-LAST:event_jBfinalizar_osActionPerformed
 
     private void jCBstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBstatusActionPerformed
@@ -443,7 +453,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         if (!jFTFquantidade.getText().isEmpty()) {
             OrdemServico ordemServico = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
             Peca peca = PecaDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_peca.getText())).get(0);
-            peca.setQuantidade(peca.getQuantidade()-Double.parseDouble(jFTFquantidade.getText()));
+            peca.setQuantidade(peca.getQuantidade() - Double.parseDouble(jFTFquantidade.getText()));
             PecaDAO.alterar(peca);
             PecaUsadaDAO.gravar(
                     new PecaUsada(new PecaUsadaId(ordemServico.getIdOrdemServico(), peca.getIdPeca()),
@@ -459,16 +469,27 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_jBvoltarActionPerformed
 
     private void jBgravar_alteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBgravar_alteracoesActionPerformed
-        OrdemServico ordemServicoCorrente = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
-        ordemServicoCorrente.setData(obterCampos().getData());
-        ordemServicoCorrente.setDescricao(obterCampos().getDescricao());
-        ordemServicoCorrente.setMecanico(obterCampos().getMecanico());
-        ordemServicoCorrente.setStatus(obterCampos().getStatus());
-        ordemServicoCorrente.setValorMaoObra(obterCampos().getValorMaoObra());
-        ordemServicoCorrente.setVeiculo(obterCampos().getVeiculo());
-        OrdemServicoDAO.alterar(ordemServicoCorrente);
-        jBgravar_alteracoes.setEnabled(false);
-        limparCampos();
+        int statusEscolhido = 0;
+        if (jCBstatus.getSelectedItem().toString().equals("F - Finalizada")) {
+            statusEscolhido = JOptionPane.showConfirmDialog(rootPane,
+                    "A ordem de serviço será finalizada, deseja continuar?");
+        }
+        if (jCBstatus.getSelectedItem().toString().equals("C - Cancelada")) {
+            statusEscolhido = JOptionPane.showConfirmDialog(rootPane,
+                    "A ordem de serviço será cancelada, deseja continuar?");
+        }
+        if (statusEscolhido == 0) {
+            OrdemServico ordemServicoCorrente = OrdemServicoDAO.obterPorCodigo(Integer.parseInt(jTFcodigo_os.getText())).get(0);
+            ordemServicoCorrente.setData(obterCampos().getData());
+            ordemServicoCorrente.setDescricao(obterCampos().getDescricao());
+            ordemServicoCorrente.setMecanico(obterCampos().getMecanico());
+            ordemServicoCorrente.setStatus(obterCampos().getStatus());
+            ordemServicoCorrente.setValorMaoObra(obterCampos().getValorMaoObra());
+            ordemServicoCorrente.setVeiculo(obterCampos().getVeiculo());
+            OrdemServicoDAO.alterar(ordemServicoCorrente);
+            jBgravar_alteracoes.setEnabled(false);
+            limparCampos();
+        }
     }//GEN-LAST:event_jBgravar_alteracoesActionPerformed
 
     /**
@@ -578,6 +599,8 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jBconfirmar_abertura.setEnabled(true);
         jBgravar_alteracoes.setEnabled(false);
         jCBveiculo.setEnabled(true);
+        jCBmecanico.setEnabled(true);
+        jCBstatus.setEnabled(true);
         jTPdescricao_problema.setEnabled(true);
         jCBcondicao_parcelamento.setEnabled(false);
         jBfinalizar_os.setEnabled(false);
@@ -611,7 +634,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
             Mecanico mecanico = MecanicoDAO.obterPorNome((String) jCBmecanico.getSelectedItem()).get(0);
             String descricao = jTPdescricao_problema.getText();
             Date data = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(jFTFdata.getText());
-            BigDecimal valorMaoObra = new BigDecimal(!jFTFvalor_mao_obra.getText().isEmpty()?jFTFvalor_mao_obra.getText().replace(',', '.'):"0.00");
+            BigDecimal valorMaoObra = new BigDecimal(!jFTFvalor_mao_obra.getText().isEmpty() ? jFTFvalor_mao_obra.getText().replace(',', '.') : "0.00");
             return new OrdemServico(veiculo, mecanico, data, descricao, status, valorMaoObra);
         } catch (ParseException ex) {
             return null;
@@ -630,7 +653,18 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jCBstatus.setSelectedItem(statusComboBox(ordemServico.getStatus()));
         jFTFvalor_mao_obra.setText(ordemServico.getValorMaoObra() != null ? ordemServico.getValorMaoObra().toString() : "0");
         pecasTotais(ordemServico);
-        habilitaCamposOrdemServicoAberta();
+        if (jCBstatus.getSelectedItem().toString().equals("F - Finalizada")) {
+            JOptionPane.showMessageDialog(rootPane, "Ordem de Serviço Finalizada");
+            bloqueiaCampos();
+        }
+        if (jCBstatus.getSelectedItem().toString().equals("C - Cancelada")) {
+            JOptionPane.showMessageDialog(rootPane, "Ordem de Serviço Cancelada");
+            bloqueiaCampos();
+        }
+        if (jCBstatus.getSelectedItem().toString().equals("E - Em andamento")
+                || jCBstatus.getSelectedItem().toString().equals("P - Pendente")) {
+            habilitaCamposOrdemServicoAberta();
+        }
     }
 
     /*Metodo que verifica se todos os campos estão preenchidos para finalizar a
@@ -674,10 +708,12 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     public void desabitaCamposNovaOrdemServico() {
         /*MarihellySantini*/
         jFTFquantidade.setEnabled(false);
-        jBgravar.setEnabled(false);
-        jBpecas.setEnabled(false);
         jFTFvalor_mao_obra.setEnabled(false);
         jCBcondicao_parcelamento.setEnabled(false);
+        jCBmecanico.setEnabled(true);
+        jCBstatus.setEnabled(true);
+        jBgravar.setEnabled(false);
+        jBpecas.setEnabled(false);
         jBfinalizar_os.setEnabled(false);
         jBgravar_alteracoes.setEnabled(false);
     }
@@ -686,17 +722,19 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     private void habilitaCamposOrdemServicoAberta() {
         /*MarihellySantini
          *Habilita os campos da "Manutenção" e "Pagamento" da OS: */
-        jFTFquantidade.setEnabled(true);
-        jBgravar.setEnabled(false);
-        jBpecas.setEnabled(true);
-        jFTFvalor_mao_obra.setEnabled(true);
-        jCBcondicao_parcelamento.setEnabled(true);
-        jBfinalizar_os.setEnabled(true);
-        jBgravar_alteracoes.setEnabled(true);
         jTFcliente.setEnabled(false);
-        jCBveiculo.setEnabled(false);
+        jFTFquantidade.setEnabled(true);
+        jFTFvalor_mao_obra.setEnabled(true);
         jFTFdata.setEnabled(false);
         jTPdescricao_problema.setEnabled(false);
+        jCBcondicao_parcelamento.setEnabled(true);
+        jCBveiculo.setEnabled(false);
+        jCBmecanico.setEnabled(true);
+        jCBstatus.setEnabled(true);
+        jBgravar.setEnabled(false);
+        jBpecas.setEnabled(true);
+        jBfinalizar_os.setEnabled(true);
+        jBgravar_alteracoes.setEnabled(true);
         jBconfirmar_abertura.setEnabled(false);
     }
 
@@ -712,5 +750,29 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
                 return "C - Cancelada";
         }
         return "";
+    }
+
+    private void bloqueiaCampos() {
+        jTFcliente.setEnabled(false);
+        jTFcodigo_os.setEnabled(false);
+        jTFcodigo_peca.setEnabled(false);
+        jTFdescricao_peca.setEnabled(false);
+        jTPdescricao_problema.setEnabled(false);
+        jTpecas_vinculadas.setEnabled(false);
+        jFTFdata.setEnabled(false);
+        jFTFquantidade.setEnabled(false);
+        jFTFvalor_mao_obra.setEnabled(false);
+        jFTFvalor_pecas.setEnabled(false);
+        jFTFvalor_total.setEnabled(false);
+        jFTFvalor_unitario.setEnabled(false);
+        jCBcondicao_parcelamento.setEnabled(false);
+        jCBmecanico.setEnabled(false);
+        jCBstatus.setEnabled(false);
+        jCBveiculo.setEnabled(false);
+        jBconfirmar_abertura.setEnabled(false);
+        jBfinalizar_os.setEnabled(false);
+        jBgravar.setEnabled(false);
+        jBgravar_alteracoes.setEnabled(false);
+        jBpecas.setEnabled(false);
     }
 }
