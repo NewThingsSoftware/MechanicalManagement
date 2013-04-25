@@ -2,6 +2,7 @@ package dao;
 
 import entidades.Cliente;
 import entidades.Veiculo;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -44,14 +45,17 @@ public class VeiculoDAO {
         return qry.list();
     }
 
-    public static List<Veiculo> obterPorCliente(Cliente cliente){
+    public static List<Veiculo> obterPorCliente(Cliente cliente) {
+        if (cliente == null) {
+            return new ArrayList<>();
+        }
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
-        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.idCliente = :idCliente");
+        Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.cliente.idCliente = :idCliente");
         qry.setParameter("idCliente", cliente.getIdCliente());
         return qry.list();
     }
-    
+
     public static List<Veiculo> obterPorPlaca(String placa) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -78,7 +82,7 @@ public class VeiculoDAO {
         List<Veiculo> veiculos = qry.list();
         return veiculos;
     }
-    
+
     public static List<Veiculo> obterPorModelo(String modelo) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
@@ -87,8 +91,8 @@ public class VeiculoDAO {
         List<Veiculo> veiculos = qry.list();
         return veiculos;
     }
-    
-    public static List<Veiculo> obterPorKm (Integer km) {
+
+    public static List<Veiculo> obterPorKm(Integer km) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.km = :km");
@@ -96,8 +100,8 @@ public class VeiculoDAO {
         List<Veiculo> veiculos = qry.list();
         return veiculos;
     }
-    
-    public static List<Veiculo> obterStatus (Boolean status) {
+
+    public static List<Veiculo> obterStatus(Boolean status) {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT v FROM Veiculo v WHERE v.status = :status");

@@ -48,11 +48,11 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jTFbusca = new javax.swing.JTextField();
         jBprocurar = new javax.swing.JButton();
         jRBplaca = new javax.swing.JRadioButton();
-        jRBmarca = new javax.swing.JRadioButton();
-        jRBmodelo = new javax.swing.JRadioButton();
-        jRBtodos = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jRBtodos = new javax.swing.JRadioButton();
+        jRBmodelo = new javax.swing.JRadioButton();
+        jRBmarca = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -85,25 +85,22 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jRBplaca.setText("Placa");
         getContentPane().add(jRBplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBmarca);
-        jRBmarca.setText("Marca");
-        getContentPane().add(jRBmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jRBmodelo.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBmodelo);
-        jRBmodelo.setText("Modelo");
-        getContentPane().add(jRBmodelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
+        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
-        getContentPane().add(jRBtodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jRBmodelo.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBmodelo);
+        jRBmodelo.setText("Modelo");
 
-        jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
+        jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBmarca);
+        jRBmarca.setText("Marca");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,19 +110,32 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(155, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRBmarca)
+                .addGap(10, 10, 10)
+                .addComponent(jRBmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jRBtodos)
+                .addGap(149, 149, 149))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBtodos)
+                    .addComponent(jRBmodelo)
+                    .addComponent(jRBmarca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-408)/2, (screenSize.height-389)/2, 408, 389);
+        setSize(new java.awt.Dimension(429, 389));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBselecionarActionPerformed
