@@ -112,7 +112,6 @@ public class OrdemServicoDAO {
         Session s = HibernateUtil.getSessionFactory().getCurrentSession();
         s.beginTransaction();
         Query qry = s.createQuery("SELECT MAX(o.idOrdemServico) FROM OrdemServico o");
-
         List<OrdemServico> ordemServicos = qry.list();
         return ordemServicos;
     }

@@ -471,6 +471,7 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
     }//GEN-LAST:event_jBgravarActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        limparCampos();
         dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
