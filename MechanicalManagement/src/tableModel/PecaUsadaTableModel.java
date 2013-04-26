@@ -1,6 +1,7 @@
 package tableModel;
 
 import entidades.PecaUsada;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 /**
@@ -13,7 +14,7 @@ public class PecaUsadaTableModel extends AbstractTableModel{
     private List<PecaUsada> pecaUsadas;
     /* Lista de Strings com o nome das colunas. */
     private String[] colunas = new String[]{
-        "Código da Peça", "Descrição", "Quantidade"};
+        "Código da Peça", "Descrição", "Quantidade", "Valor Total"};
 
     /* Cria um ClienteTableModel carregado com 
      * a lista de Cliente especificada. */
@@ -63,6 +64,8 @@ public class PecaUsadaTableModel extends AbstractTableModel{
                 return pecaUsada.getPeca().getDescricao();
             case 2:
                 return pecaUsada.getQuantidade();
+            case 3:
+                return pecaUsada.getQuantidade() * Double.parseDouble(pecaUsada.getPeca().getPrecoVenda().toString());
             default:
                 // Isto não deveria acontecer...  
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -85,6 +88,9 @@ public class PecaUsadaTableModel extends AbstractTableModel{
             case 2:
                 pecaUsada.setQuantidade(Double.parseDouble(aValue.toString()));
                 break;
+            case 3:
+                pecaUsada.getPeca().setPrecoVenda(new BigDecimal(Double.parseDouble(aValue.toString())/pecaUsada.getQuantidade()));
+                break;
             default:
             // Isto não deveria acontecer... 
         }
@@ -98,10 +104,12 @@ public class PecaUsadaTableModel extends AbstractTableModel{
         pecaUsada.getPeca().setIdPeca(aValue.getPeca().getIdPeca());
         pecaUsada.getPeca().setDescricao(aValue.getPeca().getDescricao());
         pecaUsada.setQuantidade(aValue.getQuantidade());
+        pecaUsada.getPeca().setPrecoVenda(new BigDecimal(Double.parseDouble(aValue.toString())/pecaUsada.getQuantidade()));
 
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
+        fireTableCellUpdated(rowIndex, 3);
     }
 
     @Override

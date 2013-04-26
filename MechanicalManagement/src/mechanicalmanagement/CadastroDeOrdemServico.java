@@ -121,11 +121,11 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
 
             },
             new String [] {
-                "Código da Peçca", "Descrição", "Quantidade"
+                "Código da Peçca", "Descrição", "Quantidade", "Valor Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

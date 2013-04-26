@@ -56,7 +56,6 @@ public class ClienteTableModel extends AbstractTableModel{
          e retornar o campo adequado. As colunas são as mesmas  
          que foram especificadas no array "colunas". */
         switch (columnIndex) {
-            // "Placa", "Modelo", "Marca", "Ano", "Km";  
             case 0:
                 return cliente.getNome();
             case 1:
