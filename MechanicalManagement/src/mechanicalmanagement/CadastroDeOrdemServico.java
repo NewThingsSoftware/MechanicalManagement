@@ -599,7 +599,9 @@ public class CadastroDeOrdemServico extends javax.swing.JFrame implements IJanel
         jFTFvalor_mao_obra.setText("");
         jFTFvalor_pecas.setText("");
         jFTFvalor_total.setText("");
-        ((PecaUsadaTableModel) jTpecas_vinculadas.getModel()).limpar();
+        if (jTpecas_vinculadas.getModel().getClass() == PecaUsadaTableModel.class) {
+            ((PecaUsadaTableModel) jTpecas_vinculadas.getModel()).limpar();
+        }
         jCBcondicao_parcelamento.setSelectedIndex(0);
         jCBmecanico.setSelectedIndex(0);
         jCBstatus.setSelectedIndex(0);
