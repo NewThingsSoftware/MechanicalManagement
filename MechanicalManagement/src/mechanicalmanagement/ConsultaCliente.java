@@ -42,29 +42,21 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jBGconsulta = new javax.swing.ButtonGroup();
-        jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFbusca = new javax.swing.JTextField();
         jBprocurar = new javax.swing.JButton();
         jRBnome = new javax.swing.JRadioButton();
-        jRBcpf = new javax.swing.JRadioButton();
         jRBrg = new javax.swing.JRadioButton();
         jRBtodos = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jRBcpf = new javax.swing.JRadioButton();
+        jBselecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBselecionar.setText("Selecionar");
-        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBselecionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
         jTable1.setModel(new ClienteTableModel(ClienteDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
@@ -72,6 +64,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
         getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, -1));
 
+        jBprocurar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBprocurar.setText("Procurar");
         jBprocurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,44 +75,66 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
         jRBnome.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBnome);
+        jRBnome.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBnome.setText("Nome");
         getContentPane().add(jRBnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jRBcpf.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBcpf);
-        jRBcpf.setText("CPF");
-        getContentPane().add(jRBcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
         jRBrg.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBrg);
+        jRBrg.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBrg.setText("RG");
         getContentPane().add(jRBrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 60, -1));
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
+        jRBtodos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
         getContentPane().add(jRBtodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
+
+        jRBcpf.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBcpf);
+        jRBcpf.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jRBcpf.setText("CPF");
+
+        jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBselecionar.setText("Selecionar");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBselecionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jRBcpf)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jBselecionar)
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22))
+                .addGap(20, 20, 20)
+                .addComponent(jRBcpf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jBselecionar))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
