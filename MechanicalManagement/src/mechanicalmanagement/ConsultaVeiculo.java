@@ -42,7 +42,6 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
     private void initComponents() {
 
         jBGconsulta = new javax.swing.ButtonGroup();
-        jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFbusca = new javax.swing.JTextField();
@@ -53,25 +52,21 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
         jRBtodos = new javax.swing.JRadioButton();
         jRBmodelo = new javax.swing.JRadioButton();
         jRBmarca = new javax.swing.JRadioButton();
+        jBselecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBselecionar.setText("Selecionar");
-        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBselecionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
-
         jTable1.setModel(new VeiculoTableModel(VeiculoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
+
+        jTFbusca.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, -1));
 
+        jBprocurar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBprocurar.setText("Procurar");
         jBprocurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,25 +77,38 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
 
         jRBplaca.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBplaca);
+        jRBplaca.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBplaca.setText("Placa");
         getContentPane().add(jRBplaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
+        jRBtodos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
 
         jRBmodelo.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBmodelo);
+        jRBmodelo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBmodelo.setText("Modelo");
 
         jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBmarca);
+        jRBmarca.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBmarca.setText("Marca");
+
+        jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBselecionar.setText("Selecionar");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBselecionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,15 +117,17 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jBselecionar)
+                .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jRBmarca)
-                .addGap(10, 10, 10)
-                .addComponent(jRBmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRBmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRBtodos)
-                .addGap(149, 149, 149))
+                .addGap(159, 159, 159))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,14 +137,16 @@ public class ConsultaVeiculo extends javax.swing.JFrame {
                     .addComponent(jRBtodos)
                     .addComponent(jRBmodelo)
                     .addComponent(jRBmarca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jBselecionar))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
 
-        setSize(new java.awt.Dimension(429, 389));
+        setSize(new java.awt.Dimension(413, 389));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
