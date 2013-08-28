@@ -37,7 +37,6 @@ public class ConsultaPeca extends javax.swing.JFrame {
     private void initComponents() {
 
         jBGconsulta = new javax.swing.ButtonGroup();
-        jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFbusca = new javax.swing.JTextField();
@@ -48,18 +47,11 @@ public class ConsultaPeca extends javax.swing.JFrame {
         jRBtodos = new javax.swing.JRadioButton();
         jRBmarca = new javax.swing.JRadioButton();
         jRBdescricao = new javax.swing.JRadioButton();
+        jBselecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBselecionar.setText("Selecionar");
-        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBselecionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
         jTable1.setModel(new PecaTableModel(PecaDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
@@ -67,6 +59,7 @@ public class ConsultaPeca extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
         getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, -1));
 
+        jBprocurar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jBprocurar.setText("Procurar");
         jBprocurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,15 +70,18 @@ public class ConsultaPeca extends javax.swing.JFrame {
 
         jRBcodigo.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBcodigo);
+        jRBcodigo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBcodigo.setText("Código");
         getContentPane().add(jRBcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
+        jRBtodos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
         jRBtodos.addActionListener(new java.awt.event.ActionListener() {
@@ -96,14 +92,24 @@ public class ConsultaPeca extends javax.swing.JFrame {
 
         jRBmarca.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBmarca);
+        jRBmarca.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBmarca.setText("Marca");
 
         jRBdescricao.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBdescricao);
+        jRBdescricao.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBdescricao.setText("Descrição");
         jRBdescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBdescricaoActionPerformed(evt);
+            }
+        });
+
+        jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBselecionar.setText("Selecionar");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBselecionarActionPerformed(evt);
             }
         });
 
@@ -114,7 +120,9 @@ public class ConsultaPeca extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBselecionar)
+                .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jRBmarca)
@@ -132,9 +140,11 @@ public class ConsultaPeca extends javax.swing.JFrame {
                     .addComponent(jRBtodos)
                     .addComponent(jRBmarca)
                     .addComponent(jRBdescricao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jBselecionar))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));

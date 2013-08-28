@@ -42,70 +42,53 @@ public class ConsultaMecanico extends javax.swing.JFrame {
     private void initComponents() {
 
         jBGconsulta = new javax.swing.ButtonGroup();
-        jBselecionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFbusca = new javax.swing.JTextField();
-        jBprocurar = new javax.swing.JButton();
         jRBnome = new javax.swing.JRadioButton();
-        jRBcpf = new javax.swing.JRadioButton();
         jRBEspecialidade = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jRBtodos = new javax.swing.JRadioButton();
+        jBselecionar = new javax.swing.JButton();
+        jBprocurar = new javax.swing.JButton();
+        jRBcpf = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBselecionar.setText("Selecionar");
-        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBselecionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBselecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
-
         jTable1.setModel(new MecanicoTableModel(MecanicoDAO.obterTodos()));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 231));
-        getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, -1));
-
-        jBprocurar.setText("Procurar");
-        jBprocurar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBprocurarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBprocurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 80, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 370, 231));
+        getContentPane().add(jTFbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 280, -1));
 
         jRBnome.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBnome);
+        jRBnome.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBnome.setText("Nome");
         getContentPane().add(jRBnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jRBcpf.setBackground(new java.awt.Color(255, 255, 255));
-        jBGconsulta.add(jRBcpf);
-        jRBcpf.setText("CPF");
-        getContentPane().add(jRBcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
         jRBEspecialidade.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBEspecialidade);
+        jRBEspecialidade.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBEspecialidade.setText("especialidade");
         jRBEspecialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBEspecialidadeActionPerformed(evt);
             }
         });
-        getContentPane().add(jRBEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 90, -1));
+        getContentPane().add(jRBEspecialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 100, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel1.setText("Selecione a linha desejada e clique em \"selecionar\".");
 
         jRBtodos.setBackground(new java.awt.Color(255, 255, 255));
         jBGconsulta.add(jRBtodos);
+        jRBtodos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jRBtodos.setSelected(true);
         jRBtodos.setText("Todos");
         jRBtodos.addActionListener(new java.awt.event.ActionListener() {
@@ -114,32 +97,69 @@ public class ConsultaMecanico extends javax.swing.JFrame {
             }
         });
 
+        jBselecionar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBselecionar.setText("Selecionar");
+        jBselecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBselecionarActionPerformed(evt);
+            }
+        });
+
+        jBprocurar.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jBprocurar.setText("Procurar");
+        jBprocurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBprocurarActionPerformed(evt);
+            }
+        });
+
+        jRBcpf.setBackground(new java.awt.Color(255, 255, 255));
+        jBGconsulta.add(jRBcpf);
+        jRBcpf.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jRBcpf.setText("CPF");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(155, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(jRBcpf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jRBtodos)
                 .addGap(135, 135, 135))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jBprocurar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jBselecionar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jRBtodos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBtodos)
+                    .addComponent(jRBcpf))
+                .addGap(4, 4, 4)
+                .addComponent(jBprocurar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jBselecionar))
+                .addGap(17, 17, 17))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 360));
 
-        setSize(new java.awt.Dimension(408, 389));
+        setSize(new java.awt.Dimension(405, 389));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
